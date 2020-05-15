@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { ListProjectsComponent } from './list-projects/list-projects.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
+import { ProjectServiceService } from './shared/project-service.service';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,7 @@ import { RegisterUserComponent } from './register-user/register-user.component';
     HomeComponent,
     ListProjectsComponent,
     ProjectDetailsComponent,
-    RegisterUserComponent
+    RegisterUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,7 @@ import { RegisterUserComponent } from './register-user/register-user.component';
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [ ProjectServiceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
