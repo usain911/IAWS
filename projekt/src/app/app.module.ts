@@ -11,6 +11,7 @@ import { ListProjectsComponent } from './list-projects/list-projects.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
 import { ProjectServiceService } from './shared/project-service.service';
+import { HttpClientModule }    from '@angular/common/http';
 import { from } from 'rxjs';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { from } from 'rxjs';
     RegisterUserComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

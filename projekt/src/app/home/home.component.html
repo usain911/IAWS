@@ -1,2 +1,14 @@
+<p style="padding: 13px;">
+    An Angular 9 example application that demonstrates how to use HttpClient to consume REST APIs
+    </p>
+    
 
 {{user.vorname}} {{user.name}}
+
+<input type="text" (keyup)="onKeyUp()" (input)="color=$event.target.value" [style.background-color]="color">
+
+
+<div *ngFor="let users of users" style="margin-top:10px;">
+{{users.id}} {{users.name}} {{users.vorname}} {{users.pw}} 
+
+</div>
