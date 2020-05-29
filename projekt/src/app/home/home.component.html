@@ -3,12 +3,17 @@
     </p>
     
 
-{{user.vorname}} {{user.name}}
-
 <input type="text" (keyup)="onKeyUp()" (input)="color=$event.target.value" [style.background-color]="color">
 
 
 <div *ngFor="let users of users" style="margin-top:10px;">
 {{users.id}} {{users.name}} {{users.vorname}} {{users.pw}} 
-
 </div>
+
+<div class="container">
+    <div class="col-md-6 col-md-offset-3 loginBox">
+        Welcome,  {{id}}
+        <a href="javascript:void(0);" (click)="logout()">Logout</a>
+    </div>
+</div>
+

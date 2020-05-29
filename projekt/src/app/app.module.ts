@@ -12,7 +12,16 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
 import { RegisterUserComponent } from './register-user/register-user.component';
 import { ProjectServiceService } from './shared/project-service.service';
 import { HttpClientModule }    from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 import { from } from 'rxjs';
+import { AuthGuard } from './auth.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: HomeComponent, canActivate: [AuthGuard] }
+];
 
 @NgModule({
   declarations: [
@@ -21,15 +30,19 @@ import { from } from 'rxjs';
     ListProjectsComponent,
     ProjectDetailsComponent,
     RegisterUserComponent,
+    LoginComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
     AppRoutingModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [ ProjectServiceService ],
+  providers: [ AuthGuard, ProjectServiceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
