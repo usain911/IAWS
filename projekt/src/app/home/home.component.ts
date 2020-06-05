@@ -4,6 +4,7 @@ import { ProjectServiceService } from '../shared/project-service.service';
 
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
+import { Projekt } from '../shared/projekt';
 
 
 
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   
   users: User[];
   nutzer: User;
+  projects: Projekt[];
 
   id: string;
   isLoggedIn: string;
@@ -34,15 +36,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = localStorage.getItem('token');
-    this.isLoggedIn = localStorage.getItem('isLoggedIn');
-    
+    this.isLoggedIn = localStorage.getItem('isLoggedIn');    
     this.authService.checkLogin(this.isLoggedIn);
-
-    
 
     this.ps.sendGetRequest().subscribe((data: any[]) =>{
       console.log(data);
       this.users = data;
+    })
+
+    this.ps.getProjectsByOwner(1).subscribe((data: any[]) =>{
+      this.projects = data;
     })
     
   }

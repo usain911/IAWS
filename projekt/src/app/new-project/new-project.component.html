@@ -1,0 +1,9 @@
+
+<h2>Neues Projekt erstellen</h2>
+
+<form #projectForm="ngForm" (ngSubmit)="submitForm()">
+    <label>Projekttitel</label>
+    <input name="name" [(ngModel)]="project.name" required>
+
+    <button type="submit" [disabled]="projectForm.invalid">Speichern</button>
+</form>

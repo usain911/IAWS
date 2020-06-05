@@ -18,5 +18,19 @@
       "name": "Smith",
       "pw": "ann@codingthesmartway.com"
     }
+  ],
+  "projekte": [
+    {
+      "id": 1,
+      "owner": 1,
+      "name": "haus bau",
+      "bezeichnung": "haus bezeichnung"
+    },
+    {
+      "id": 2,
+      "owner": 1,
+      "name": "garage bauen",
+      "bezeichnung": "steve@codingthesmartway.com"
+    }
   ]
 }

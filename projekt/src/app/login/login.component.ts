@@ -48,23 +48,23 @@ export class LoginComponent implements OnInit {
       return;
   }
   else {    
-    this.authService.getUserByLogin().subscribe((data: User) => {
+    this.authService.getUserByLogin(1).subscribe((data: User) => {
       this.nutzer = data;
       console.log("name "+this.nutzer.name)
     }, error => {
       console.log("error");
     });
   }
-
-    if(this.f.userid.value == this.model.userid && this.f.password.value == this.model.password){      
-      //let nutzer = this.authService.getUser();      
+    if(this.f.userid.value == this.model.userid && this.f.password.value == this.model.password){          
       setTimeout(() => { this.checkData()  }, 2000);
-      console.log("Login successful ");
+      console.log("Login successful "+ this.model.userid);
+      if(this.model.userid === "admin")
+        localStorage.setItem('admin', "true");
       localStorage.setItem('isLoggedIn', "true");
       localStorage.setItem('token', this.f.userid.value);
     }
     else{
-      this.message = "Please check your userid and password";
+      this.message = "Please check your userid and password"; 
     }
   }    
   

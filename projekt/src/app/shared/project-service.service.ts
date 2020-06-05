@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User } from './user';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Projekt } from './projekt';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import {  throwError } from 'rxjs';
+import {  throwError, Observable } from 'rxjs';
 import { retry, catchError, tap, map } from 'rxjs/operators';
 
 
@@ -12,10 +13,9 @@ import { retry, catchError, tap, map } from 'rxjs/operators';
 })
 export class ProjectServiceService {
 
-  private REST_API_SERVER = "http://localhost:3000/users";
+  private REST_API_SERVER = "http://localhost:3000/";
   user: User;
-
-  
+  projects : Projekt[];  
 
   constructor(private httpClient: HttpClient) { 
   }
@@ -34,12 +34,28 @@ export class ProjectServiceService {
     return throwError(errorMessage);
   }
 
+  //-------------------------------------------------------------------------------
+  //-----------------------------------USER----------------------------------------
+  //-------------------------------------------------------------------------------
+
   public sendGetRequest(){
     //const options = { params: new HttpParams({fromString: "_page=1&_limit=3"}) }; // limitiert auf 3 user
-    return this.httpClient.get<User[]>(this.REST_API_SERVER).pipe(retry(3), catchError(this.handleError));
+    return this.httpClient.get<User[]>(this.REST_API_SERVER+"users").pipe(retry(3), catchError(this.handleError));
   }
 
- 
+  //-------------------------------------------------------------------------------
+  //----------------------------------PROJEKTE-------------------------------------
+  //-------------------------------------------------------------------------------
+
+  public getProjects(){
+    return this.httpClient.get<Projekt[]>(`${this.REST_API_SERVER}projekte`).pipe(retry(3), catchError(this.handleError));
+  } 
+  public getProjectById(id: number): Observable<Projekt>{
+    return this.httpClient.get<any>(`${this.REST_API_SERVER}projekte/${id}`).pipe(retry(3), catchError(this.handleError));
+  } 
+  public getProjectsByOwner(owner: number) {
+    return this.httpClient.get<any>(`${this.REST_API_SERVER}projekte/?owner=${owner}`).pipe(retry(3), catchError(this.handleError));
+  }
 }
 
 

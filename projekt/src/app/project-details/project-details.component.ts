@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ProjectServiceService } from '../shared/project-service.service';
+import { Projekt } from '../shared/projekt';
+
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.component.html',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectDetailsComponent implements OnInit {
 
-  constructor() { }
+  projekt: Projekt;
+
+  constructor(private ps: ProjectServiceService) { }
 
   ngOnInit(): void {
+    this.ps.getProjectById(1).subscribe(p => this.projekt = p);
   }
 
 }

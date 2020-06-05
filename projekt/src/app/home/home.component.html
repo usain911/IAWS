@@ -1,6 +1,3 @@
-<p style="padding: 13px;">
-    An Angular 9 example application that demonstrates how to use HttpClient to consume REST APIs
-    </p>
     
 
 <input type="text" (keyup)="onKeyUp()" (input)="color=$event.target.value" [style.background-color]="color">
@@ -9,6 +6,21 @@
 <div *ngFor="let users of users" style="margin-top:10px;">
 {{users.id}} {{users.name}} {{users.vorname}} {{users.pw}} 
 </div>
+<hr>
+Meine Projekte:
+
+<div *ngFor="let project of projects" style="margin-top:10px;">
+    <div *ngIf="project; else loading">
+
+    </div>
+   {{project.name}}
+    </div>
+
+<div class="button">
+    <a routerLink="/newproject" routerLinkActive="active">neues Projekt anlegen</a>
+</div>
+
+<hr>
 
 <div class="container">
     <div class="col-md-6 col-md-offset-3 loginBox">
@@ -17,3 +29,6 @@
     </div>
 </div>
 
+<ng-template #loading>
+    <div>loading...</div>
+</ng-template>

@@ -13,10 +13,10 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { ProjectServiceService } from './shared/project-service.service';
 import { HttpClientModule }    from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { from } from 'rxjs';
 import { AuthGuard } from './auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { NewProjectComponent } from './new-project/new-project.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,6 +31,7 @@ const appRoutes: Routes = [
     ProjectDetailsComponent,
     RegisterUserComponent,
     LoginComponent,
+    NewProjectComponent,
   ],
   imports: [
     HttpClientModule,

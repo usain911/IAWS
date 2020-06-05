@@ -41,27 +41,13 @@ export class AuthService {
     return throwError(errorMessage);
   }
 
-  authLogin(login: Login) {    
-    //let user: User;
-    let nutzer = this.getUserByLogin();
-    console.log("Login: "+login + "UserLogin= " + this.nutzer.name);
-  }
-
   logout(): void {
     localStorage.setItem('isLoggedIn', "false");
     localStorage.removeItem('token');
+    localStorage.removeItem('admin');
   }
 
-   getUserByLogin(): Observable<User> {
-    let id = 1;
-    const url = `${this.REST_API_SERVER}/${id}`;
-    return this.httpClient.get<User>(url)
-  }
-
-  async getUser() {
-    let id = 1;
-    const url = `${this.REST_API_SERVER}/${id}`;
-    const promise = await this.httpClient.get(url).toPromise();
-    console.log("promise: " + promise); 
+   getUserByLogin(id: number): Observable<User> {
+    return this.httpClient.get<User>(`${this.REST_API_SERVER}/${id}`)
   }
 }
