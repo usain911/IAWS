@@ -4,8 +4,7 @@ import{ Router } from '@angular/router';
 import { Login } from '../shared/login';
 import { AuthService } from '../shared/auth.service';
 import { User } from '../shared/user';
-import { first } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-login',
@@ -16,7 +15,7 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnInit {
 
   nutzer: User;
-  model: Login = { userid: "admin", password: "admin123" };
+  model: Login = { nutzername: "admin", password: "admin123" };
   loginForm: FormGroup;
   message: string;
   returnUrl: string;
@@ -36,8 +35,9 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   checkData() {
-    if(this.f.userid.value == this.nutzer.name) {
-      console.log(JSON.stringify("nutzer "+this.nutzer.name));
+    console.log("checkdata");
+    if(this.f.userid.value == this.nutzer.nutzername) {
+      console.log(JSON.stringify("nutzer "+this.nutzer.nutzername));
       this.router.navigate([this.returnUrl]);
     }
   }
@@ -50,15 +50,15 @@ export class LoginComponent implements OnInit {
   else {    
     this.authService.getUserByLogin(1).subscribe((data: User) => {
       this.nutzer = data;
-      console.log("name "+this.nutzer.name)
+      console.log("name "+ this.nutzer.nutzername)
     }, error => {
       console.log("error");
     });
   }
-    if(this.f.userid.value == this.model.userid && this.f.password.value == this.model.password){          
+    if(this.f.userid.value == this.model.nutzername && this.f.password.value == this.model.password){          
       setTimeout(() => { this.checkData()  }, 2000);
-      console.log("Login successful "+ this.model.userid);
-      if(this.model.userid === "admin")
+      console.log("Login "+ this.model.nutzername);
+      if(this.model.nutzername === "admin")
         localStorage.setItem('admin', "true");
       localStorage.setItem('isLoggedIn', "true");
       localStorage.setItem('token', this.f.userid.value);

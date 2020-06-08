@@ -19,6 +19,7 @@ import { Projekt } from '../shared/projekt';
 export class HomeComponent implements OnInit {
   
   users: User[];
+  luser: User[];
   nutzer: User;
   projects: Projekt[];
 
@@ -47,6 +48,17 @@ export class HomeComponent implements OnInit {
     this.ps.getProjectsByOwner(1).subscribe((data: any[]) =>{
       this.projects = data;
     })
+
+    this.ps.getRequest().subscribe((
+      data: any[]) =>{
+        this.luser = data;
+        console.log(`live: ${data}`);
+      })
+
+    this.ps.getTeams().subscribe((
+      data: any[]) =>{
+        console.log(data)
+      })
     
   }
 

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,7 +12,7 @@ import { ListProjectsComponent } from './list-projects/list-projects.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
 import { ProjectServiceService } from './shared/project-service.service';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule, HTTP_INTERCEPTORS }    from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     HttpClientModule,
+    HttpClientJsonpModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -43,7 +45,10 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [ AuthGuard, ProjectServiceService ],
+  providers: [
+    AuthGuard, 
+    ProjectServiceService 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

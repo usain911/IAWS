@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Login } from '../login';
+import { Login } from '../shared/login';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {  throwError } from 'rxjs';
 import { retry, catchError, tap, map } from 'rxjs/operators';
 import { User } from '../shared/user';
+import { ThrowStmt } from '@angular/compiler';
 //import 'rxjs/add/operator/toPromise';
 
 @Injectable({
@@ -18,6 +19,7 @@ export class AuthService {
   login: Login;
   isLoggedIn: string;
   private REST_API_SERVER = "http://localhost:3000/users";
+  private restLive = "https://localhost:44372/api/Nutzer";
 
   constructor(private router: Router, private httpClient: HttpClient) { }
 
@@ -49,5 +51,11 @@ export class AuthService {
 
    getUserByLogin(id: number): Observable<User> {
     return this.httpClient.get<User>(`${this.REST_API_SERVER}/${id}`)
+  }
+  //-------------------------------------------------------------------------------
+  //-----------------------------------LIVE----------------------------------------
+  //-------------------------------------------------------------------------------
+  getUserByNutzername(nutzername: string) {
+    return this.httpClient.get<User>(`${this.restLive}/GetNutzerByNutzername/${nutzername}`)
   }
 }

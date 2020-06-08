@@ -14,7 +14,9 @@ import { retry, catchError, tap, map } from 'rxjs/operators';
 export class ProjectServiceService {
 
   private REST_API_SERVER = "http://localhost:3000/";
+  private restLive = "https://localhost:44372/api/Nutzer";
   user: User;
+ 
   projects : Projekt[];  
 
   constructor(private httpClient: HttpClient) { 
@@ -41,6 +43,26 @@ export class ProjectServiceService {
   public sendGetRequest(){
     //const options = { params: new HttpParams({fromString: "_page=1&_limit=3"}) }; // limitiert auf 3 user
     return this.httpClient.get<User[]>(this.REST_API_SERVER+"users").pipe(retry(3), catchError(this.handleError));
+  }
+  //-------------------------------------------------------------------------------
+  //-----------------------------------TEAMS----------------------------------------
+  //-------------------------------------------------------------------------------
+
+  public getTeams(){
+    return this.httpClient.get<any>(this.REST_API_SERVER+"teams").pipe(retry(3), catchError(this.handleError));
+  }
+
+
+  //-------------------------------------------------------------------------------
+  //-----------------------------------LIVE----------------------------------------
+  //-------------------------------------------------------------------------------
+
+  public getRequest(){
+    const header = new HttpHeaders({
+      'Access-Control-Allow-Headers': '*'
+    });
+    //const options = { params: new HttpParams({fromString: "_page=1&_limit=3"}) }; // limitiert auf 3 user
+    return this.httpClient.get<User[]>('https://localhost:44372/api/Nutzer');
   }
 
   //-------------------------------------------------------------------------------

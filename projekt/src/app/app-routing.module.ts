@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CanNavigate } from './can-navigate.guard'
 
 import { HomeComponent } from './home/home.component';
 import { ListProjectsComponent } from './list-projects/list-projects.component';
@@ -8,11 +9,11 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'list', component: ListProjectsComponent },
-  { path: 'project', component: ProjectDetailsComponent },
+  { path: 'home', component: HomeComponent, canActivate:[CanNavigate] },
+  { path: 'list', component: ListProjectsComponent, canActivate:[CanNavigate] },
+  { path: 'project', component: ProjectDetailsComponent, canActivate:[CanNavigate] },
   { path: 'register', component: RegisterUserComponent },
-  { path: 'newproject', component: NewProjectComponent },
+  { path: 'newproject', component: NewProjectComponent, canActivate:[CanNavigate] },
 
 ];
 

@@ -2,21 +2,33 @@
   "users": [
     {
       "id": 1,
-      "vorname": "Sebastian",
-      "name": "admin",
-      "pw": "admin123"
+      "nutzername": "admin",
+      "vorname": "admin",
+      "nachname": "admin",
+      "email": "email@mail.de",
+      "passwort": "admin123",
+      "isAdmin": true,
+      "team": "admin"
     },
     {
       "id": 2,
-      "vorname": "Steve",
-      "name": "Palmer",
-      "pw": "steve@codingthesmartway.com"
+      "nutzername": "admin2",
+      "vorname": "admin2",
+      "nachname": "admin2",
+      "email": "email@mail.de",
+      "passwort": "steve@codingthesmartway.com",
+      "isAdmin": true,
+      "team": "admin"
     },
     {
       "id": 3,
-      "vorname": "Ann",
-      "name": "Smith",
-      "pw": "ann@codingthesmartway.com"
+      "nutzername": "admin3",
+      "vorname": "admin3",
+      "nachname": "admin3",
+      "email": "ann@codingthesmartway.com",
+      "passwort": "ann@codingthesmartway.com",
+      "isAdmin": true,
+      "team": "admin"
     }
   ],
   "projekte": [
@@ -31,6 +43,20 @@
       "owner": 1,
       "name": "garage bauen",
       "bezeichnung": "steve@codingthesmartway.com"
+    }
+  ],
+  "teams": [
+    {
+      "id": 1,
+      "bezeichnung":"admin"
+    },
+    {
+      "id": 2,
+      "bezeichnung":"Leiter"
+    },
+    {
+      "id": 3,
+      "bezeichnung":"doofmannsgehilfe"
     }
   ]
 }

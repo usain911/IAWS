@@ -4,21 +4,30 @@
 
 
 <div *ngFor="let users of users" style="margin-top:10px;">
-{{users.id}} {{users.name}} {{users.vorname}} {{users.pw}} 
+{{users.nutzerId}} | {{users.name}} | {{users.isAdmin}} 
 </div>
 <hr>
 Meine Projekte:
 
+
 <div *ngFor="let project of projects" style="margin-top:10px;">
-    <div *ngIf="project; else loading">
-
-    </div>
+    <div *ngIf="project; else loading"></div>
    {{project.name}}
+   
+    <div *ngIf="!projects">
+        Lädt...
+    </div>   
+</div>
+
+<hr>
+<h1>Nutzer als DB</h1>
+<div *ngFor="let item of luser" style="margin-top:10px;">
+    {{item.name}} {{item.email}} {{item.team}} 
     </div>
 
-<div class="button">
-    <a routerLink="/newproject" routerLinkActive="active">neues Projekt anlegen</a>
-</div>
+
+
+
 
 <hr>
 
@@ -32,3 +41,7 @@ Meine Projekte:
 <ng-template #loading>
     <div>loading...</div>
 </ng-template>
+
+<div class="button">
+    <a routerLink="/newproject" routerLinkActive="active">neues Projekt anlegen</a>
+</div>

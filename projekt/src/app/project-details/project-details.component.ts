@@ -15,7 +15,7 @@ export class ProjectDetailsComponent implements OnInit {
   constructor(private ps: ProjectServiceService) { }
 
   ngOnInit(): void {
-    this.ps.getProjectById(1).subscribe(p => this.projekt = p);
+    this.ps.getProjectById(1).subscribe(p => this.projekt = p); 
   }
 
 }
