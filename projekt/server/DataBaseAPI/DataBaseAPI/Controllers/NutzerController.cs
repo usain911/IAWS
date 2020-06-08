@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,10 +41,22 @@ namespace DataBaseAPI.Controllers
             return nutzer;
         }
 
-        // PUT: api/Nutzer/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        // GET: api/Nutzer/5
+        [HttpGet("GetNutzerByNutzername/{nname}")]
+        public async Task<ActionResult<Nutzer>> GetNutzerByBenutzerName(string nname)
+        {
+          var nutzer = _context.Nutzer.Where(bn => bn.Nutzername == nname).FirstOrDefault();
+
+          if (nutzer == null)
+          {
+            return NotFound();
+          }
+
+          return nutzer;
+        }
+
+    // PUT: api/Nutzer/5
+    [HttpPut("{id}")]
         public async Task<IActionResult> PutNutzer(int id, Nutzer nutzer)
         {
             if (id != nutzer.NutzerId)

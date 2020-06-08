@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -28,7 +28,7 @@ namespace DataBaseAPI.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=ubi19.informatik.uni-siegen.de;Initial Catalog=Projektmanagement;Persist Security Info=True;User ID=gruppe03-1;Password=IVA.765$");
             }
         }
@@ -70,31 +70,38 @@ namespace DataBaseAPI.Models
 
             modelBuilder.Entity<Nutzer>(entity =>
             {
+                entity.HasKey(e => e.NutzerId)
+                    .IsClustered(false);
+
                 entity.Property(e => e.NutzerId)
                     .HasColumnName("nutzer_id")
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
-                    .HasMaxLength(45)
-                    .IsFixedLength();
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.IsAdmin).HasColumnName("isAdmin");
 
-                entity.Property(e => e.Name)
-                    .HasColumnName("name")
-                    .HasMaxLength(45)
-                    .IsFixedLength();
+                entity.Property(e => e.Nachname)
+                    .HasColumnName("nachname")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Nutzername)
+                    .HasColumnName("nutzername")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.Passwort)
                     .HasColumnName("passwort")
-                    .HasMaxLength(45)
-                    .IsFixedLength();
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.Team)
                     .HasColumnName("team")
-                    .HasMaxLength(45)
-                    .IsFixedLength();
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Vorname)
+                    .HasColumnName("vorname")
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<NutzerAufgaben>(entity =>
