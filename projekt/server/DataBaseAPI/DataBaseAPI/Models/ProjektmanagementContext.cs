@@ -19,6 +19,7 @@ namespace DataBaseAPI.Models
         public virtual DbSet<Nutzer> Nutzer { get; set; }
         public virtual DbSet<NutzerAufgaben> NutzerAufgaben { get; set; }
         public virtual DbSet<NutzerProjekte> NutzerProjekte { get; set; }
+        public virtual DbSet<NutzerTeam> NutzerTeam { get; set; }
         public virtual DbSet<Projekte> Projekte { get; set; }
         public virtual DbSet<Rechte> Rechte { get; set; }
         public virtual DbSet<Teilaufgaben> Teilaufgaben { get; set; }
@@ -37,14 +38,11 @@ namespace DataBaseAPI.Models
         {
             modelBuilder.Entity<Aufgaben>(entity =>
             {
-                entity.Property(e => e.AufgabenId)
-                    .HasColumnName("aufgaben_id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.AufgabenId).HasColumnName("aufgaben_id");
 
                 entity.Property(e => e.Beschreibung)
                     .HasColumnName("beschreibung")
-                    .HasMaxLength(500)
-                    .IsFixedLength();
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.Erledigt).HasColumnName("erledigt");
 
@@ -60,8 +58,7 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.Titel)
                     .HasColumnName("titel")
-                    .HasMaxLength(45)
-                    .IsFixedLength();
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.VorgaengerId).HasColumnName("vorgaenger_id");
 
@@ -73,9 +70,7 @@ namespace DataBaseAPI.Models
                 entity.HasKey(e => e.NutzerId)
                     .IsClustered(false);
 
-                entity.Property(e => e.NutzerId)
-                    .HasColumnName("nutzer_id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.NutzerId).HasColumnName("nutzer_id");
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
@@ -108,9 +103,7 @@ namespace DataBaseAPI.Models
             {
                 entity.ToTable("Nutzer_Aufgaben");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.AufgabenId).HasColumnName("aufgaben_id");
 
@@ -123,9 +116,7 @@ namespace DataBaseAPI.Models
             {
                 entity.ToTable("Nutzer_Projekte");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.NutzerId).HasColumnName("nutzer_id");
 
@@ -134,32 +125,43 @@ namespace DataBaseAPI.Models
                 entity.Property(e => e.ProjektOwner).HasColumnName("projekt_owner");
             });
 
+            modelBuilder.Entity<NutzerTeam>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("Nutzer_Team");
+
+                entity.Property(e => e.NutzerId).HasColumnName("nutzer_id");
+
+                entity.Property(e => e.NutzerTeamId)
+                    .HasColumnName("nutzer_team_id")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.TeamName)
+                    .HasColumnName("team_name")
+                    .HasMaxLength(30);
+            });
+
             modelBuilder.Entity<Projekte>(entity =>
             {
                 entity.HasKey(e => e.ProjektId);
 
-                entity.Property(e => e.ProjektId)
-                    .HasColumnName("projekt_id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ProjektId).HasColumnName("projekt_id");
 
                 entity.Property(e => e.Bezeichnung)
                     .HasColumnName("bezeichnung")
-                    .HasMaxLength(500)
-                    .IsFixedLength();
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")
-                    .HasMaxLength(45)
-                    .IsFixedLength();
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.ProjektOwnerId).HasColumnName("projekt_owner_id");
             });
 
             modelBuilder.Entity<Rechte>(entity =>
             {
-                entity.Property(e => e.RechteId)
-                    .HasColumnName("rechte_id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.RechteId).HasColumnName("rechte_id");
 
                 entity.Property(e => e.LeseZugriff).HasColumnName("leseZugriff");
 
@@ -172,14 +174,11 @@ namespace DataBaseAPI.Models
 
             modelBuilder.Entity<Teilaufgaben>(entity =>
             {
-                entity.Property(e => e.TeilaufgabenId)
-                    .HasColumnName("teilaufgaben_id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.TeilaufgabenId).HasColumnName("teilaufgaben_id");
 
                 entity.Property(e => e.Beschreibung)
                     .HasColumnName("beschreibung")
-                    .HasMaxLength(500)
-                    .IsFixedLength();
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.Erledigt).HasColumnName("erledigt");
 
@@ -195,8 +194,7 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.Titel)
                     .HasColumnName("titel")
-                    .HasMaxLength(45)
-                    .IsFixedLength();
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.VorgaengerId).HasColumnName("vorgaenger_id");
 
@@ -211,9 +209,7 @@ namespace DataBaseAPI.Models
 
                 entity.ToTable("ZwischenRechteAP");
 
-                entity.Property(e => e.ZwischenRechteId)
-                    .HasColumnName("zwischenRechte_id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ZwischenRechteId).HasColumnName("zwischenRechte_id");
 
                 entity.Property(e => e.LeseZugriffAufgaben).HasColumnName("leseZugriff_aufgaben");
 
