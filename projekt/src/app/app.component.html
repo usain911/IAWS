@@ -1,6 +1,6 @@
 <nav class="navbar">
   <ul>
-    <li><a routerLink="/home" routerLinkActive="active">home</a></li>
+    <li><a routerLink="/home" routerLinkActive="routerLinkActive">home</a></li>
     <li><a routerLink="/list" routerLinkActive="active">Liste</a></li>
     <li><a routerLink="/project" routerLinkActive="active">Projekt</a></li>
   </ul>
@@ -12,17 +12,20 @@
   <nav id="normal">
     <ul>
       <li><a routerLink="/home" routerLinkActive="active">home</a></li>
-      <li><a routerLink="/login" routerLinkActive="active">login</a></li>
-      <li><a routerLink="/list" routerLinkActive="active">Liste</a></li>
+      
+      <li><a routerLink="/list" routerLinkActive="active">Projektliste</a></li>
       <li>
         <a href="">Admin</a>
         <ul>
-          <li><a routerLink="/register" routerLinkActive="active">registrieren</a></li>
+         
           <li><a routerLink="/project" routerLinkActive="active">Projekt</a></li>
         </ul>
       </li>
       <li><a routerLink="/project" routerLinkActive="active">Projekt</a></li>
-
+      <li><a routerLink="/login" routerLinkActive="active">login</a></li>
+      <ul>
+        <li><a routerLink="/register" routerLinkActive="active">registrieren</a></li>
+      </ul>
     </ul>
   </nav>
 
@@ -42,8 +45,8 @@
   </nav>
 
 </header>
-<div class="content" role="main">
-</div>
+<div class="content">
 
 <router-outlet></router-outlet>
 
+</div>

@@ -35,6 +35,7 @@ export class ProjectServiceService {
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
+  
 
   //-------------------------------------------------------------------------------
   //-----------------------------------USER----------------------------------------
@@ -81,3 +82,10 @@ export class ProjectServiceService {
 }
 
 
+const httpOptions = {
+  headers: new HttpHeaders({     
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type':  'plain/text',
+    //'Authorization': 'my-auth-token'
+  })
+};

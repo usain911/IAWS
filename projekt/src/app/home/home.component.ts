@@ -6,12 +6,23 @@ import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
 import { Projekt } from '../shared/projekt';
 
+import { trigger, transition,style, query, group, animate, state} from '@angular/animations';
+
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({opacity:0}),
+        animate('300ms', style({ opacity:1 }))
+      ])
+
+    ])
+  ]
 })
 
 
@@ -33,6 +44,7 @@ export class HomeComponent implements OnInit {
   constructor(private ps: ProjectServiceService, private router: Router,public authService: AuthService) { } 
 
   user: User;
+  test: User;
   
 
   ngOnInit(): void {
@@ -57,6 +69,12 @@ export class HomeComponent implements OnInit {
 
     this.ps.getTeams().subscribe((
       data: any[]) =>{
+        console.log(data)
+      })
+    
+    this.authService.getUserByNutzername("jboldt").subscribe((
+      data:User) => {
+        this.test = data;
         console.log(data)
       })
     

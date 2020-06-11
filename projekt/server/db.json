@@ -2,11 +2,11 @@
   "users": [
     {
       "id": 1,
-      "nutzername": "admin",
+      "nutzername": "jboldt",
       "vorname": "admin",
       "nachname": "admin",
       "email": "email@mail.de",
-      "passwort": "admin123",
+      "passwort": "passwort",
       "isAdmin": true,
       "team": "admin"
     },
@@ -29,6 +29,16 @@
       "passwort": "ann@codingthesmartway.com",
       "isAdmin": true,
       "team": "admin"
+    },
+    {
+      "nutzername": "123",
+      "vorname": "123",
+      "nachname": "123",
+      "email": "jboldt",
+      "passwort": "passwort",
+      "isAdmin": false,
+      "team": "",
+      "id": 11
     }
   ],
   "projekte": [
@@ -48,15 +58,15 @@
   "teams": [
     {
       "id": 1,
-      "bezeichnung":"admin"
+      "bezeichnung": "admin"
     },
     {
       "id": 2,
-      "bezeichnung":"Leiter"
+      "bezeichnung": "Leiter"
     },
     {
       "id": 3,
-      "bezeichnung":"doofmannsgehilfe"
+      "bezeichnung": "doofmannsgehilfe"
     }
   ]
 }

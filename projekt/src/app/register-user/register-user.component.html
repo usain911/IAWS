@@ -1,4 +1,4 @@
-<div class="container">
+<div @fadeInAnimation class="container">
     <h1>Registrieren</h1>
     <form (ngSubmit)="onSubmit()" #userForm="ngForm">
 
@@ -19,31 +19,39 @@
 
       <div class="form-group">
         <label for="vorname">Vorname</label>
-        <input type="text" class="form-control" id="vorname" 
+        <input type="text" class="form-control" id="vorname"  
         [(ngModel)]="user.vorname" name="vorname" #vorname="ngModel" required>
       </div>
       <div [hidden]="vorname.valid || vorname.pristine" class="alert alert-danger">bitte Vornamen angeben</div>
 
       <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input type="email" class="form-control" id="email"
-        [(ngModel)]="user.email" name="email" #email="ngModel">
-        <div [hidden]="email.valid || email.pristine" class="alert alert-danger">bitte E-Mail angeben</div>
+        <label for="email">E-Mail Adresse</label>
+        <input type="email" class="form-control" id="email" 
+        [(ngModel)]="user.email" name="email" #email="ngModel" required>
       </div>
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">bitte Mailadresse angeben</div>
+      
+
      
       <div class="form-group">
         <label for="passwort">Passwort</label>
         <input type="password" class="form-control" id="passwort" 
-        [(ngModel)]="user.passwort" name="passwort" #passwort="ngModel"required >
+        [(ngModel)]="user.passwort" name="passwort" #passwort="ngModel"required minlength="5" maxlength="8">
       </div>      
       <div [hidden]="passwort.valid || passwort.pristine" class="alert alert-danger">bitte Passwort angeben</div>
+      <div *ngIf="passwort.control.hasError('minlength')"class="alert alert-danger">
+        Passwort muss mind. {{ passwort.control.getError('minlength').requiredLength }} Zeichen enthalten
+      </div>
+     
 
       <div class="form-group">
         <label for="team">Team</label>
         <select class="form-control" id="team" required>
+          <option value="">--- Bitte auswählen ---</option>
           <option *ngFor="let team of teams" [value]="team">{{team.bezeichnung}}</option>
         </select>
       </div>
+
 
       <button type="submit" class="btn btn-success" 
         [disabled]="!userForm.form.valid" 
@@ -52,3 +60,8 @@
       <button type="reset" class="btn btn-danger" (click)= "userForm.reset">Cancel</button>
     </form>
 </div>
+
+<div class="button">
+  <a routerLink="/newproject" routerLinkActive="active">neues Projekt anlegen</a>
+</div>
+

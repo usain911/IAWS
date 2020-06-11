@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Projekt } from '../shared/projekt';
+import { Aufgaben } from '../shared/aufgaben';
 
 
 @Component({
@@ -9,15 +10,40 @@ import { Projekt } from '../shared/projekt';
 })
 export class NewProjectComponent implements OnInit {
 
-  project: Projekt;
+  projekt = new Projekt();
+  aufgaben: Aufgaben[];
+  public toAdd: Aufgaben;
+
+  constructor() {
+    this.aufgaben = [];
+    this.toAdd = 
+      {
+        aufgabenId: 1,
+      }
+  }
 
   @Output() submitproject = new EventEmitter<Projekt>();
 
   submitForm() {
-    console.log(this.project)
+    console.log(this.projekt)
   }
 
   ngOnInit(): void { 
   }
 
+  addTag() {
+    console.log(this.toAdd);
+    console.log('aufgaben: ' + this.aufgaben.length)
+    this.aufgaben.push(this.toAdd);
+    console.log('aufgaben: ' + this.aufgaben.length)
+
+    return false;
+  }
+
+  removeTag(i: number) {
+    this.projekt.aufgaben.splice(i,1);
+    return false;
+  }
+
 }
+ 
