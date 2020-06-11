@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError, tap, map } from 'rxjs/operators';
+import { Aufgaben } from './aufgaben';
 
 
 
@@ -86,7 +87,12 @@ export class ProjectServiceService {
   public addProjekt(pr: Projekt):Observable<Projekt>{
     return this.httpClient.post<any>(`${this.api}NutzerProjekte`, pr)
   }
-
+  //-------------------------------------------------------------------------------
+  //----------------------------------Aufgaben-------------------------------------
+  //-------------------------------------------------------------------------------
+  public getAufgaben() {
+    return  this.httpClient.get<any>(`${this.api}Aufgaben`).pipe(retry(3), catchError(this.handleError));
+  }
 }
 
 

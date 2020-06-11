@@ -5,8 +5,10 @@ import { ProjectServiceService } from '../shared/project-service.service';
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
 import { Projekt } from '../shared/projekt';
+import { Aufgaben } from '../shared/aufgaben'
 
 import { trigger, transition,style, query, group, animate, state} from '@angular/animations';
+import { from } from 'rxjs';
 
 
 
@@ -33,6 +35,7 @@ export class HomeComponent implements OnInit {
   luser: User[];
   nutzer: User;
   projects: Projekt[];
+  aufgaben: Aufgaben[];
 
   id: string;
   isLoggedIn: string;
@@ -61,6 +64,12 @@ export class HomeComponent implements OnInit {
       this.projects = data;
       console.log("Projekte "+data);
     })
+
+    this.ps.getAufgaben().subscribe((data: any[]) =>{
+      this.aufgaben = data;
+    })
+
+
 
     //this.ps.getUser().subscribe((
     //  data: any[]) =>{

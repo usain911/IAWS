@@ -13,9 +13,8 @@
 <!-- <div *ngFor="let users of users" style="margin-top:10px;">
 {{users.nutzerId}} | {{users.vorname}} | {{users.nachname}} 
 </div> -->
-<hr>
-Meine Projekte:
 
+<h1>Meine Projekte:</h1>
 
 <div *ngFor="let project of projects" style="margin-top:10px;">
     <div *ngIf="project; else loading"></div>
@@ -27,7 +26,18 @@ Meine Projekte:
   </div> 
 </div>
 
-<hr>
+<div class="container">
+<div *ngFor="let aufgabe of aufgaben" style="margin-top:10px;">
+    <div *ngIf="aufgaben; else loading"></div>
+   <h2>{{aufgabe.titel}}</h2>
+   <p>{{aufgabe.beschreibung}}</p>
+   
+   <div  role="status" [hidden]="projects">
+   Keine Projekte gefunden
+  </div> 
+</div>
+</div>
+
 <ng-template #loading>
     <div>loading...</div>
 </ng-template>
@@ -35,3 +45,12 @@ Meine Projekte:
 <div @fadeIn class="button">
     <a routerLink="/newproject" routerLinkActive="active" class="btn btn-danger">neues Projekt anlegen</a>
 </div></div>  
+
+
+<!-- <div class="box loader-1">
+    <div class="loader">
+        <div class="loader-ball-1"></div>
+        <div class="loader-ball-2"></div>
+    </div>
+    <p>Loading</p>
+</div> -->
