@@ -43,8 +43,7 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.Beschreibung)
                     .HasColumnName("beschreibung")
-                    .HasMaxLength(500)
-                    .IsFixedLength();
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.Erledigt).HasColumnName("erledigt");
 
@@ -60,8 +59,7 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.Titel)
                     .HasColumnName("titel")
-                    .HasMaxLength(45)
-                    .IsFixedLength();
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.VorgaengerId).HasColumnName("vorgaenger_id");
 
@@ -73,9 +71,7 @@ namespace DataBaseAPI.Models
                 entity.HasKey(e => e.NutzerId)
                     .IsClustered(false);
 
-                entity.Property(e => e.NutzerId)
-                    .HasColumnName("nutzer_id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.NutzerId).HasColumnName("nutzer_id");
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
@@ -144,13 +140,11 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.Bezeichnung)
                     .HasColumnName("bezeichnung")
-                    .HasMaxLength(500)
-                    .IsFixedLength();
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")
-                    .HasMaxLength(45)
-                    .IsFixedLength();
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.ProjektOwnerId).HasColumnName("projekt_owner_id");
             });
@@ -178,8 +172,7 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.Beschreibung)
                     .HasColumnName("beschreibung")
-                    .HasMaxLength(500)
-                    .IsFixedLength();
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.Erledigt).HasColumnName("erledigt");
 
@@ -195,8 +188,7 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.Titel)
                     .HasColumnName("titel")
-                    .HasMaxLength(45)
-                    .IsFixedLength();
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.VorgaengerId).HasColumnName("vorgaenger_id");
 
