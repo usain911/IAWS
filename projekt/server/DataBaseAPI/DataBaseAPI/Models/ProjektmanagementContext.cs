@@ -54,6 +54,8 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.NachfolgerId).HasColumnName("nachfolger_id");
 
+                entity.Property(e => e.ProjektId).HasColumnName("projekt_id");
+
                 entity.Property(e => e.SollZeit).HasColumnName("soll_zeit");
 
                 entity.Property(e => e.Titel)
@@ -61,8 +63,6 @@ namespace DataBaseAPI.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.VorgaengerId).HasColumnName("vorgaenger_id");
-
-                entity.Property(e => e.Zugewiesen).HasColumnName("zugewiesen");
             });
 
             modelBuilder.Entity<Nutzer>(entity =>

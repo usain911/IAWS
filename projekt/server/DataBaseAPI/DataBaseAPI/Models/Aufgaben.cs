@@ -9,7 +9,7 @@ namespace DataBaseAPI.Models
         public string Titel { get; set; }
         public string Beschreibung { get; set; }
         public int? ErstellerId { get; set; }
-        public bool? Zugewiesen { get; set; }
+        public int? ProjektId { get; set; }
         public TimeSpan? SollZeit { get; set; }
         public TimeSpan? IstZeit { get; set; }
         public bool? Erledigt { get; set; }
