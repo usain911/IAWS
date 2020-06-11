@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,10 +41,25 @@ namespace DataBaseAPI.Controllers
             return projekte;
         }
 
-        // PUT: api/Projekte/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+
+        // GET: api/Nutzer/5
+        [HttpGet("GetProjektByOwnerId/{owner}")]
+        public async Task<ActionResult<Projekte>> GetProjektByOwnerId(int owner)
+        {
+          var nutzer = _context.Projekte.Where(ow => ow.ProjektOwnerId == owner).FirstOrDefault();
+
+          if (nutzer == null)
+          {
+            return NotFound();
+          }
+
+          return nutzer;
+        }
+
+    // PUT: api/Projekte/5
+    // To protect from overposting attacks, enable the specific properties you want to bind to, for
+    // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+    [HttpPut("{id}")]
         public async Task<IActionResult> PutProjekte(int id, Projekte projekte)
         {
             if (id != projekte.ProjektId)
