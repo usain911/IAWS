@@ -1,52 +1,73 @@
-.box {
-    width: 50%;
-    height: 50%;
-}
+.topnav {
+    overflow: hidden;
+    background-color: #e9e9e9;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Style the "active" element to highlight the current page */
+  .topnav a.active {
+    background-color: #2196F3;
+    color: white;
+  }
 
-.loader-1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.topnav input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+  }
+
+.progress {
+    margin-top: 3rem;
 }
-.loader-1 .loader {
-    width: 5rem;
-    height: 5rem;
+.projekt {
+    background-color: #eee;
+}
+img {
+    width: 4rem;
+    height: 4rem;
     position: relative;
-}
-.loader-1 .loader .loader-ball-1 {
-position: absolute;
-top: 1rem;
-left: 1rem;
-background-color: black;
-border-radius: 50%;
-width: 3rem;
-height: 3rem;
-animation: move 4s infinite alternate;
-}
+    margin-left: 95%;
+    margin-bottom: 1rem;
 
-.loader-1 .loader .loader-ball-2 {
-position: absolute;
-top: 1rem;
-left: 1rem;
-background-color: black;
-border-radius: 50%;
-width: 3rem;
-height: 3rem;
-animation: move 4s infinite alternate-reverse;
 }
-p { 
-text-align: center;
-text-transform: uppercase;
-color: white;
-letter-spacing: 0.8rem;
-font-size: 1.2rem;
+.ca {
+    z-index: 0;
 }
-
-@keyframes move {
-0% {transform: translateX(-300%), scale(1)}
-25% {transform: translateX(0), scale(0.5)}
-50% {transform: translateX(300%), scale(1)}
-75% {transform: translateX(0), scale(0.5)}
-100% {transform: translateX(-300%), scale(1)}
+.bu {
+    transition: 200ms;
+    background-color: #33455e;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.de-bu {
+    transition: 200ms;
+    background-color: #556770;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.bu:hover {
+    transform: scale(1.02);
+    color: white;
+}
+.ku {
+    font-weight: 500;
 }

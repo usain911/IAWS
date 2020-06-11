@@ -9,6 +9,7 @@ import { Aufgaben } from './aufgaben';
 
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -46,6 +47,10 @@ export class ProjectServiceService {
   public getLocalUser(){
     //const options = { params: new HttpParams({fromString: "_page=1&_limit=3"}) }; // limitiert auf 3 user
     return this.httpClient.get<User[]>(this.REST_API_SERVER+"users").pipe(retry(3), catchError(this.handleError));
+  }
+
+  public getUserById(id: number){
+    return this.httpClient.get<User[]>(`${this.api}Nutzer/${id}`).pipe(retry(3), catchError(this.handleError));
   }
   //-------------------------------------------------------------------------------
   //-----------------------------------TEAMS----------------------------------------
@@ -92,6 +97,9 @@ export class ProjectServiceService {
   //-------------------------------------------------------------------------------
   public getAufgaben() {
     return  this.httpClient.get<any>(`${this.api}Aufgaben`).pipe(retry(3), catchError(this.handleError));
+  }
+  public getNutzerAufgaben() {
+    return  this.httpClient.get<any>(`${this.api}NutzerAufgaben/GetNutzerIdByAufgabenId/1`).pipe(retry(3), catchError(this.handleError));
   }
 }
 

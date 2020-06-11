@@ -2,7 +2,7 @@
 
 <div @fadeInAnimation class="container">
   <div class="box">
-    <div class="col-md-6 col-md-offset-3 loginBox">
+    <div class="login col-md-6 col-md-offset-3 loginBox">
         <h3>Log In</h3>
         <p *ngIf="message" class="text-center error">{{message}}</p>
       <form [formGroup]="loginForm" (ngSubmit)="login()">
@@ -25,13 +25,25 @@
             </div>
           </div>
           <div class="col-xs-12 form-group text-right">
-            <button class="btn btn-success" type="submit">Login</button>
-          </div>        
-          <div class="spinner-border" role="status"[hidden]="!laden">
-            <span class="sr-only">Loading...</span>
-          </div>
+           <!--  <button class="btn btn-success" type="submit">Login</button> -->
+            <button type="submit" class="de-bu btn btn-secondary">Login</button> 
+<!--             <button type="buton" class="de-bu btn btn-secondary">Registrieren</button>  -->          
+
+  </div>        
+ 
           
-      </form>
-    </div>
+ <div class="box loader-1"[hidden]="!laden">
+  <div class="loader">
+      <div class="loader-ball-1"></div>
+      <div class="loader-ball-2"></div>
   </div>
-</div>
+  <p>lädt</p>
+</div> 
+      </form>
+    
+     
+    </div>
+
+  </div>
+  Falls du noch kein Konto hast, kannst du <a href="javascript:void(0);">hier</a> registrieren.
+</div> 

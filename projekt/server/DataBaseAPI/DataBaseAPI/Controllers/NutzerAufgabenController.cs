@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,6 +40,14 @@ namespace DataBaseAPI.Controllers
 
             return nutzerAufgaben;
         }
+
+        // GET: api/Nutzer/GetNutzerByAufgabenId/5
+        [HttpGet("GetNutzerIdByAufgabenId/{aid}")]
+        public async Task<ActionResult<IEnumerable<NutzerAufgaben>>> GetNutzerIdByAufgabenId(int aid)
+            {
+               return _context.NutzerAufgaben.Where(ai => ai.NutzerId == aid).ToArray();
+
+            }
 
         // PUT: api/NutzerAufgaben/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

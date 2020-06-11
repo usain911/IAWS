@@ -8,8 +8,8 @@ import { Projekt } from '../shared/projekt';
 import { Aufgaben } from '../shared/aufgaben'
 
 import { trigger, transition,style, query, group, animate, state} from '@angular/animations';
-import { from } from 'rxjs';
 
+import { NutzerAufgaben} from '../shared/nutzer-aufgaben';
 
 
 @Component({
@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
   nutzer: User;
   projects: Projekt[];
   aufgaben: Aufgaben[];
+  nutzerAufgaben: NutzerAufgaben[];
 
   id: string;
   isLoggedIn: string;
@@ -44,11 +45,14 @@ export class HomeComponent implements OnInit {
     onKeyUp() {
       console.log('keyup ' + this.color)
     }
-  constructor(private ps: ProjectServiceService, private router: Router,public authService: AuthService) { } 
+  constructor(private ps: ProjectServiceService, private router: Router,public authService: AuthService) { 
+    
+  } 
 
-  user: User;
+  user: User[];
   test: User;
-  
+  zahl= 75;
+  array: number[];
 
   ngOnInit(): void {
     this.id = localStorage.getItem('token');
@@ -56,26 +60,35 @@ export class HomeComponent implements OnInit {
     this.authService.checkLogin(this.isLoggedIn);
 
     this.ps.getLocalUser().subscribe((data: any[]) =>{
-      console.log(data);
+      //console.log(data);
       this.users = data;
     })
 
     this.ps.getProjectsByOwner(1).subscribe((data: any[]) =>{
       this.projects = data;
-      console.log("Projekte "+data);
+      //console.log("Projekte "+data);
     })
 
     this.ps.getAufgaben().subscribe((data: any[]) =>{
       this.aufgaben = data;
+     // getNutzerid(this.aufgaben);
+
     })
 
+    this.ps.getNutzerAufgaben().subscribe((data: NutzerAufgaben[]) =>{
+      this.nutzerAufgaben = data;
+      getNutzerid(this.nutzerAufgaben);
+    })
 
-
-    //this.ps.getUser().subscribe((
-    //  data: any[]) =>{
-    //    this.luser = data;
-    //    console.log(`live: ${data}`);
-    //  })    
+    function getNutzerid(items: NutzerAufgaben[]) {
+      for(let entry of items) {
+        console.log(entry.nutzerId);
+        this.ps.get  (entry.nutzerId).subscribe((data: User[]) =>{
+          this.user = data;
+        })        
+      }
+      console.log(this.user);      
+    }
   }
 
     logout(): void {
