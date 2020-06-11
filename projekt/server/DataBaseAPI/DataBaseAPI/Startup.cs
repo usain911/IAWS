@@ -15,8 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using Swashbuckle.AspNetCore.Swagger;
-
-
+using Newtonsoft.Json;
 
 namespace DataBaseAPI
 {
@@ -36,11 +35,15 @@ namespace DataBaseAPI
             // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddControllers();
-                    services.AddDbContext<Models.ProjektmanagementContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProjektmanagementDB")));
+            services.AddDbContext<Models.ProjektmanagementContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProjektmanagementDB")));
 
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            // zu bearbeiten (Test URL USW)
-            services.AddSwaggerGen(c =>
+            services.AddMvc(option => option.EnableEndpointRouting = false)
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+      // Register the Swagger generator, defining 1 or more Swagger documents
+      // zu bearbeiten (Test URL USW)
+      services.AddSwaggerGen(c =>
             {
               c.SwaggerDoc("v1", new OpenApiInfo
               {

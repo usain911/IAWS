@@ -55,35 +55,37 @@ namespace DataBaseAPI.Controllers
           return nutzer;
         }
 
-    // PUT: api/Nutzer/5
-    [HttpPut("{id}")]
-        public async Task<IActionResult> PutNutzer(int id, Nutzer nutzer)
-        {
-            if (id != nutzer.NutzerId)
-            {
-                return BadRequest();
-            }
 
-            _context.Entry(nutzer).State = EntityState.Modified;
 
-            try
+        // PUT: api/Nutzer/5
+        [HttpPut("{id}")]
+            public async Task<IActionResult> PutNutzer(int id, Nutzer nutzer)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!NutzerExists(id))
+                if (id != nutzer.NutzerId)
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return NoContent();
-        }
+                _context.Entry(nutzer).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!NutzerExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return NoContent();
+            }
 
         // POST: api/Nutzer
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

@@ -42,18 +42,12 @@ namespace DataBaseAPI.Controllers
         }
 
 
-        // GET: api/Nutzer/5
-        [HttpGet("GetProjektByOwnerId/{owner}")]
-        public async Task<ActionResult<Projekte>> GetProjektByOwnerId(int owner)
+    // GET: api/Projekte/GetProjektByOwnerId/5
+    [HttpGet("GetProjektByOwnerId/{owner}")]
+        public async Task<ActionResult<IEnumerable<Projekte>>> GetProjektByOwnerId(int owner)
         {
-          var nutzer = _context.Projekte.Where(ow => ow.ProjektOwnerId == owner).FirstOrDefault();
+          return _context.Projekte.Where(ow => ow.ProjektOwnerId == owner).ToArray();
 
-          if (nutzer == null)
-          {
-            return NotFound();
-          }
-
-          return nutzer;
         }
 
     // PUT: api/Projekte/5
