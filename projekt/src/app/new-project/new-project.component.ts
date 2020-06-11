@@ -19,6 +19,7 @@ export class NewProjectComponent implements OnInit {
     this.toAdd = 
       {
         aufgabenId: 1,
+        beschreibung: 'beschreibung'
       }
   }
 

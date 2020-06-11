@@ -40,9 +40,10 @@ export class LoginComponent implements OnInit {
   checkData() {
     console.log("checkdata");
     if(this.f.userid.value == this.nutzer.nutzername) {
-      console.log(JSON.stringify("nutzer "+this.nutzer.nutzername));
+      console.log(JSON.stringify("nutzer "+this.nutzer.nutzerId));
       if(this.nutzer.isAdmin == true)
         localStorage.setItem('admin', "true");
+      localStorage.setItem('id', JSON.stringify(this.nutzer.nutzerId));
       this.router.navigate([this.returnUrl]);
     }
   }
@@ -60,7 +61,7 @@ export class LoginComponent implements OnInit {
       this.nutzer = data;
       //console.log("daten= "+data);
       //console.log(data);
-      console.log("name= "+ this.nutzer.nutzername +" eingabe="+ this.f.userid.value +" " + + " ")
+      //console.log("nID= "+ this.nutzer.nutzerId +" eingabe="+ this.f.userid.value +" " + + " ")
     }, error => {
       console.log("error");
     });

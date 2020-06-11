@@ -52,32 +52,21 @@ export class HomeComponent implements OnInit {
     this.isLoggedIn = localStorage.getItem('isLoggedIn');    
     this.authService.checkLogin(this.isLoggedIn);
 
-    this.ps.sendGetRequest().subscribe((data: any[]) =>{
+    this.ps.getLocalUser().subscribe((data: any[]) =>{
       console.log(data);
       this.users = data;
     })
 
     this.ps.getProjectsByOwner(1).subscribe((data: any[]) =>{
       this.projects = data;
+      console.log("Projekte "+data);
     })
 
-    this.ps.getRequest().subscribe((
-      data: any[]) =>{
-        this.luser = data;
-        console.log(`live: ${data}`);
-      })
-
-    this.ps.getTeams().subscribe((
-      data: any[]) =>{
-        console.log(data)
-      })
-    
-    this.authService.getUserByNutzername("jboldt").subscribe((
-      data:User) => {
-        this.test = data;
-        console.log(data)
-      })
-    
+    //this.ps.getUser().subscribe((
+    //  data: any[]) =>{
+    //    this.luser = data;
+    //    console.log(`live: ${data}`);
+    //  })    
   }
 
     logout(): void {

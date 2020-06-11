@@ -18,7 +18,6 @@
             #bezeichnung="ngModel" rows="5"></textarea>
         </div>
 
-        <button class="btn btn-success" (click)="addTag()">+</button>
 
 
 <!--------------------------------------------------------------------------------------------------------------->
@@ -26,13 +25,16 @@
 <!------------------------------------------Aufgabe-------------------------------------------------------------->
 
 <!--------------------------------------------------------------------------------------------------------------->
-
+ 
 
         <div *ngFor="let aufgabe of aufgaben; let i = index" class="tag-controls aufgabe">
            <input type="number" class="form-control" name="aufgabenId {{i}}" [(ngModel)]="aufgabe.aufgabenId">
            <input type="text" class="form-control" name="titel{{i}}"  [(ngModel)]="aufgabe.titel">
            <input type="text" class="form-control" name="bez{{i}}" [(ngModel)]="aufgabe.bezeichnung">         
         </div>
+        
+        <button class="btn btn-success" (click)="addTag()"> Aufgabe hinzufügen</button>
+
 
         <div>
             <input type="number" name="test" [(ngModel)]="toAdd.aufgabenId">

@@ -3,7 +3,7 @@ import { User } from './user';
 import { Projekt } from './projekt';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import {  throwError, Observable } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { retry, catchError, tap, map } from 'rxjs/operators';
 
 
@@ -15,6 +15,7 @@ export class ProjectServiceService {
 
   private REST_API_SERVER = "http://localhost:3000/";
   private restLive = "https://localhost:44372/api/Nutzer";
+  private api = "https://localhost:44372/api/";
   user: User;
  
   projects : Projekt[];  
@@ -41,7 +42,7 @@ export class ProjectServiceService {
   //-----------------------------------USER----------------------------------------
   //-------------------------------------------------------------------------------
 
-  public sendGetRequest(){
+  public getLocalUser(){
     //const options = { params: new HttpParams({fromString: "_page=1&_limit=3"}) }; // limitiert auf 3 user
     return this.httpClient.get<User[]>(this.REST_API_SERVER+"users").pipe(retry(3), catchError(this.handleError));
   }
@@ -58,7 +59,7 @@ export class ProjectServiceService {
   //-----------------------------------LIVE----------------------------------------
   //-------------------------------------------------------------------------------
 
-  public getRequest(){
+  public getUser(){
     const header = new HttpHeaders({
       'Access-Control-Allow-Headers': '*'
     });
@@ -70,15 +71,22 @@ export class ProjectServiceService {
   //----------------------------------PROJEKTE-------------------------------------
   //-------------------------------------------------------------------------------
 
-  public getProjects(){
-    return this.httpClient.get<Projekt[]>(`${this.REST_API_SERVER}projekte`).pipe(retry(3), catchError(this.handleError));
+  public getProjects():Observable<Projekt[]> {
+    return this.httpClient.get<Projekt[]>(`${this.api}Projekte`).pipe(retry(3), catchError(this.handleError));
   } 
   public getProjectById(id: number): Observable<Projekt>{
-    return this.httpClient.get<any>(`${this.REST_API_SERVER}projekte/${id}`).pipe(retry(3), catchError(this.handleError));
+    return this.httpClient.get<any>(`${this.api}projekte/${id}`).pipe(retry(3), catchError(this.handleError));
   } 
   public getProjectsByOwner(owner: number) {
-    return this.httpClient.get<any>(`${this.REST_API_SERVER}projekte/?owner=${owner}`).pipe(retry(3), catchError(this.handleError));
+    return this.httpClient.get<any>(`${this.api}Projekte/`).pipe(retry(3), catchError(this.handleError));
+
+    //return this.httpClient.get<any>(`${this.api}Projekte/GetProjektByOwnerID/1`).pipe(retry(3), catchError(this.handleError));
   }
+//----------------------------------PROJEKTE-LIVE---------------------------------
+  public addProjekt(pr: Projekt):Observable<Projekt>{
+    return this.httpClient.post<any>(`${this.api}NutzerProjekte`, pr)
+  }
+
 }
 
 

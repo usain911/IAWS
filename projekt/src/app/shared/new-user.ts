@@ -6,6 +6,6 @@ export class NewUser {
         public nachname: string,
         public email: string,
         public passwort: string,
-        public isAdmin: number,
+        public isAdmin: boolean,
     ) {}
 }

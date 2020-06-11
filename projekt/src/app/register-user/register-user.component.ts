@@ -23,13 +23,14 @@ export class RegisterUserComponent implements OnInit {
   teams = [];
 
   //user = new User(null, '', '','', '','', false, '',);
-  user = new NewUser('','','','','', 0 );
+  //user = new NewUser('','','','','', 0 );
+  user = new NewUser('name','vor','na','ps','em', false );
   submitted = false;
 
   onSubmit() {this.submitted = true;}
 
   newUser() {
-    console.log("neuer nutzer: "+ this.user.nutzername + this.user.email + this.user.passwort );
+    console.log("neuer nutzer: "+ this.user);
     this.as.addUser(this.user).subscribe(NewUser => console.log("done"))
   }
 

@@ -42,20 +42,12 @@
       <div *ngIf="passwort.control.hasError('minlength')"class="alert alert-danger">
         Passwort muss mind. {{ passwort.control.getError('minlength').requiredLength }} Zeichen enthalten
       </div>
-     
-
-      <div class="form-group">
-        <label for="team">Team</label>
-        <select class="form-control" id="team" required>
-          <option value="">--- Bitte auswählen ---</option>
-          <option *ngFor="let team of teams" [value]="team">{{team.bezeichnung}}</option>
-        </select>
-      </div>
+  
 
 
       <button type="submit" class="btn btn-success" 
         [disabled]="!userForm.form.valid" 
-        (click)="newUser(); userForm.reset()">Submit</button>
+        (click)="newUser();">Submit</button>
 
       <button type="reset" class="btn btn-danger" (click)= "userForm.reset">Cancel</button>
     </form>

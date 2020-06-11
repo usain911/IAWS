@@ -3,6 +3,11 @@ export class Aufgaben {
     titel?: string;
     beschreibung?: string;
     ersteller_id?: number;
-    zugewiesen?: number;
+    projekt_id?: number;
+    soll_zeit?: string;
+    ist_zeit?: string;
     erledigt?: boolean;
+    erstell_datum?: string;
+    vorgaenger_id?: number;
+    nachfolger_id?: number;
 }

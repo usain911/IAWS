@@ -8,7 +8,8 @@
       "email": "email@mail.de",
       "passwort": "passwort",
       "isAdmin": true,
-      "team": "admin"
+      "team": "admin",
+      "nutzerId": 2
     },
     {
       "id": 2,
@@ -39,6 +40,24 @@
       "isAdmin": false,
       "team": "",
       "id": 11
+    },
+    {
+      "nutzername": "name",
+      "vorname": "vor",
+      "nachname": "na",
+      "email": "ps",
+      "passwort": "em224",
+      "isAdmin": 0,
+      "id": 12
+    },
+    {
+      "nutzername": "neuertest",
+      "vorname": "vor",
+      "nachname": "na",
+      "email": "ps",
+      "passwort": "emqwe",
+      "isAdmin": false,
+      "id": 13
     }
   ],
   "projekte": [

@@ -3,16 +3,16 @@
         Welcome,  {{id}}
         <a href="javascript:void(0);" (click)="logout()">Logout</a>
     </div>
-</div>  
+
 
 <input type="text" (keyup)="onKeyUp()" (input)="color=$event.target.value" [style.background-color]="color">
 
 
 <button type="button" class="btn btn-success">test</button>
 
-<div *ngFor="let users of users" style="margin-top:10px;">
-{{users.nutzerId}} | {{users.name}} | {{users.isAdmin}} 
-</div>
+<!-- <div *ngFor="let users of users" style="margin-top:10px;">
+{{users.nutzerId}} | {{users.vorname}} | {{users.nachname}} 
+</div> -->
 <hr>
 Meine Projekte:
 
@@ -20,30 +20,18 @@ Meine Projekte:
 <div *ngFor="let project of projects" style="margin-top:10px;">
     <div *ngIf="project; else loading"></div>
    <h2>{{project.name}}</h2>
+   <p>{{project.bezeichnung}}</p>
    
-    <div *ngIf="!projects">
-        Lädt...
-    </div>   
+   <div  role="status" [hidden]="projects">
+   Keine Projekte gefunden
+  </div> 
 </div>
 
 <hr>
-<h1>Nutzer als DB</h1>
-<div *ngFor="let item of luser" style="margin-top:10px;">
-    {{item.name}} {{item.email}} {{item.team}} 
-    </div>
-
-
-
-
-
-<hr>
-
-
-
 <ng-template #loading>
     <div>loading...</div>
 </ng-template>
 
 <div @fadeIn class="button">
-    <a routerLink="/newproject" routerLinkActive="active">neues Projekt anlegen</a>
-</div>
+    <a routerLink="/newproject" routerLinkActive="active" class="btn btn-danger">neues Projekt anlegen</a>
+</div></div>  
