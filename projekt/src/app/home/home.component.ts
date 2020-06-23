@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../shared/user'
 import { ProjectServiceService } from '../shared/project-service.service';
-
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
 import { Projekt } from '../shared/projekt';
@@ -26,8 +25,6 @@ import { NutzerAufgaben} from '../shared/nutzer-aufgaben';
     ])
   ]
 })
-
-
 
 export class HomeComponent implements OnInit {
   

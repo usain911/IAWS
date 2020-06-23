@@ -1,14 +1,54 @@
-<h1>Projekt</h1>
 
-
- 
-
-<ng-container *ngIf="projekt">
-    <h2>{{projekt.name}}</h2>  
-    {{projekt.bezeichnung}} 
-</ng-container> 
+<div class="container">
 
 <div id="Button3" class="ud_solution">
+
+   <h2>{{projekt.name}}</h2>
+   <p>{{projekt.bezeichnung}}</p>
+   <div class="container">
   <button type="button" class="ud_button">Neues Projekt</button>
 </div>
 
+<div class="ca card" *ngFor="let aufgabe of aufgaben; index as i" style="margin-top:10px;">
+  <div *ngIf="aufgaben"></div>
+  
+<div class="card-header"><b> #{{i+1}}   {{aufgabe.titel}} {{aufgabe.aufgabenId}} </b> </div> 
+<div class="ku card-body"> <b>Kurzbeschreibung:</b> {{aufgabe.beschreibung}} </div> 
+zugewiesen an: name by {{aufgabe.aufgabenId}}
+<div class="form-group">
+  <label for="Kommentar">Kommentar</label>
+  <textarea type="text" class="form-control" id="Kommentar" name="Kommentar" rows="2"></textarea>
+</div>
+
+<div class="card-body"><b>geplante Zeit:</b>    {{aufgabe.sollZeit}} </div> 
+<div class="card-body">             <b>tatsächliche Zeit</b>  {{aufgabe.istZeit}}</div> 
+ 
+<div class="btn-group" role="group" aria-label="Basic example">
+
+
+
+
+  <input type="time" class="form-control" />
+ 
+
+
+  <button type="button" class="de-bu btn btn-secondary" >Zeit hinzufügen</button> 
+  <button type="button" class="bu btn btn-secondary">Aufgabe zuweisen</button> 
+
+  <button type="button" class="bu btn btn-secondary">Zuweisung entfernen</button>
+  <button *ngIf="!aufgabe.erledigt" type="button" class="btn btn-success">Aufgabe erledigt</button>
+</div>
+
+<img *ngIf="aufgabe.erledigt" src="../../assets/icons/haken.png">  <!-- zeigt haken wenn erledigt == true -->
+
+<div class="ca card" *ngFor="let teil of teilAufgaben;">
+  <div *ngIf="aufgabe.aufgabenId == teil.zugeordnetZuAufgabe">
+    <b>{{teil.titel}} </b>  {{teil.beschreibung}}
+  </div>
+</div>
+
+</div> 
+</div>
+<button type="button" class="de-bu btn btn-secondary" >Abbrechen</button> 
+<button type="button" class="bu btn btn-secondary">Seichern</button> 
+</div>
