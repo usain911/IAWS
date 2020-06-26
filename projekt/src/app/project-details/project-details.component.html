@@ -6,7 +6,6 @@
    <h2>{{projekt.name}}</h2>
    <p>{{projekt.bezeichnung}}</p>
    <div class="container">
-  <button type="button" class="ud_button">Neues Projekt</button>
 </div>
 
 <div class="ca card" *ngFor="let aufgabe of aufgaben; index as i" style="margin-top:10px;">
@@ -32,11 +31,11 @@ zugewiesen an: name by {{aufgabe.aufgabenId}}
  
 
 
-  <button type="button" class="de-bu btn btn-secondary" >Zeit hinzufügen</button> 
+  <button type="button" class="de-bu btn btn-secondary" (click)="addTime(aufgabe.istZeit)">Zeit hinzufügen</button> 
   <button type="button" class="bu btn btn-secondary">Aufgabe zuweisen</button> 
 
   <button type="button" class="bu btn btn-secondary">Zuweisung entfernen</button>
-  <button *ngIf="!aufgabe.erledigt" type="button" class="btn btn-success">Aufgabe erledigt</button>
+  <button *ngIf="!aufgabe.erledigt" type="button" (click)="isDone(aufgabe.aufgabenId)" class="btn btn-success">Aufgabe erledigt</button>
 </div>
 
 <img *ngIf="aufgabe.erledigt" src="../../assets/icons/haken.png">  <!-- zeigt haken wenn erledigt == true -->

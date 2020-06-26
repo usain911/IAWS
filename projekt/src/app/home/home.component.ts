@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit {
   projects: Projekt[];
   aufgaben: Aufgaben[];
   nutzerAufgaben: NutzerAufgaben[];
-
   id: string;
   isLoggedIn: string;
 
@@ -50,6 +49,9 @@ export class HomeComponent implements OnInit {
   test: User;
   zahl= 75;
   array: number[];
+  numbers = new Array();
+  showTasks = false; 
+
 
   ngOnInit(): void {
     this.id = localStorage.getItem('token');
@@ -61,23 +63,25 @@ export class HomeComponent implements OnInit {
       this.users = data;
     })
 
-    this.ps.getProjectsByOwner(1).subscribe((data: any[]) =>{
+    this.ps.getProjectsByOwner(1).subscribe((data: any[]) => {
       this.projects = data;
-      //console.log("Projekte "+data);
+      //console.log("Projekte "+data);   
+      for(let item of this.projects) {      
+        this.numbers.push(item.projektId);
+      }
+      console.log(this.numbers);
     })
 
     this.ps.getAufgaben().subscribe((data: any[]) =>{
-      this.aufgaben = data;
-     // getNutzerid(this.aufgaben);
-
+      this.aufgaben = data;        
     })
 
     this.ps.getNutzerAufgaben().subscribe((data: NutzerAufgaben[]) =>{
       this.nutzerAufgaben = data;
-      getNutzerid(this.nutzerAufgaben);
+      //getNutzerid(this.nutzerAufgaben);
     })
 
-    function getNutzerid(items: NutzerAufgaben[]) {
+   /*  function getNutzerid(items: NutzerAufgaben[]) {
       for(let entry of items) {
         console.log(entry.nutzerId);
         this.ps.get  (entry.nutzerId).subscribe((data: User[]) =>{
@@ -85,7 +89,27 @@ export class HomeComponent implements OnInit {
         })        
       }
       console.log(this.user);      
-    }
+    } */
+  }
+
+  zuProjekt(id: number): void {
+    console.log("zu Projekt "+ id);
+    this.router.navigate(['/project/id']);
+  };
+
+  zuAufgabe(id: number):void {
+    console.log("zu Aufgabe "+ id);
+  }
+
+  isDone(id: number) {
+    console.log(this.aufgaben[id -1]);
+    this.aufgaben[id-1].erledigt = true;
+    this.aufgaben[id-1].hasChanged = true;
+  }
+
+  show(id: number) {
+    console.log("project " + id  +" / " + this.numbers[id-1]);
+    this.showTasks = !this.showTasks;
   }
 
     logout(): void {

@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent, data: {animation: 'one'} },
   { path: 'home', component: HomeComponent, canActivate:[CanNavigate] },
   { path: 'list', component: ListProjectsComponent, canActivate:[CanNavigate] },
-  { path: 'project', component: ProjectDetailsComponent, canActivate:[CanNavigate] },
+  { path: 'project/:id', component: ProjectDetailsComponent, canActivate:[CanNavigate] },
   { path: 'register', component: RegisterUserComponent },
   { path: 'newproject', component: NewProjectComponent, },
 

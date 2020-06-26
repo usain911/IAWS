@@ -101,9 +101,9 @@ export class ProjectServiceService {
   public getNutzerAufgaben() {
     return  this.httpClient.get<any>(`${this.api}NutzerAufgaben/GetNutzerIdByAufgabenId/1`).pipe(retry(3), catchError(this.handleError));
   }
-  
+
   //-------------------------------------------------------------------------------
-  //----------------------------------Aufgaben-------------------------------------
+  //----------------------------------Teilaufgaben-------------------------------------
   //-------------------------------------------------------------------------------
   public getTeilAufgaben() {
     return  this.httpClient.get<any>(`${this.api}Teilaufgaben`).pipe(retry(3), catchError(this.handleError));

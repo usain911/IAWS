@@ -71,3 +71,7 @@ img {
 .ku {
     font-weight: 500;
 }
+
+.card-header {
+  background-color: #ddd;
+}

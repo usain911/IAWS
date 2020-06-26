@@ -14,31 +14,28 @@
 
 <div class="projekt" *ngFor="let project of projects" style="margin-top:10px;">
     <div *ngIf="project; else loading"></div>
-   <h2>{{project.name}}</h2>
-   <p>{{project.bezeichnung}}</p>
+   <h2 (click)="zuProjekt(project.projektId)">{{project.name}}</h2>
+   <p>{{project.bezeichnung}}</p> <button type="button" (click)="show(project.projektId)">zeigen</button>
    <div class="container">
+
+    <div class="progress">
+      <div class="progress-bar bg-success" role="progressbar" style="width:75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{zahl}}%</div>
+    </div>
     
     <!-------------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------->
     <!-------------------------------------AUFGABEN VON PROJEKT----------------------------------->
     <!-------------------------------------------------------------------------------------------->
 
-    <div class="ca card" *ngFor="let aufgabe of aufgaben; index as i" style="margin-top:10px;">
+    <div [hidden]="showTasks" class="ca card" *ngFor="let aufgabe of aufgaben; index as i" style="margin-top:10px;">
         <div *ngIf="aufgaben; else loading"></div>
         
-     <div class="card-header"><b> #{{i+1}}   {{aufgabe.titel}}</b> </div> 
+     <div class="card-header" (click)="zuAufgabe(aufgabe.aufgabenId)"><b> #{{i+1}}   {{aufgabe.titel}}</b> </div> 
      <div class="ku card-body"> <b>Kurzbeschreibung:</b> {{aufgabe.beschreibung}} </div> 
-  
-    <div class="card-body"><b>geplante Zeit:</b>    {{aufgabe.sollZeit}} </div> 
-    <div class="card-body">             <b>tatsächliche Zeit</b>  {{aufgabe.istZeit}}</div> 
        
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="de-bu btn btn-secondary">Detailansicht</button> 
-        <button type="button" class="bu btn btn-secondary">Aufgabe zuweisen</button> 
 
-        <button type="button" class="bu btn btn-secondary">Zuweisung entfernen</button>
-        <button *ngIf="!aufgabe.erledigt" type="button" class="btn btn-success">Aufgabe erledigt</button>
-      </div>
+  </div>
 
     <img *ngIf="aufgabe.erledigt" src="../../assets/icons/haken.png">  <!-- zeigt haken wenn erledigt == true -->
 
@@ -54,15 +51,9 @@
 
 
 
-
-<div class="progress">
-    <div class="progress-bar bg-success" role="progressbar" style="width: {{zahl}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{zahl}}%</div>
-  </div>
 <ng-template #loading>
     <div>loading...</div>
 </ng-template>
 
-<div @fadeIn class="button">
-    <a routerLink="/newproject" routerLinkActive="active" class="bu btn btn-secondary">neues Projekt anlegen</a>
-</div></div>  
+</div>  
 

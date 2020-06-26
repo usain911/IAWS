@@ -10,4 +10,5 @@ export class Aufgaben {
     erstellDdatum?: string;
     vorgaengerId?: number;
     nachfolgerId?: number;
+    hasChanged?: boolean;
 }
