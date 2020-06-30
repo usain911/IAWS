@@ -84,7 +84,8 @@ export class HomeComponent implements OnInit {
 
   zuProjekt(id: number): void {
     console.log("zu Projekt "+ id);
-    this.router.navigate(['/project/'+id]);
+    setTimeout(() => { this.router.navigate(['/project/'+id]);  }, 500);
+    //this.router.navigate(['/project/'+id]);
   };
 
   zuAufgabe(id: number):void {

@@ -8,7 +8,7 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
 import { RegisterUserComponent } from './register-user/register-user.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { LoginComponent } from './login/login.component';
-
+import { ProfilComponent } from './profil/profil.component';
 const routes: Routes = [
   { path: '', component: LoginComponent, data: {animation: 'one'} },
   { path: 'home', component: HomeComponent, canActivate:[CanNavigate] },
@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'project/:id', component: ProjectDetailsComponent, canActivate:[CanNavigate] },
   { path: 'register', component: RegisterUserComponent },
   { path: 'newproject', component: NewProjectComponent, },
+  { path: 'profil', component: ProfilComponent },
 
 ];
 

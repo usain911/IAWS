@@ -18,6 +18,7 @@ import { AuthGuard } from './auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { ProfilComponent } from './profil/profil.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
     RegisterUserComponent,
     LoginComponent,
     NewProjectComponent,
+    ProfilComponent,
   ],
   imports: [
     HttpClientModule,

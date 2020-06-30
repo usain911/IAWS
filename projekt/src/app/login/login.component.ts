@@ -16,7 +16,6 @@ import { fadeInAnimation } from '../_animations/index'
 export class LoginComponent implements OnInit {
 
   nutzer: User;
-  model: Login = { nutzername: "admin", password: "admin123" };
   loginForm: FormGroup;
   message: string;
   returnUrl: string;

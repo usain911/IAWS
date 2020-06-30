@@ -13,14 +13,16 @@ import { Aufgaben } from '../shared/aufgaben';
 })
 export class ProjectDetailsComponent implements OnInit {
 
- 
-
-  constructor(private ps: ProjectServiceService, private router: Router,  private route: ActivatedRoute) { }
-
   projekt: Projekt;
   teilAufgaben: TeilAufgabe[];
   percent: number;
-  timeToAdd= '00:00:00';
+
+  constructor(private ps: ProjectServiceService, private router: Router,  private route: ActivatedRoute) { 
+
+    
+  }
+
+
 
   ngOnInit(): void {    
 
@@ -53,8 +55,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   addTime(time: string) {
-    console.log(time);
-    console.log(this.timeToAdd);
+    console.log(time);  
 
   }
 
