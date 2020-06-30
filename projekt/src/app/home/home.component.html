@@ -1,21 +1,21 @@
 <div class="container">
     <div class="col-md-6 col-md-offset-3 loginBox">
-        Welcome,  {{id}}
+        Willkommen,  {{id}}
         <a href="javascript:void(0);" (click)="logout()">Logout</a>
     </div>
 
     <div class="topnav">
-        <input type="text" placeholder="Search..">
+        <input type="text" placeholder="Suchen..">
       </div> 
 
 
 
 <h1>Meine Projekte:</h1>
 
-<div class="projekt" *ngFor="let project of projects" style="margin-top:10px;">
+<div class="projekt" *ngFor="let project of projects" [routerLink]="project.projektId" style="margin-top:10px;">
     <div *ngIf="project; else loading"></div>
    <h2 (click)="zuProjekt(project.projektId)">{{project.name}}</h2>
-   <p>{{project.bezeichnung}}</p> <button type="button" (click)="show(project.projektId)">zeigen</button>
+   <p>{{project.bezeichnung}}</p> <button type="button" (click)="show(project.projektId)">zeigen</button> 
    <div class="container">
 
     <div class="progress">
@@ -27,8 +27,8 @@
     <!-------------------------------------AUFGABEN VON PROJEKT----------------------------------->
     <!-------------------------------------------------------------------------------------------->
 
-    <div [hidden]="showTasks" class="ca card" *ngFor="let aufgabe of aufgaben; index as i" style="margin-top:10px;">
-        <div *ngIf="aufgaben; else loading"></div>
+    <div [hidden]="hideTasks" class="ca card" *ngFor="let aufgabe of project.aufgaben; index as i" style="margin-top:10px;">
+        <div *ngIf="project.aufgaben; else loading"></div>
         
      <div class="card-header" (click)="zuAufgabe(aufgabe.aufgabenId)"><b> #{{i+1}}   {{aufgabe.titel}}</b> </div> 
      <div class="ku card-body"> <b>Kurzbeschreibung:</b> {{aufgabe.beschreibung}} </div> 

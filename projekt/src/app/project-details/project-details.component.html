@@ -3,13 +3,19 @@
 
 <div id="Button3" class="ud_solution">
 
-   <h2>{{projekt.name}}</h2>
+   <h2>{{projekt.name}}</h2>  
    <p>{{projekt.bezeichnung}}</p>
+
+
+<div class="progress">
+    <div class="progress-bar bg-success" role="progressbar" style="width:{{percent}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{percent}}% erledigt</div>
+  </div>
+
    <div class="container">
 </div>
 
-<div class="ca card" *ngFor="let aufgabe of aufgaben; index as i" style="margin-top:10px;">
-  <div *ngIf="aufgaben"></div>
+<div class="ca card" *ngFor="let aufgabe of projekt.aufgaben; index as i" style="margin-top:10px;">
+  <div *ngIf="projekt.aufgaben"></div>
   
 <div class="card-header"><b> #{{i+1}}   {{aufgabe.titel}} {{aufgabe.aufgabenId}} </b> </div> 
 <div class="ku card-body"> <b>Kurzbeschreibung:</b> {{aufgabe.beschreibung}} </div> 
@@ -31,7 +37,7 @@ zugewiesen an: name by {{aufgabe.aufgabenId}}
  
 
 
-  <button type="button" class="de-bu btn btn-secondary" (click)="addTime(aufgabe.istZeit)">Zeit hinzufügen</button> 
+  <button type="button" class="de-bu btn btn-secondary" >Zeit hinzufügen</button> 
   <button type="button" class="bu btn btn-secondary">Aufgabe zuweisen</button> 
 
   <button type="button" class="bu btn btn-secondary">Zuweisung entfernen</button>

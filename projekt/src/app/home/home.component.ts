@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   luser: User[];
   nutzer: User;
   projects: Projekt[];
-  aufgaben: Aufgaben[];
+  //aufgaben: Aufgaben[];
   nutzerAufgaben: NutzerAufgaben[];
   id: string;
   isLoggedIn: string;
@@ -41,83 +41,64 @@ export class HomeComponent implements OnInit {
     onKeyUp() {
       console.log('keyup ' + this.color)
     }
+
+
   constructor(private ps: ProjectServiceService, private router: Router,public authService: AuthService) { 
     
-  } 
+  }  
 
   user: User[];
   test: User;
   zahl= 75;
   array: number[];
   numbers = new Array();
-  showTasks = false; 
-
+  hideTasks = true; 
 
   ngOnInit(): void {
     this.id = localStorage.getItem('token');
     this.isLoggedIn = localStorage.getItem('isLoggedIn');    
     this.authService.checkLogin(this.isLoggedIn);
 
-    this.ps.getLocalUser().subscribe((data: any[]) =>{
-      //console.log(data);
-      this.users = data;
-    })
-
+  
+    //hole projekt. in for schleife für jedes projekt die aufgaben in das projekt.aufgaben laden. 
+    //
     this.ps.getProjectsByOwner(1).subscribe((data: any[]) => {
-      this.projects = data;
-      //console.log("Projekte "+data);   
+      this.projects = data; 
       for(let item of this.projects) {      
         this.numbers.push(item.projektId);
       }
       console.log(this.numbers);
     })
 
+    //Aufgaben werden in das Array projekt.aufgaben kopiert
     this.ps.getAufgaben().subscribe((data: any[]) =>{
-      this.aufgaben = data;        
+      this.projects[0].aufgaben = data;
+      console.log("Aufgaben: "+ data.length);
     })
 
     this.ps.getNutzerAufgaben().subscribe((data: NutzerAufgaben[]) =>{
       this.nutzerAufgaben = data;
       //getNutzerid(this.nutzerAufgaben);
     })
-
-   /*  function getNutzerid(items: NutzerAufgaben[]) {
-      for(let entry of items) {
-        console.log(entry.nutzerId);
-        this.ps.get  (entry.nutzerId).subscribe((data: User[]) =>{
-          this.user = data;
-        })        
-      }
-      console.log(this.user);      
-    } */
   }
 
   zuProjekt(id: number): void {
     console.log("zu Projekt "+ id);
-    this.router.navigate(['/project/id']);
+    this.router.navigate(['/project/'+id]);
   };
 
   zuAufgabe(id: number):void {
     console.log("zu Aufgabe "+ id);
   }
 
-  isDone(id: number) {
-    console.log(this.aufgaben[id -1]);
-    this.aufgaben[id-1].erledigt = true;
-    this.aufgaben[id-1].hasChanged = true;
-  }
-
   show(id: number) {
     console.log("project " + id  +" / " + this.numbers[id-1]);
-    this.showTasks = !this.showTasks;
+    this.hideTasks = !this.hideTasks;
   }
 
     logout(): void {
       console.log("Logout");
       this.authService.logout();
       this.router.navigate(['/login']);
-    };
-
-    
-
-}
+    };   
+  }

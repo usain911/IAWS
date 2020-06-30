@@ -56,8 +56,8 @@ export class LoginComponent implements OnInit {
       return;
   }
   else {    
-    //this.authService.getUserByNutzername(this.f.userid.value).subscribe((data: User) => {
-      this.authService.getUserByLogin(1).subscribe((data: User) => {
+    this.authService.getUserByNutzername(this.f.userid.value).subscribe((data: User) => {
+    //  this.authService.getUserByLogin(1).subscribe((data: User) => {
       this.nutzer = data;
       //console.log("daten= "+data);
       //console.log(data);

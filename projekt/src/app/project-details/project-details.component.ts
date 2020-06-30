@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectServiceService } from '../shared/project-service.service';
 import { Projekt } from '../shared/projekt';
 import { TeilAufgabe } from '../shared/teil-aufgabe';
@@ -13,39 +13,55 @@ import { Aufgaben } from '../shared/aufgaben';
 })
 export class ProjectDetailsComponent implements OnInit {
 
+ 
+
+  constructor(private ps: ProjectServiceService, private router: Router,  private route: ActivatedRoute) { }
+
   projekt: Projekt;
-  aufgaben: Aufgaben[];
   teilAufgaben: TeilAufgabe[];
+  percent: number;
+  timeToAdd= '00:00:00';
 
-  constructor(private ps: ProjectServiceService) { }
+  ngOnInit(): void {    
 
-  ngOnInit(): void {
-    this.ps.getProjectById(1).subscribe(p => this.projekt = p);      
+    const params = this.route.snapshot.paramMap;
+    console.log(params.get('id'))
+    const ident = parseInt(params.get('id'));
 
-    this.ps.getAufgaben().subscribe((data: any[]) =>{
-      this.aufgaben = data;
-     // getNutzerid(this.aufgaben);
+    this.ps.getProjectById(ident).subscribe(p => this.projekt = p);      
 
+    this.ps.getAufgaben().subscribe((data: Aufgaben[]) =>{
+      this.projekt.aufgaben = data; 
+      this.projekt.size = data.length;  
+      var isDone = 0;
+      for(let a of data) {
+        if(a.erledigt === true) {
+          isDone +=1;
+        }
+      }  
+      this.projekt.tasksDone = isDone; 
+      this.percent= isDone/this.projekt.size * 100; 
     })
 
-    this.ps.getTeilAufgaben().subscribe((data: any[]) =>{
-      console.log(data);
-      this.teilAufgaben = data;
+    //this.ps.getTeilAufgaben().subscribe((data: any[]) =>{
+    //  console.log(data);
+    //  this.teilAufgaben = data;
      // getNutzerid(this.aufgaben);
 
-    })
+    //})
 
   }
 
   addTime(time: string) {
     console.log(time);
+    console.log(this.timeToAdd);
 
   }
 
   isDone(id: number) {
-    console.log(this.aufgaben[id -1]);
-    this.aufgaben[id-1].erledigt = true;
-    this.aufgaben[id-1].hasChanged = true;
+    console.log(this.projekt.aufgaben[id -1]);
+    this.projekt.aufgaben[id-1].erledigt = true;
+    this.projekt.aufgaben[id-1].hasChanged = true;
   }
 
 }

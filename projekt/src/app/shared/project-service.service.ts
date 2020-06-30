@@ -15,12 +15,9 @@ import { Aufgaben } from './aufgaben';
 })
 export class ProjectServiceService {
 
-  private REST_API_SERVER = "http://localhost:3000/";
-  private restLive = "https://localhost:44372/api/Nutzer";
+  private local = "http://localhost:3000/";
   private api = "https://localhost:44372/api/";
-  user: User;
- 
-  projects : Projekt[];  
+  
 
   constructor(private httpClient: HttpClient) { 
   }
@@ -46,7 +43,7 @@ export class ProjectServiceService {
 
   public getLocalUser(){
     //const options = { params: new HttpParams({fromString: "_page=1&_limit=3"}) }; // limitiert auf 3 user
-    return this.httpClient.get<User[]>(this.REST_API_SERVER+"users").pipe(retry(3), catchError(this.handleError));
+    return this.httpClient.get<User[]>(this.local+"users").pipe(retry(3), catchError(this.handleError));
   }
 
   public getUserById(id: number){
@@ -57,7 +54,7 @@ export class ProjectServiceService {
   //-------------------------------------------------------------------------------
 
   public getTeams(){
-    return this.httpClient.get<any>(this.REST_API_SERVER+"teams").pipe(retry(3), catchError(this.handleError));
+    return this.httpClient.get<any>(this.local+"teams").pipe(retry(3), catchError(this.handleError));
   }
 
 
@@ -81,7 +78,7 @@ export class ProjectServiceService {
     return this.httpClient.get<Projekt[]>(`${this.api}Projekte`).pipe(retry(3), catchError(this.handleError));
   } 
   public getProjectById(id: number): Observable<Projekt>{
-    return this.httpClient.get<any>(`${this.api}projekte/${id}`).pipe(retry(3), catchError(this.handleError));
+    return this.httpClient.get<Projekt>(`${this.api}projekte/${id}`).pipe(retry(3), catchError(this.handleError));
   } 
   public getProjectsByOwner(owner: number) {
     return this.httpClient.get<any>(`${this.api}Projekte/`).pipe(retry(3), catchError(this.handleError));
@@ -95,8 +92,8 @@ export class ProjectServiceService {
   //-------------------------------------------------------------------------------
   //----------------------------------Aufgaben-------------------------------------
   //-------------------------------------------------------------------------------
-  public getAufgaben() {
-    return  this.httpClient.get<any>(`${this.api}Aufgaben`).pipe(retry(3), catchError(this.handleError));
+  public getAufgaben():Observable<any> {
+    return  this.httpClient.get<Aufgaben[]>(`${this.api}Aufgaben`).pipe(retry(5), catchError(this.handleError));
   }
   public getNutzerAufgaben() {
     return  this.httpClient.get<any>(`${this.api}NutzerAufgaben/GetNutzerIdByAufgabenId/1`).pipe(retry(3), catchError(this.handleError));
@@ -118,6 +115,5 @@ const httpOptions = {
   headers: new HttpHeaders({     
     'Access-Control-Allow-Origin': '*',
     'Content-Type':  'plain/text',
-    //'Authorization': 'my-auth-token'
   })
 };
