@@ -9,5 +9,8 @@ namespace DataBaseAPI.Models
         public int? NutzerId { get; set; }
         public int? ProjektId { get; set; }
         public bool? ProjektOwner { get; set; }
+
+        public virtual Nutzer Nutzer { get; set; }
+        public virtual Projekte Projekt { get; set; }
     }
 }

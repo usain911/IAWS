@@ -5,6 +5,11 @@ namespace DataBaseAPI.Models
 {
     public partial class Aufgaben
     {
+        public Aufgaben()
+        {
+            NutzerAufgaben = new HashSet<NutzerAufgaben>();
+        }
+
         public int AufgabenId { get; set; }
         public string Titel { get; set; }
         public string Beschreibung { get; set; }
@@ -16,5 +21,8 @@ namespace DataBaseAPI.Models
         public DateTime? ErstellDatum { get; set; }
         public int? VorgaengerId { get; set; }
         public int? NachfolgerId { get; set; }
+
+        public virtual Projekte Projekt { get; set; }
+        public virtual ICollection<NutzerAufgaben> NutzerAufgaben { get; set; }
     }
 }

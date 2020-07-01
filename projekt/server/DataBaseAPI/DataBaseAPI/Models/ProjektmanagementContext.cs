@@ -16,6 +16,7 @@ namespace DataBaseAPI.Models
         }
 
         public virtual DbSet<Aufgaben> Aufgaben { get; set; }
+        public virtual DbSet<Kommentar> Kommentar { get; set; }
         public virtual DbSet<Nutzer> Nutzer { get; set; }
         public virtual DbSet<NutzerAufgaben> NutzerAufgaben { get; set; }
         public virtual DbSet<NutzerProjekte> NutzerProjekte { get; set; }
@@ -63,6 +64,32 @@ namespace DataBaseAPI.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.VorgaengerId).HasColumnName("vorgaenger_id");
+
+                entity.HasOne(d => d.Projekt)
+                    .WithMany(p => p.Aufgaben)
+                    .HasForeignKey(d => d.ProjektId)
+                    .HasConstraintName("fk_Projekt");
+            });
+
+            modelBuilder.Entity<Kommentar>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.AufgabenId).HasColumnName("aufgaben_id");
+
+                entity.Property(e => e.Erstelldatum).HasColumnName("erstelldatum");
+
+                entity.Property(e => e.KommentarFeld)
+                    .IsRequired()
+                    .HasColumnName("kommentarFeld")
+                    .HasMaxLength(500)
+                    .IsFixedLength();
+
+                entity.Property(e => e.KommentarId).HasColumnName("kommentar_id");
+
+                entity.Property(e => e.NutzerId).HasColumnName("nutzer_id");
+
+                entity.Property(e => e.TeilaufgabenId).HasColumnName("teilaufgaben_id");
             });
 
             modelBuilder.Entity<Nutzer>(entity =>
@@ -78,6 +105,13 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.IsAdmin).HasColumnName("isAdmin");
 
+                entity.Property(e => e.LetzteAnmeldung)
+                    .HasColumnName("letzteAnmeldung")
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.Property(e => e.MitgliedSeit).HasColumnName("mitgliedSeit");
+
                 entity.Property(e => e.Nachname)
                     .HasColumnName("nachname")
                     .HasMaxLength(50);
@@ -88,6 +122,10 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.Passwort)
                     .HasColumnName("passwort")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Position)
+                    .HasColumnName("position")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Team)
@@ -109,7 +147,29 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.NutzerId).HasColumnName("nutzer_id");
 
+                entity.Property(e => e.ProjektId).HasColumnName("projekt_id");
+
                 entity.Property(e => e.TeilaufgabenId).HasColumnName("teilaufgaben_id");
+
+                entity.HasOne(d => d.Aufgaben)
+                    .WithMany(p => p.NutzerAufgaben)
+                    .HasForeignKey(d => d.AufgabenId)
+                    .HasConstraintName("fk_NP_aufgaben");
+
+                entity.HasOne(d => d.Nutzer)
+                    .WithMany(p => p.NutzerAufgaben)
+                    .HasForeignKey(d => d.NutzerId)
+                    .HasConstraintName("fk_NP_nutzer");
+
+                entity.HasOne(d => d.Projekt)
+                    .WithMany(p => p.NutzerAufgaben)
+                    .HasForeignKey(d => d.ProjektId)
+                    .HasConstraintName("fk_NP_projekte");
+
+                entity.HasOne(d => d.Teilaufgaben)
+                    .WithMany(p => p.NutzerAufgaben)
+                    .HasForeignKey(d => d.TeilaufgabenId)
+                    .HasConstraintName("fk_NP_teilaufgaben");
             });
 
             modelBuilder.Entity<NutzerProjekte>(entity =>
@@ -123,6 +183,16 @@ namespace DataBaseAPI.Models
                 entity.Property(e => e.ProjektId).HasColumnName("projekt_id");
 
                 entity.Property(e => e.ProjektOwner).HasColumnName("projekt_owner");
+
+                entity.HasOne(d => d.Nutzer)
+                    .WithMany(p => p.NutzerProjekte)
+                    .HasForeignKey(d => d.NutzerId)
+                    .HasConstraintName("fk_nutzer");
+
+                entity.HasOne(d => d.Projekt)
+                    .WithMany(p => p.NutzerProjekte)
+                    .HasForeignKey(d => d.ProjektId)
+                    .HasConstraintName("fk_projekte");
             });
 
             modelBuilder.Entity<NutzerTeam>(entity =>

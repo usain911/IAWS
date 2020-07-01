@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,10 +41,29 @@ namespace DataBaseAPI.Controllers
             return nutzerAufgaben;
         }
 
-        // PUT: api/NutzerAufgaben/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        // GET: api/Nutzer/GetNutzerByAufgabenId/5
+        [HttpGet("GetNutzerIdByAufgabenId/{aid}")]
+        public async Task<ActionResult<IEnumerable<NutzerAufgaben>>> GetNutzerIdByAufgabenId(int aid)
+            {
+               return _context.NutzerAufgaben.Where(ai => ai.NutzerId == aid).ToArray();
+
+            }
+
+
+        // GET: api/Nutzer/GetAufgabenByProjektId/5
+        [HttpGet("GetAufgabenByProjektId/{pid}")]
+        public async Task<ActionResult<IEnumerable<NutzerAufgaben>>> GetAufgabenByProjektId(int pid)
+        {
+          return _context.NutzerAufgaben.Where(p => p.NutzerId == pid).ToArray();
+
+        }
+
+
+
+    // PUT: api/NutzerAufgaben/5
+    // To protect from overposting attacks, enable the specific properties you want to bind to, for
+    // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+    [HttpPut("{id}")]
         public async Task<IActionResult> PutNutzerAufgaben(int id, NutzerAufgaben nutzerAufgaben)
         {
             if (id != nutzerAufgaben.Id)
