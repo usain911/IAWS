@@ -73,7 +73,7 @@ namespace DataBaseAPI.Models
 
             modelBuilder.Entity<Kommentar>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.KommentarId).HasColumnName("kommentar_id");
 
                 entity.Property(e => e.AufgabenId).HasColumnName("aufgaben_id");
 
@@ -84,8 +84,6 @@ namespace DataBaseAPI.Models
                     .HasColumnName("kommentarFeld")
                     .HasMaxLength(500)
                     .IsFixedLength();
-
-                entity.Property(e => e.KommentarId).HasColumnName("kommentar_id");
 
                 entity.Property(e => e.NutzerId).HasColumnName("nutzer_id");
 
