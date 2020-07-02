@@ -8,6 +8,10 @@ export class User {
         public email: string,
         public passwort: string,
         public isAdmin: boolean,
-        public team: string
+        public team?: string,
+        public mitgliedSeit?: string,
+        public letzteAnmeldung?: string,
+        public nutzerAufgaben?: string,
+        public nutzerProjekte?: string,
     ) {}
 }

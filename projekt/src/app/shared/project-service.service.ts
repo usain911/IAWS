@@ -41,26 +41,9 @@ export class ProjectServiceService {
   //-----------------------------------USER----------------------------------------
   //-------------------------------------------------------------------------------
 
-  public getLocalUser(){
-    //const options = { params: new HttpParams({fromString: "_page=1&_limit=3"}) }; // limitiert auf 3 user
-    return this.httpClient.get<User[]>(this.local+"users").pipe(retry(3), catchError(this.handleError));
+  public getUserById(id: number):Observable<any> {
+    return this.httpClient.get<any>(`${this.api}Nutzer/${id}`).pipe(retry(3), catchError(this.handleError));
   }
-
-  public getUserById(id: number){
-    return this.httpClient.get<User[]>(`${this.api}Nutzer/${id}`).pipe(retry(3), catchError(this.handleError));
-  }
-  //-------------------------------------------------------------------------------
-  //-----------------------------------TEAMS----------------------------------------
-  //-------------------------------------------------------------------------------
-
-  public getTeams(){
-    return this.httpClient.get<any>(this.local+"teams").pipe(retry(3), catchError(this.handleError));
-  }
-
-
-  //-------------------------------------------------------------------------------
-  //-----------------------------------LIVE----------------------------------------
-  //-------------------------------------------------------------------------------
 
   public getUser(){
     const header = new HttpHeaders({
@@ -70,6 +53,16 @@ export class ProjectServiceService {
     return this.httpClient.get<User[]>('https://localhost:44372/api/Nutzer');
   }
 
+
+  //-------------------------------------------------------------------------------
+  //-----------------------------------TEAMS----------------------------------------
+  //-------------------------------------------------------------------------------
+
+  public getTeams(){
+    return this.httpClient.get<any>(this.local+"teams").pipe(retry(3), catchError(this.handleError));
+  }
+
+ 
   //-------------------------------------------------------------------------------
   //----------------------------------PROJEKTE-------------------------------------
   //-------------------------------------------------------------------------------
@@ -100,10 +93,16 @@ export class ProjectServiceService {
   }
 
   //-------------------------------------------------------------------------------
-  //----------------------------------Teilaufgaben-------------------------------------
+  //----------------------------------Teilaufgaben---------------------------------
   //-------------------------------------------------------------------------------
   public getTeilAufgaben() {
     return  this.httpClient.get<any>(`${this.api}Teilaufgaben`).pipe(retry(3), catchError(this.handleError));
+  }
+  //-------------------------------------------------------------------------------
+  //----------------------------------Kommentare-----------------------------------
+  //-------------------------------------------------------------------------------
+  public getKommentare() {
+    return this.httpClient.get<any>(`${this.api}Kommentar`).pipe(retry(3), catchError(this.handleError));
   }
 }
 

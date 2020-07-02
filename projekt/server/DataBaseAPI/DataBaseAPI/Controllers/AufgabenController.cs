@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,24 +27,31 @@ namespace DataBaseAPI.Controllers
             return await _context.Aufgaben.ToListAsync();
         }
 
+
+        
+
         // GET: api/Aufgaben/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Aufgaben>> GetAufgaben(int id)
-        {
-            var aufgaben = await _context.Aufgaben.FindAsync(id);
-
-            if (aufgaben == null)
+            public async Task<ActionResult<Aufgaben>> GetAufgaben(int id)
             {
-                return NotFound();
+                var aufgaben = await _context.Aufgaben.FindAsync(id);
+
+                if (aufgaben == null)
+                {
+                    return NotFound();
+                }
+
+                return aufgaben;
             }
 
-            return aufgaben;
-        }
+    
 
-        // PUT: api/Aufgaben/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+
+
+    // PUT: api/Aufgaben/5
+    // To protect from overposting attacks, enable the specific properties you want to bind to, for
+    // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+    [HttpPut("{id}")]
         public async Task<IActionResult> PutAufgaben(int id, Aufgaben aufgaben)
         {
             if (id != aufgaben.AufgabenId)
