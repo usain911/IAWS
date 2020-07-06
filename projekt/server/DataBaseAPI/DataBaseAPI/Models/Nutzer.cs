@@ -21,7 +21,7 @@ namespace DataBaseAPI.Models
         public string Team { get; set; }
         public string Position { get; set; }
         public DateTime? MitgliedSeit { get; set; }
-        public byte[] LetzteAnmeldung { get; set; }
+        public string LetzteAnmeldung { get; set; }
 
         public virtual ICollection<NutzerAufgaben> NutzerAufgaben { get; set; }
         public virtual ICollection<NutzerProjekte> NutzerProjekte { get; set; }
