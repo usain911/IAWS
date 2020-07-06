@@ -105,8 +105,7 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.LetzteAnmeldung)
                     .HasColumnName("letzteAnmeldung")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.MitgliedSeit).HasColumnName("mitgliedSeit");
 
@@ -219,6 +218,8 @@ namespace DataBaseAPI.Models
                 entity.Property(e => e.Bezeichnung)
                     .HasColumnName("bezeichnung")
                     .HasMaxLength(500);
+
+                entity.Property(e => e.Erledigt).HasColumnName("erledigt");
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")
