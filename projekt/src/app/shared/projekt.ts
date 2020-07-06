@@ -1,4 +1,5 @@
 import { Aufgaben } from './aufgaben';
+import { User } from './user';
 
 export class Projekt {
     projektId: number;
@@ -8,6 +9,7 @@ export class Projekt {
     aufgaben: Aufgaben[];
     size?: number;
     tasksDone?: number;
+    user?: User;
 
     set setSize(val:number) {
         this.size=val;

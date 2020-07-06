@@ -5,6 +5,8 @@ import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
 import { Projekt } from '../shared/projekt';
 import { Aufgaben } from '../shared/aufgaben'
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, tap, switchMap, filter } from 'rxjs/operators';
 
 import { trigger, transition,style, query, group, animate, state} from '@angular/animations';
 
@@ -27,6 +29,10 @@ import { NutzerAufgaben} from '../shared/nutzer-aufgaben';
 })
 
 export class HomeComponent implements OnInit {
+
+  keyUp$ = new Subject<string>();
+  isLoading = false;
+  foundProjects: Projekt[] = [];
   
   users: User[];
   luser: User[];
@@ -58,6 +64,17 @@ export class HomeComponent implements OnInit {
     this.id = localStorage.getItem('token');
     this.isLoggedIn = localStorage.getItem('isLoggedIn');    
     this.authService.checkLogin(this.isLoggedIn);
+
+    this.keyUp$.pipe(
+      filter(term => term.length >= 3),
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap(() => this.isLoading = true),
+      switchMap(searchTerm => this.ps.getAllSearch(searchTerm)),
+      tap(() => this.isLoading = false)
+    )
+    .subscribe(projekte => this.foundProjects = projekte);
+  
 
   
     //hole projekt. in for schleife für jedes projekt die aufgaben in das projekt.aufgaben laden. 

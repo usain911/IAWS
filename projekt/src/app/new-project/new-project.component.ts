@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Projekt } from '../shared/projekt';
 import { Aufgaben } from '../shared/aufgaben';
+import { ProjectServiceService } from '../shared/project-service.service';
 
 
 @Component({
@@ -11,10 +12,12 @@ import { Aufgaben } from '../shared/aufgaben';
 export class NewProjectComponent implements OnInit {
 
   projekt = new Projekt();
+  projektAdded: Projekt;
   aufgaben: Aufgaben[];
   public toAdd: Aufgaben;
 
-  constructor() {
+  constructor(private ps: ProjectServiceService) {
+    this.projekt.projektOwnerId = parseInt(localStorage.getItem('id'));
     this.aufgaben = [];
     this.toAdd = 
       {
@@ -26,13 +29,15 @@ export class NewProjectComponent implements OnInit {
   @Output() submitproject = new EventEmitter<Projekt>();
 
   submitForm() {
-    console.log(this.projekt)
+    //console.log(this.projekt)
+    if (this.ps.setProjekt(this.projekt).subscribe(pr => this.projektAdded = pr ))
+      console.log(this.projektAdded + " angelegt");
   }
 
   ngOnInit(): void { 
   }
 
-  addTag() {
+  addTag() { 
     console.log(this.toAdd);
     console.log('aufgaben: ' + this.aufgaben.length)
     this.aufgaben.push(this.toAdd);

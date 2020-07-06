@@ -75,3 +75,9 @@ img {
 .card-header {
   background-color: #ddd;
 }
+.bu {
+  transition: 200ms;
+  background-color: #33455e;
+  margin-left: 3px;
+  margin-right: 3px;
+}

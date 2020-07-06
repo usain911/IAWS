@@ -15,8 +15,9 @@ import { Aufgaben } from './aufgaben';
 })
 export class ProjectServiceService {
 
-  private local = "http://localhost:3000/";
   private api = "https://localhost:44372/api/";
+  //user: User[];
+  //projekte: Projekt[];
   
 
   constructor(private httpClient: HttpClient) { 
@@ -53,14 +54,27 @@ export class ProjectServiceService {
     return this.httpClient.get<User[]>('https://localhost:44372/api/Nutzer');
   }
 
+  getAllUser():Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.api}Nutzer`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError)
+    );      
+  }
+
+  deleteUser(id: number):Observable<{}> {
+    console.log('parameter = ' + id)
+    const url = '${this.api}${id}';
+    return this.httpClient.delete(`${this.api}Nutzer/${id}`).pipe(
+      catchError(this.handleError)
+    )
+  }
+
 
   //-------------------------------------------------------------------------------
   //-----------------------------------TEAMS----------------------------------------
   //-------------------------------------------------------------------------------
 
-  public getTeams(){
-    return this.httpClient.get<any>(this.local+"teams").pipe(retry(3), catchError(this.handleError));
-  }
 
  
   //-------------------------------------------------------------------------------
@@ -68,23 +82,39 @@ export class ProjectServiceService {
   //-------------------------------------------------------------------------------
 
   public getProjects():Observable<Projekt[]> {
-    return this.httpClient.get<Projekt[]>(`${this.api}Projekte`).pipe(retry(3), catchError(this.handleError));
+    return this.httpClient.get<any[]>(`${this.api}Projekte`).pipe(retry(3), catchError(this.handleError));
   } 
   public getProjectById(id: number): Observable<Projekt>{
-    return this.httpClient.get<Projekt>(`${this.api}projekte/${id}`).pipe(retry(3), catchError(this.handleError));
+    return this.httpClient.get<any>(`${this.api}projekte/${id}`).pipe(retry(3), catchError(this.handleError));
   } 
   public getProjectsByOwner(owner: number) {
-    return this.httpClient.get<any>(`${this.api}Projekte/`).pipe(retry(3), catchError(this.handleError));
+    return this.httpClient.get<any>(`${this.api}Projekte/`);
 
     //return this.httpClient.get<any>(`${this.api}Projekte/GetProjektByOwnerID/1`).pipe(retry(3), catchError(this.handleError));
   }
-//----------------------------------PROJEKTE-LIVE---------------------------------
+
+  getAllSearch(searchTerm: string): Observable<Projekt[]> {
+    return this.httpClient.get<Projekt[]>(
+      `${this.api}Projekte/search/${searchTerm}`).pipe(retry(3), catchError(this.handleError)
+      );    
+  }
+
+  public setProjekt(projekt: Projekt): Observable<Projekt> {
+    console.log(projekt);
+    return this.httpClient.post<Projekt>(`${this.api}Projekte`, projekt)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+
+
   public addProjekt(pr: Projekt):Observable<Projekt>{
     return this.httpClient.post<any>(`${this.api}NutzerProjekte`, pr)
   }
   //-------------------------------------------------------------------------------
   //----------------------------------Aufgaben-------------------------------------
   //-------------------------------------------------------------------------------
+
   public getAufgaben():Observable<any> {
     return  this.httpClient.get<Aufgaben[]>(`${this.api}Aufgaben`).pipe(retry(5), catchError(this.handleError));
   }

@@ -20,6 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { ProfilComponent } from './profil/profil.component';
+import { ProjectListItemComponent } from './project-list-item/project-list-item.component';
+import { NutzerComponent } from './admin/nutzer/nutzer.component';
+import { NutzerItemComponent } from './admin/nutzer-item/nutzer-item.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -36,6 +39,9 @@ const appRoutes: Routes = [
     LoginComponent,
     NewProjectComponent,
     ProfilComponent,
+    ProjectListItemComponent,
+    NutzerComponent,
+    NutzerItemComponent,
   ],
   imports: [
     HttpClientModule,

@@ -12,18 +12,11 @@
   <nav id="normal">
     <ul>
       <li><a routerLink="/home" routerLinkActive="active">home</a></li>
-      
-      <li><a routerLink="/list" routerLinkActive="active">Projektliste</a></li>
-      <li>
-       
-       
-         
-      <a routerLink="/profil" routerLinkActive="active">Profil</a>
-        
-      </li>
-      <li><a routerLink="newproject" routerLinkActive="active">Neues Projekt</a> </li>
-   
-      <ul>
+      <li><a routerLink="/profil" routerLinkActive="active">Profil</a></li>
+      <li><a routerLink="newproject" routerLinkActive="active">Neues Projekt</a></li> 
+      <li *ngIf="isAdmin"><a routerLink="/list" routerLinkActive="active">Projekte</a></li> 
+      <li *ngIf="isAdmin"><a routerLink="/nutzer" routerLinkActive="active">Nutzer</a></li> 
+    <ul>
   
       </ul>
     </ul>
@@ -44,8 +37,7 @@
   </nav>
 
 </header>
-<div class="content">
+
   
 <router-outlet></router-outlet>
 
-</div>

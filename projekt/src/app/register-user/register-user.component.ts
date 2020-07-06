@@ -35,11 +35,11 @@ export class RegisterUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ps.getTeams().subscribe((
+   /*  this.ps.getTeams().subscribe((
       data: any[]) =>{
         this.teams = data;
         console.log(data)
-      })
+      }) */
   } 
 
 }

@@ -5,9 +5,19 @@
     </div>
 
     <div class="topnav">
-        <input type="text" placeholder="Suchen..">
+        <input type="text"  (keyup)="keyUp$.next($event.target.value)" placeholder="Suchen..">
       </div> 
 
+      <div class="results transition visible"
+      *ngIf="foundProjects.length">
+      <a class="result"
+        *ngFor="let pr of foundProjects"
+        [routerLink]="['..', 'pr', pr.projektId]">
+        {{ pr.name }}
+        <p class="description">{{ pr.bezeichnung }}</p>
+      </a>
+    </div>
+  
 
 
 <h1>Meine Projekte:</h1>
