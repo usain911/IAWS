@@ -41,6 +41,13 @@ namespace DataBaseAPI.Controllers
             return teilaufgaben;
         }
 
+    // GET: api/TeilAufgaben/GetTeilaufgabenByAufgabenId/5
+    [HttpGet("GetTeilaufgabenByAufgabenId/{AufgabenID}")]
+    public async Task<ActionResult<IEnumerable<Teilaufgaben>>> GetTeilaufgabenByAufgabenId(int AufgabenID)
+    {
+      return _context.Teilaufgaben.Where(k => k.ZugeordnetZuAufgabe == AufgabenID).ToArray();
+    }
+
 
     // Search for Teilaufgaben
     // GET: api/Teilaufgaben/search/test

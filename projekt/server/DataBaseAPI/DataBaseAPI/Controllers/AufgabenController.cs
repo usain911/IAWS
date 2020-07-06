@@ -60,6 +60,14 @@ namespace DataBaseAPI.Controllers
     }
 
 
+    // GET: api/Aufgaben/GetAufgabenByProjektId/5
+    [HttpGet("GetAufgabenByProjektId/{ProjektID}")]
+    public async Task<ActionResult<IEnumerable<Aufgaben>>> GetAufgabenByProjektId(int ProjektID)
+    {
+      return _context.Aufgaben.Where(k => k.ProjektId == ProjektID).ToArray();
+
+    }
+
 
     // PUT: api/Aufgaben/5
     // To protect from overposting attacks, enable the specific properties you want to bind to, for
