@@ -105,8 +105,8 @@ namespace DataBaseAPI.Models
 
                 entity.Property(e => e.LetzteAnmeldung)
                     .HasColumnName("letzteAnmeldung")
-                    .IsRowVersion()
-                    .IsConcurrencyToken();
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.MitgliedSeit).HasColumnName("mitgliedSeit");
 

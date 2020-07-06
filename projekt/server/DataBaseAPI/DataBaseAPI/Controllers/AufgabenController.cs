@@ -44,8 +44,29 @@ namespace DataBaseAPI.Controllers
                 return aufgaben;
             }
 
-    
+    // Search for Aufgaben
+    // GET: api/Aufgaben/search/test
+    [HttpGet("search/{s}")]
+    public async Task<ActionResult<IEnumerable<Aufgaben>>> SearchAufgaben(string s)
+    {
+      IQueryable<Aufgaben> query = _context.Aufgaben;
 
+      if (!string.IsNullOrEmpty(s))
+      {
+        query = query.Where(e => e.Titel.Contains(s));
+      }
+
+      return await query.ToListAsync();
+    }
+
+
+    // GET: api/Aufgaben/GetAufgabenByProjektId/5
+    [HttpGet("GetAufgabenByProjektId/{ProjektID}")]
+    public async Task<ActionResult<IEnumerable<Aufgaben>>> GetAufgabenByProjektId(int ProjektID)
+    {
+      return _context.Aufgaben.Where(k => k.ProjektId == ProjektID).ToArray();
+
+    }
 
 
     // PUT: api/Aufgaben/5

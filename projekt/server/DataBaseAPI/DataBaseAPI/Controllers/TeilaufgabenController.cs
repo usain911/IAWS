@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,10 +41,33 @@ namespace DataBaseAPI.Controllers
             return teilaufgaben;
         }
 
-        // PUT: api/Teilaufgaben/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+    // GET: api/TeilAufgaben/GetTeilaufgabenByAufgabenId/5
+    [HttpGet("GetTeilaufgabenByAufgabenId/{AufgabenID}")]
+    public async Task<ActionResult<IEnumerable<Teilaufgaben>>> GetTeilaufgabenByAufgabenId(int AufgabenID)
+    {
+      return _context.Teilaufgaben.Where(k => k.ZugeordnetZuAufgabe == AufgabenID).ToArray();
+    }
+
+
+    // Search for Teilaufgaben
+    // GET: api/Teilaufgaben/search/test
+    [HttpGet("search/{s}")]
+    public async Task<ActionResult<IEnumerable<Teilaufgaben>>> SearchTeilaufgaben(string s)
+    {
+      IQueryable<Teilaufgaben> query = _context.Teilaufgaben;
+
+      if (!string.IsNullOrEmpty(s))
+      {
+        query = query.Where(e => e.Titel.Contains(s));
+      }
+
+      return await query.ToListAsync();
+    }
+
+    // PUT: api/Teilaufgaben/5
+    // To protect from overposting attacks, enable the specific properties you want to bind to, for
+    // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+    [HttpPut("{id}")]
         public async Task<IActionResult> PutTeilaufgaben(int id, Teilaufgaben teilaufgaben)
         {
             if (id != teilaufgaben.TeilaufgabenId)

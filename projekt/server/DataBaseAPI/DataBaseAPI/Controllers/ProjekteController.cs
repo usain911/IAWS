@@ -42,7 +42,7 @@ namespace DataBaseAPI.Controllers
     }
 
         // Search for Projects
-        // GET: api/Projekte/search/testprojekt
+        // GET: api/Projekte/search/test
         [HttpGet("search/{s}")]
         public async Task<ActionResult<IEnumerable<Projekte>>> SearchProjekte(string s)
         {
