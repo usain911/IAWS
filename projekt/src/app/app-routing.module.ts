@@ -17,10 +17,10 @@ const routes: Routes = [
   { path: 'list', component: ListProjectsComponent, canActivate:[CanNavigate] },
   { path: 'list/:id', component: ProjectDetailsComponent, canActivate:[CanNavigate] },
   { path: 'project/:id', component: ProjectDetailsComponent, canActivate:[CanNavigate] },
-  { path: 'register', component: RegisterUserComponent },
-  { path: 'newproject', component: NewProjectComponent, },
-  { path: 'profil', component: ProfilComponent },
-  { path: 'nutzer', component: NutzerComponent },
+  { path: 'register', component: RegisterUserComponent, canActivate:[CanNavigate] },
+  { path: 'newproject', component: NewProjectComponent, canActivate:[CanNavigate]},
+  { path: 'profil', component: ProfilComponent, canActivate:[CanNavigate] },
+  { path: 'nutzer', component: NutzerComponent, canActivate:[CanNavigate] },
 
 ];
 

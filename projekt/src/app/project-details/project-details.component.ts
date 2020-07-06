@@ -4,16 +4,20 @@ import { ProjectServiceService } from '../shared/project-service.service';
 import { Projekt } from '../shared/projekt';
 import { TeilAufgabe } from '../shared/teil-aufgabe';
 import { Aufgaben } from '../shared/aufgaben';
+import { Observable } from 'rxjs';
+import { fadeIn, fadeInAnimation} from '../_animations/index'
 
 
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.component.html',
-  styleUrls: ['./project-details.component.css']
+  styleUrls: ['./project-details.component.css'],
+  animations: [fadeInAnimation]
 })
 export class ProjectDetailsComponent implements OnInit {
-
+  index: number;
   projekt: Projekt;
+  aufgaben$: Observable<Aufgaben>;
   teilAufgaben: TeilAufgabe[];
   percent: number;
 
@@ -30,7 +34,9 @@ export class ProjectDetailsComponent implements OnInit {
     console.log(params.get('id'))
     const ident = parseInt(params.get('id'));
 
-    this.ps.getProjectById(ident).subscribe(p => this.projekt = p);      
+    this.ps.getProjectById(ident).subscribe(p => this.projekt = p);
+    
+    this.aufgaben$ = this.ps.getAufgaben();
 
     this.ps.getAufgaben().subscribe((data: Aufgaben[]) =>{
       this.projekt.aufgaben = data; 
@@ -44,14 +50,6 @@ export class ProjectDetailsComponent implements OnInit {
       this.projekt.tasksDone = isDone; 
       this.percent= isDone/this.projekt.size * 100; 
     })
-
-    //this.ps.getTeilAufgaben().subscribe((data: any[]) =>{
-    //  console.log(data);
-    //  this.teilAufgaben = data;
-     // getNutzerid(this.aufgaben);
-
-    //})
-
   }
 
   addTime(time: string) {

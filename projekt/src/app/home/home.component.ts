@@ -33,12 +33,9 @@ export class HomeComponent implements OnInit {
   keyUp$ = new Subject<string>();
   isLoading = false;
   foundProjects: Projekt[] = [];
-  
-  users: User[];
-  luser: User[];
-  nutzer: User;
+
   projects: Projekt[];
-  //aufgaben: Aufgaben[];
+  aufgaben: Aufgaben[];
   nutzerAufgaben: NutzerAufgaben[];
   id: string;
   isLoggedIn: string;
@@ -55,7 +52,7 @@ export class HomeComponent implements OnInit {
 
   user: User[];
   test: User;
-  zahl= 75;
+
   array: number[];
   numbers = new Array();
   hideTasks = true; 
@@ -79,7 +76,7 @@ export class HomeComponent implements OnInit {
   
     //hole projekt. in for schleife für jedes projekt die aufgaben in das projekt.aufgaben laden. 
     //
-    this.ps.getProjectsByOwner(1).subscribe((data: any[]) => {
+    this.ps.getProjectsByOwner(2).subscribe((data: any[]) => {
       this.projects = data; 
       for(let item of this.projects) {      
         this.numbers.push(item.projektId);
@@ -89,7 +86,7 @@ export class HomeComponent implements OnInit {
 
     //Aufgaben werden in das Array projekt.aufgaben kopiert
     this.ps.getAufgaben().subscribe((data: any[]) =>{
-      this.projects[0].aufgaben = data;
+      this.aufgaben = data;
       console.log("Aufgaben: "+ data.length);
     })
 

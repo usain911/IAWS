@@ -17,53 +17,38 @@
         <p class="description">{{ pr.bezeichnung }}</p>
       </a>
     </div>
-  
-
-
-<h1>Meine Projekte:</h1>
-
-<div class="projekt" *ngFor="let project of projects" [routerLink]="project.projektId" style="margin-top:10px;">
-    <div *ngIf="project; else loading"></div>
-   <h2 (click)="zuProjekt(project.projektId)">{{project.name}}</h2>
-   <p>{{project.bezeichnung}}</p> <button type="button" (click)="show(project.projektId)">zeigen</button> 
-   <div class="container">
-
-    <div class="progress">
-      <div class="progress-bar bg-success" role="progressbar" style="width:75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{zahl}}%</div>
-    </div>
-    
-    <!-------------------------------------------------------------------------------------------->
-    <!-------------------------------------------------------------------------------------------->
-    <!-------------------------------------AUFGABEN VON PROJEKT----------------------------------->
-    <!-------------------------------------------------------------------------------------------->
-
-    <div [hidden]="hideTasks" class="ca card" *ngFor="let aufgabe of project.aufgaben; index as i" style="margin-top:10px;">
-        <div *ngIf="project.aufgaben; else loading"></div>
-        
-     <div class="card-header" (click)="zuAufgabe(aufgabe.aufgabenId)"><b> #{{i+1}}   {{aufgabe.titel}}</b> </div> 
-     <div class="ku card-body"> <b>Kurzbeschreibung:</b> {{aufgabe.beschreibung}} </div> 
-       
-    <div class="btn-group" role="group" aria-label="Basic example">
-
-  </div>
-
-    <img *ngIf="aufgabe.erledigt" src="../../assets/icons/haken.png">  <!-- zeigt haken wenn erledigt == true -->
-
-    <div  role="status" [hidden]="projects"> Keine Projekte gefunden </div> 
-    </div>
-    </div>
-    
-   <div  role="status" [hidden]="projects">
-   Keine Projekte gefunden
-  </div> 
-</div>
-
-
-
-
-<ng-template #loading>
-    <div>loading...</div>
-</ng-template>
 
 </div>  
+<div class="row">
+  <div class="col-1"></div> <!-- Rand Links -->
+ 
+  <div class="col-6">
+    <h1>Projekte</h1>
+    <div @fadeIn class="item ca card" *ngFor="let project of projects; index as i">
+      <div *ngIf="project; else loading"></div>
+  
+      <div class="card-header" (click)="zuProjekt(project.projektId)"><b> #{{i+1 +"  " +project.name}}</b></div>
+      <div class="ku card-body">{{project.bezeichnung}}</div>  
+    </div>
+  </div>  
+  
+  <div class="col-4">
+    <h1>Aufgaben</h1>
+  
+    <div  @fadeIn class="item ca card" *ngFor="let a of aufgaben; index as i" style="margin-top:10px;">
+      <ng-container>
+      <div *ngIf="a; else loading"></div> 
+      <div (click)="zuAufgabe(a.aufgabenId)" *ngIf="a.erstellerId == 1">
+        <div class="card-header" ><b> #{{i+1}}   {{a.titel}}</b> </div> 
+        <div class="ku card-body"> <b>Kurzbeschreibung:</b> {{a.beschreibung}} </div>
+      </div>
+    </ng-container>        
+    </div>
+  </div>
+  <div class="col-1"></div> <!-- Rand Rechts -->
+</div>
 
+<div role="status" [hidden]="projects">Keine Projekte gefunden</div>
+<ng-template #loading>
+  <div>loading...</div>
+</ng-template>

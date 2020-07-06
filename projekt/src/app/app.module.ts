@@ -23,6 +23,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { ProjectListItemComponent } from './project-list-item/project-list-item.component';
 import { NutzerComponent } from './admin/nutzer/nutzer.component';
 import { NutzerItemComponent } from './admin/nutzer-item/nutzer-item.component';
+import { ProjectDetailsItemComponent } from './project-details-item/project-details-item.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
     ProjectListItemComponent,
     NutzerComponent,
     NutzerItemComponent,
+    ProjectDetailsItemComponent,
   ],
   imports: [
     HttpClientModule,

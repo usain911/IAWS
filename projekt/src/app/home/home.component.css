@@ -35,11 +35,12 @@
     font-size: 17px;
   }
 
-.progress {
-    margin-top: 3rem;
+.item {
+    margin-bottom: 1rem;
 }
-.projekt {
-    background-color: #eee;
+.item:hover {
+  background-color: #ddd;
+  cursor: pointer;
 }
 img {
     width: 4rem;
@@ -47,7 +48,6 @@ img {
     position: relative;
     margin-left: 95%;
     margin-bottom: 1rem;
-
 }
 .ca {
     z-index: 0;
