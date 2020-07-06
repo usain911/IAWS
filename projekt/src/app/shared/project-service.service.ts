@@ -134,6 +134,12 @@ export class ProjectServiceService {
   public getKommentare() {
     return this.httpClient.get<any>(`${this.api}Kommentar`).pipe(retry(3), catchError(this.handleError));
   }
+  public getKommentarByAufgabenId(aufgabenId: number) {
+    return this.httpClient.get<any>(`${this.api}Kommentar/GetKommentarByAufgabenId/${aufgabenId}`).pipe(retry(3), catchError(this.handleError));
+  }
+  public getKommentareByNutzerId(nutzerId: number) {
+    return this.httpClient.get<any>(`${this.api}Kommentar/GetKommentarByNutzerId/${nutzerId}`).pipe(retry(3), catchError(this.handleError));
+  }
 }
 
 
