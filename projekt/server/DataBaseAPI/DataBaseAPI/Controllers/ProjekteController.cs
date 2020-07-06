@@ -41,6 +41,21 @@ namespace DataBaseAPI.Controllers
             return projekte;
         }
 
+        // Search for Projects
+        // GET: api/Projekte/search/testprojekt
+        [HttpGet("search/{s}")]
+        public async Task<ActionResult<IEnumerable<Projekte>>> SearchProjekte(string s)
+        {
+            IQueryable<Projekte> query = _context.Projekte;
+
+            if (!string.IsNullOrEmpty(s))
+            {
+               query = query.Where(e => e.Name.Contains(s));
+            }
+
+            return await query.ToListAsync();
+        }
+
 
     // GET: api/Projekte/GetProjektByOwnerId/5
     [HttpGet("GetProjektByOwnerId/{owner}")]
