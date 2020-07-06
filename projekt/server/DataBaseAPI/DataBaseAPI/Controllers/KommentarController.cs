@@ -27,8 +27,26 @@ namespace DataBaseAPI.Controllers
             return await _context.Kommentar.ToListAsync();
         }
 
-        // GET: api/Kommentar/5
-        [HttpGet("{id}")]
+    // GET: api/Kommentar/GetKommentarByAufgabenId/5
+    [HttpGet("GetKommentarByAufgabenId/{AufgabenID}")]
+    public async Task<ActionResult<IEnumerable<Kommentar>>> GetKommentarByAufgabenId(int AufgabenID)
+    {
+      return _context.Kommentar.Where(k => k.KommentarId == AufgabenID).ToArray();
+
+    }
+
+    // GET: api/Kommentar/GetKommentarByNutzerId/5
+    [HttpGet("GetKommentarByNutzerId/{NutzerID}")]
+    public async Task<ActionResult<IEnumerable<Kommentar>>> GetKommentarByNutzerId(int NutzerID)
+    {
+      return _context.Kommentar.Where(ow => ow.NutzerId == NutzerID).ToArray();
+
+    }
+
+
+
+    // GET: api/Kommentar/5
+    [HttpGet("{id}")]
         public async Task<ActionResult<Kommentar>> GetKommentar(int id)
         {
             var kommentar = await _context.Kommentar.FindAsync(id);
