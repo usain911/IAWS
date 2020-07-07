@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Projekt } from '../shared/projekt';
 import { Aufgaben } from '../shared/aufgaben';
 import { ProjectServiceService } from '../shared/project-service.service';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-project',
@@ -16,8 +16,10 @@ export class NewProjectComponent implements OnInit {
   aufgaben: Aufgaben[];
   public toAdd: Aufgaben;
 
-  constructor(private ps: ProjectServiceService) {
+  constructor(private ps: ProjectServiceService, private route: ActivatedRoute, private router: Router) {
+
     this.projekt.projektOwnerId = parseInt(localStorage.getItem('id'));
+    this.projekt.erledigt = 2;
     this.aufgaben = [];
     this.toAdd = 
       {
@@ -29,12 +31,20 @@ export class NewProjectComponent implements OnInit {
   @Output() submitproject = new EventEmitter<Projekt>();
 
   submitForm() {
-    //console.log(this.projekt)
-    if (this.ps.setProjekt(this.projekt).subscribe(pr => this.projektAdded = pr ))
-      console.log(this.projektAdded + " angelegt");
-  }
+    this.ps.setProjekt(this.projekt)
+      .subscribe(pr => this.projekt)
+      //console.log(this.projektAdded.projektId + "angelegt");
+      setTimeout(() => { this.router.navigate(['home']);  }, 200);
+    }      
+  
 
   ngOnInit(): void { 
+  }
+
+  createBook(project: Projekt) {
+    this.ps.setProjekt(project).subscribe(() => {
+      this.router.navigate(['../..', 'project'], { relativeTo: this.route });
+    });
   }
 
   addTag() { 

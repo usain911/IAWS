@@ -10,6 +10,7 @@ import { NewProjectComponent } from './new-project/new-project.component';
 import { LoginComponent } from './login/login.component';
 import { ProfilComponent } from './profil/profil.component';
 import { NutzerComponent } from './admin/nutzer/nutzer.component';
+import { AufgabeComponent } from './aufgabe/aufgabe.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, data: {animation: 'one'} },
@@ -21,6 +22,8 @@ const routes: Routes = [
   { path: 'newproject', component: NewProjectComponent, canActivate:[CanNavigate]},
   { path: 'profil', component: ProfilComponent, canActivate:[CanNavigate] },
   { path: 'nutzer', component: NutzerComponent, canActivate:[CanNavigate] },
+  { path: 'aufgabe/:id', component: AufgabeComponent, canActivate:[CanNavigate] },
+
 
 ];
 

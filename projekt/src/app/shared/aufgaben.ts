@@ -1,3 +1,6 @@
+import { TeilAufgabe } from './teil-aufgabe';
+import { Kommentar } from './kommentar';
+
 export class Aufgaben {
     aufgabenId:number;
     titel?: string;
@@ -11,4 +14,6 @@ export class Aufgaben {
     vorgaengerId?: number;
     nachfolgerId?: number;
     hasChanged?: boolean;
+    teilaufgaben?: TeilAufgabe[];
+    kommentar?: Kommentar[];
 }

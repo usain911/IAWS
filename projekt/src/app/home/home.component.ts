@@ -104,6 +104,7 @@ export class HomeComponent implements OnInit {
 
   zuAufgabe(id: number):void {
     console.log("zu Aufgabe "+ id);
+    setTimeout(() => { this.router.navigate(['/aufgabe/'+id]);  }, 500);
   }
 
   show(id: number) {

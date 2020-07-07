@@ -24,6 +24,7 @@ import { ProjectListItemComponent } from './project-list-item/project-list-item.
 import { NutzerComponent } from './admin/nutzer/nutzer.component';
 import { NutzerItemComponent } from './admin/nutzer-item/nutzer-item.component';
 import { ProjectDetailsItemComponent } from './project-details-item/project-details-item.component';
+import { AufgabeComponent } from './aufgabe/aufgabe.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
     NutzerComponent,
     NutzerItemComponent,
     ProjectDetailsItemComponent,
+    AufgabeComponent,
   ],
   imports: [
     HttpClientModule,

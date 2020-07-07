@@ -24,21 +24,21 @@
 
 <!--------------------------------------------------------------------------------------------------------------->
  
-
+<!-- 
         <div *ngFor="let aufgabe of aufgaben; let i = index" class="tag-controls aufgabe">
            <input type="number" class="form-control" name="aufgabenId {{i}}" [(ngModel)]="aufgabe.aufgabenId">
            <input type="text" class="form-control" name="titel{{i}}"  [(ngModel)]="aufgabe.titel">
            <input type="text" class="form-control" name="bez{{i}}" [(ngModel)]="aufgabe.bezeichnung">         
         </div>
         
-        <button class="btn btn-success" (click)="addTag()"> Aufgabe hinzufügen</button>
+        <button class="btn btn-success" (click)="addTag()"> Aufgabe hinzufügen</button> -->
 
 
-        <div>
+      <!--   <div>
             <input type="number" name="test" [(ngModel)]="toAdd.aufgabenId">
-        </div>
+        </div> -->
 
         <button type="submit" class="btn btn-success" [disabled]="!projektForm.valid">Speichern</button>
     </form>
-    Aufgaben hinzufügen!!
+  
 </div> 

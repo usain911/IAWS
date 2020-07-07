@@ -1,5 +1,5 @@
 <ng-container *ngIf="projekt">
-<div class="container">
+<div *ngIf="!add" class="container">
   <h2>{{projekt.name}}</h2>  
   <p>{{projekt.bezeichnung}}</p>
   <div class="progress">
@@ -15,7 +15,33 @@
 
 <button type="button" class="de-bu btn btn-secondary" >Abbrechen</button> 
 <button type="button" class="bu btn btn-secondary">Seichern</button> 
+<button type="button" class="bu btn btn-secondary" (click)="add=true">Aufgabe hinzufügen</button> 
+
   </div>
+
 </div>
 </ng-container>
 
+<div class="container">
+  <div *ngIf="add">
+    <h2>Neue Aufgabe</h2>
+    <form #projektForm="ngForm" (ngSubmit)="submitForm()">
+
+      <div class="form-group">
+          <label for="name">Titel</label>
+          <input type="text" class="form-control" id="name" required [(ngModel)]="neueAufgabe.titel" name="name"
+          #name="ngModel">
+   
+          <label for="beschreibung">Beschreibung</label>
+          <textarea type="text" class="form-control" id="bezeichnung" required [(ngModel)]="neueAufgabe.beschreibung" name="beschreibung"
+          #beschreibung="ngModel" rows="5"></textarea>
+
+          <label for="sollZeit"></label>
+          <input type="time" id="time" required [(ngModel)]="neueAufgabe.sollZeit" name="sollZeit"
+          #sollZeit=ngModel>
+
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="!projektForm.valid">Speichern</button>
+  </form>
+  </div>
+</div>

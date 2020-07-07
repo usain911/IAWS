@@ -6,8 +6,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError, tap, map } from 'rxjs/operators';
 import { Aufgaben } from './aufgaben';
-
-
+import { TeilAufgabe } from './teil-aufgabe';
 
 
 @Injectable({
@@ -16,9 +15,7 @@ import { Aufgaben } from './aufgaben';
 export class ProjectServiceService {
 
   private api = "https://localhost:44372/api/";
-  //user: User[];
-  //projekte: Projekt[];
-  
+ 
 
   constructor(private httpClient: HttpClient) { 
   }
@@ -69,13 +66,6 @@ export class ProjectServiceService {
       catchError(this.handleError)
     )
   }
-
-
-  //-------------------------------------------------------------------------------
-  //-----------------------------------TEAMS----------------------------------------
-  //-------------------------------------------------------------------------------
-
-
  
   //-------------------------------------------------------------------------------
   //----------------------------------PROJEKTE-------------------------------------
@@ -102,15 +92,10 @@ export class ProjectServiceService {
   public setProjekt(projekt: Projekt): Observable<Projekt> {
     console.log(projekt);
     return this.httpClient.post<Projekt>(`${this.api}Projekte`, projekt)
-      .pipe(
-        catchError(this.handleError)
-      )
+      .pipe(catchError(this.handleError)
+    );
   }
 
-
-  public addProjekt(pr: Projekt):Observable<Projekt>{
-    return this.httpClient.post<any>(`${this.api}NutzerProjekte`, pr)
-  }
   //-------------------------------------------------------------------------------
   //----------------------------------Aufgaben-------------------------------------
   //-------------------------------------------------------------------------------
@@ -121,12 +106,29 @@ export class ProjectServiceService {
   public getNutzerAufgaben() {
     return  this.httpClient.get<any>(`${this.api}NutzerAufgaben/GetNutzerIdByAufgabenId/1`).pipe(retry(3), catchError(this.handleError));
   }
+  public getAufgabeById(id: number):Observable<Aufgaben> {
+    return  this.httpClient.get<Aufgaben>(`${this.api}Aufgaben/${id}`).pipe(retry(3), catchError(this.handleError));
+  }
+  public getAufgabenByProjektId(pId: number): Observable<Aufgaben> {
+    return  this.httpClient.get<Aufgaben>(`${this.api}Aufgaben/GetAufgabenByProjektId/${pId}`).pipe(retry(3), catchError(this.handleError));
+  }
+
+  public addAufgabe(auf: Aufgaben): Observable<Aufgaben> {
+    console.log(auf);
+    return this.httpClient.post<Aufgaben>(`${this.api}Aufgaben`, auf)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
 
   //-------------------------------------------------------------------------------
   //----------------------------------Teilaufgaben---------------------------------
   //-------------------------------------------------------------------------------
   public getTeilAufgaben() {
-    return  this.httpClient.get<any>(`${this.api}Teilaufgaben`).pipe(retry(3), catchError(this.handleError));
+    return  this.httpClient.get<TeilAufgabe[]>(`${this.api}Teilaufgaben`).pipe(retry(3), catchError(this.handleError));
+  }
+  public getTeilAufgabenByAufgabenId(aId: number) {
+    return  this.httpClient.get<TeilAufgabe[]>(`${this.api}Teilaufgaben/GetTeilaufgabenByAufgabenId/${aId}`).pipe(retry(3), catchError(this.handleError));
   }
   //-------------------------------------------------------------------------------
   //----------------------------------Kommentare-----------------------------------
@@ -141,9 +143,6 @@ export class ProjectServiceService {
     return this.httpClient.get<any>(`${this.api}Kommentar/GetKommentarByNutzerId/${nutzerId}`).pipe(retry(3), catchError(this.handleError));
   }
 }
-
-
-
 
 
 const httpOptions = {

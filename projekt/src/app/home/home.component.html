@@ -5,7 +5,7 @@
     </div>
 
     <div class="topnav">
-        <input type="text"  (keyup)="keyUp$.next($event.target.value)" placeholder="Suchen..">
+        <input type="text"  (keyup)="keyUp$.next($event.target.value)" placeholder="nach Projekten suchen">
       </div> 
 
       <div class="results transition visible"
@@ -22,12 +22,18 @@
 <div class="row">
   <div class="col-1"></div> <!-- Rand Links -->
  
-  <div class="col-6">
+  <div class="col-4">
     <h1>Projekte</h1>
     <div @fadeIn class="item ca card" *ngFor="let project of projects; index as i">
       <div *ngIf="project; else loading"></div>
   
-      <div class="card-header" (click)="zuProjekt(project.projektId)"><b> #{{i+1 +"  " +project.name}}</b></div>
+      <div class="card-header" (click)="zuProjekt(project.projektId)" 
+        [class.text-success]="project.erledigt == 0"
+        [class.text-primary]="project.erledigt == 1"
+        [class.text-warning]="project.erledigt == 2"
+        [class.rot]="project.erledigt == 3"
+        [class.orange]="project.erledigt == 4">
+        <b> #{{i+1 +"  " +project.name}}</b></div> 
       <div class="ku card-body">{{project.bezeichnung}}</div>  
     </div>
   </div>  
@@ -38,11 +44,21 @@
     <div  @fadeIn class="item ca card" *ngFor="let a of aufgaben; index as i" style="margin-top:10px;">
       <ng-container>
       <div *ngIf="a; else loading"></div> 
-      <div (click)="zuAufgabe(a.aufgabenId)" *ngIf="a.erstellerId == 1">
+      <div (click)="zuAufgabe(a.aufgabenId)" *ngIf="a.erstellerId == 2">
         <div class="card-header" ><b> #{{i+1}}   {{a.titel}}</b> </div> 
         <div class="ku card-body"> <b>Kurzbeschreibung:</b> {{a.beschreibung}} </div>
       </div>
     </ng-container>        
+    </div>
+  </div>
+  <div class="col-2"> <!-- Legende -->
+    <div>
+      <h1>Legende</h1>
+      <p class="text-success">Projekt abgeschlossen</p>
+      <p class="text-primary">Projekt in Bearbeitung</p>
+      <p class="text-warning">Projekt pausiert</p>
+      <p class="rot">Fehler</p>
+      <p class="orange">Zeitüberschreitung</p>
     </div>
   </div>
   <div class="col-1"></div> <!-- Rand Rechts -->
