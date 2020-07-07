@@ -69,6 +69,14 @@ namespace DataBaseAPI.Controllers
     }
 
 
+    // GET: api/Aufgaben/GetAufgabenByErstellerId/5
+    [HttpGet("GetAufgabenByErstellerId/{ErstellerId}")]
+    public async Task<ActionResult<IEnumerable<Aufgaben>>> GetAufgabenByErstellerId(int ErstellerId)
+    {
+      return _context.Aufgaben.Where(k => k.ErstellerId == ErstellerId).ToArray();
+
+    }
+
     // PUT: api/Aufgaben/5
     // To protect from overposting attacks, enable the specific properties you want to bind to, for
     // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
