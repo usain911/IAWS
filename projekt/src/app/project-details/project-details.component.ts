@@ -44,13 +44,9 @@ export class ProjectDetailsComponent implements OnInit {
     console.log(params.get('id'))
     const ident = parseInt(params.get('id'));
 
-/*     @Output() submitaufgabe = new EventEmitter<Aufgaben>();
- */
-
-    this.ps.getProjectById(ident).subscribe(p => this.projekt = p);
-    
+    this.ps.getProjectById(ident).subscribe(p => this.projekt = p);    
     this.aufgaben$ = this.ps.getAufgabenByProjektId(ident);
-
+    
   } 
 
   addTime(time: string) {
@@ -67,5 +63,7 @@ export class ProjectDetailsComponent implements OnInit {
     console.log("neue");
     this.add = true
   } 
+
+ 
 
 }

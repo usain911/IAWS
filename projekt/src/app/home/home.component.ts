@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
     })
 
     //Aufgaben werden in das Array projekt.aufgaben kopiert
-    this.ps.getAufgaben().subscribe((data: any[]) =>{
+    this.ps.getAufgabenByErstellerId(2).subscribe((data: Aufgaben[]) =>{
       this.aufgaben = data;
       console.log("Aufgaben: "+ data.length);
     })

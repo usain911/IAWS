@@ -2,16 +2,15 @@
 <div *ngIf="!add" class="container">
   <h2>{{projekt.name}}</h2>  
   <p>{{projekt.bezeichnung}}</p>
-  <div class="progress">
+ <!--  <div class="progress">
     <div class="progress-bar bg-success" role="progressbar" style="width:{{percent}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{percent}}% erledigt</div>
-  </div>
+  </div> -->
 
   <div class="container">
   <ng-container *ngIf="aufgaben$ | async as aufgabe">
   <app-project-details-item  @fadeInAnimation *ngFor="let a of aufgabe;"  [index]="index"  [aufgabe]="a">"> 
   </app-project-details-item>
 </ng-container> 
-
 
 <button type="button" class="de-bu btn btn-secondary" >Abbrechen</button> 
 <button type="button" class="bu btn btn-secondary">Seichern</button> 

@@ -2,11 +2,11 @@
 <div class="container">
 <h1 @fadeInAnimation>Projekte Administrieren</h1>
 
-<ng-container *ngIf="user && projekte">
+<ng-container *ngIf="user && projekte"> 
 
 
 
-  <app-project-list-item  @fadeInAnimation *ngFor="let p of projekte" [projekt]="p" [routerLink]="p.projektId">">
+  <app-project-list-item  @fadeInAnimation *ngFor="let p of projekte" [projekt]="p">">
   </app-project-list-item>
   
   <div *ngIf="!projekte">

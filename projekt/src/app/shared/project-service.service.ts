@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from './user';
 import { Projekt } from './projekt';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 
 import { throwError, Observable } from 'rxjs';
 import { retry, catchError, tap, map } from 'rxjs/operators';
@@ -96,6 +96,17 @@ export class ProjectServiceService {
     );
   }
 
+  deleteProjekt(pId: number): Observable<any> {
+    return this.httpClient.delete(
+      `${this.api}Projekte/${pId}`,
+      {responseType: 'text'}
+      ).pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
   //-------------------------------------------------------------------------------
   //----------------------------------Aufgaben-------------------------------------
   //-------------------------------------------------------------------------------
@@ -112,14 +123,24 @@ export class ProjectServiceService {
   public getAufgabenByProjektId(pId: number): Observable<Aufgaben> {
     return  this.httpClient.get<Aufgaben>(`${this.api}Aufgaben/GetAufgabenByProjektId/${pId}`).pipe(retry(3), catchError(this.handleError));
   }
+  public getAufgabenByErstellerId(pId: number): Observable<Aufgaben[]> {
+    return  this.httpClient.get<Aufgaben[]>(`${this.api}Aufgaben/GetAufgabenByErstellerId/${pId}`).pipe(retry(3), catchError(this.handleError));
+  }
 
   public addAufgabe(auf: Aufgaben): Observable<Aufgaben> {
-    console.log(auf);
+    //console.log(auf);
     return this.httpClient.post<Aufgaben>(`${this.api}Aufgaben`, auf)
       .pipe(
         catchError(this.handleError)
       )
   }
+
+  updateAufgabe(aufgabe: Aufgaben): Observable<Aufgaben> {
+    return this.httpClient.put<Aufgaben>(this.api, aufgabe).pipe(
+      catchError(this.handleError)
+    )
+  }
+
 
   //-------------------------------------------------------------------------------
   //----------------------------------Teilaufgaben---------------------------------
