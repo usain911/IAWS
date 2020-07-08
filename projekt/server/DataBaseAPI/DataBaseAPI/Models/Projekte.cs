@@ -16,6 +16,7 @@ namespace DataBaseAPI.Models
         public string Name { get; set; }
         public string Bezeichnung { get; set; }
         public int? ProjektOwnerId { get; set; }
+        public int? Erledigt { get; set; }
 
         public int? Erledigt { get; set; }
 
