@@ -45,6 +45,8 @@ namespace DataBaseAPI.Models
                     .HasColumnName("beschreibung")
                     .HasMaxLength(500);
 
+                entity.Property(e => e.Deadline).HasColumnName("deadline");
+
                 entity.Property(e => e.Erledigt).HasColumnName("erledigt");
 
                 entity.Property(e => e.ErstellDatum).HasColumnName("erstell_datum");
@@ -64,11 +66,6 @@ namespace DataBaseAPI.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.VorgaengerId).HasColumnName("vorgaenger_id");
-
-                entity.HasOne(d => d.Projekt)
-                    .WithMany(p => p.Aufgaben)
-                    .HasForeignKey(d => d.ProjektId)
-                    .HasConstraintName("fk_Projekt");
             });
 
             modelBuilder.Entity<Kommentar>(entity =>
@@ -248,6 +245,8 @@ namespace DataBaseAPI.Models
                 entity.Property(e => e.Beschreibung)
                     .HasColumnName("beschreibung")
                     .HasMaxLength(500);
+
+                entity.Property(e => e.Deadline).HasColumnName("deadline");
 
                 entity.Property(e => e.Erledigt).HasColumnName("erledigt");
 

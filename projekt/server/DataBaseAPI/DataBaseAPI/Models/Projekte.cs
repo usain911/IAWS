@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace DataBaseAPI.Models
@@ -7,7 +7,6 @@ namespace DataBaseAPI.Models
     {
         public Projekte()
         {
-            Aufgaben = new HashSet<Aufgaben>();
             NutzerAufgaben = new HashSet<NutzerAufgaben>();
             NutzerProjekte = new HashSet<NutzerProjekte>();
         }
@@ -18,7 +17,6 @@ namespace DataBaseAPI.Models
         public int? ProjektOwnerId { get; set; }
         public int? Erledigt { get; set; }
 
-        public virtual ICollection<Aufgaben> Aufgaben { get; set; }
         public virtual ICollection<NutzerAufgaben> NutzerAufgaben { get; set; }
         public virtual ICollection<NutzerProjekte> NutzerProjekte { get; set; }
     }
