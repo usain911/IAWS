@@ -1,1 +1,19 @@
-<p>list-projects works!</p>
+
+<div class="container">
+<h1 @fadeInAnimation>Projekte Administrieren</h1>
+
+<ng-container *ngIf="user && projekte"> 
+
+
+
+  <app-project-list-item  @fadeInAnimation *ngFor="let p of projekte" [projekt]="p">">
+  </app-project-list-item>
+  
+  <div *ngIf="!projekte">
+    <div>Daten werden geladen...</div>
+  </div>
+    
+
+  </ng-container>
+</div>
+    

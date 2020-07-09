@@ -2,21 +2,62 @@
   "users": [
     {
       "id": 1,
-      "vorname": "Sebastian",
-      "name": "admin",
-      "pw": "admin123"
+      "nutzername": "jboldt",
+      "vorname": "admin",
+      "nachname": "admin",
+      "email": "email@mail.de",
+      "passwort": "passwort",
+      "isAdmin": true,
+      "team": "admin",
+      "nutzerId": 2
     },
     {
       "id": 2,
-      "vorname": "Steve",
-      "name": "Palmer",
-      "pw": "steve@codingthesmartway.com"
+      "nutzername": "admin2",
+      "vorname": "admin2",
+      "nachname": "admin2",
+      "email": "email@mail.de",
+      "passwort": "steve@codingthesmartway.com",
+      "isAdmin": true,
+      "team": "admin"
     },
     {
       "id": 3,
-      "vorname": "Ann",
-      "name": "Smith",
-      "pw": "ann@codingthesmartway.com"
+      "nutzername": "admin3",
+      "vorname": "admin3",
+      "nachname": "admin3",
+      "email": "ann@codingthesmartway.com",
+      "passwort": "ann@codingthesmartway.com",
+      "isAdmin": true,
+      "team": "admin"
+    },
+    {
+      "nutzername": "123",
+      "vorname": "123",
+      "nachname": "123",
+      "email": "jboldt",
+      "passwort": "passwort",
+      "isAdmin": false,
+      "team": "",
+      "id": 11
+    },
+    {
+      "nutzername": "name",
+      "vorname": "vor",
+      "nachname": "na",
+      "email": "ps",
+      "passwort": "em224",
+      "isAdmin": 0,
+      "id": 12
+    },
+    {
+      "nutzername": "neuertest",
+      "vorname": "vor",
+      "nachname": "na",
+      "email": "ps",
+      "passwort": "emqwe",
+      "isAdmin": false,
+      "id": 13
     }
   ],
   "projekte": [
@@ -31,6 +72,20 @@
       "owner": 1,
       "name": "garage bauen",
       "bezeichnung": "steve@codingthesmartway.com"
+    }
+  ],
+  "teams": [
+    {
+      "id": 1,
+      "bezeichnung": "admin"
+    },
+    {
+      "id": 2,
+      "bezeichnung": "Leiter"
+    },
+    {
+      "id": 3,
+      "bezeichnung": "doofmannsgehilfe"
     }
   ]
 }

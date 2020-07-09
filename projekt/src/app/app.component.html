@@ -1,9 +1,8 @@
 <nav class="navbar">
   <ul>
-    <li><a routerLink="/home" routerLinkActive="active">home</a></li>
+    <li><a routerLink="/home" routerLinkActive="routerLinkActive">home</a></li>
     <li><a routerLink="/list" routerLinkActive="active">Liste</a></li>
     <li><a routerLink="/project" routerLinkActive="active">Projekt</a></li>
-    <li><a routerLink="/register" routerLinkActive="active">registrieren</a></li>
   </ul>
 </nav>
 
@@ -13,17 +12,13 @@
   <nav id="normal">
     <ul>
       <li><a routerLink="/home" routerLinkActive="active">home</a></li>
-      <li><a routerLink="/login" routerLinkActive="active">login</a></li>
-      <li><a routerLink="/list" routerLinkActive="active">Liste</a></li>
-      <li>
-        <a href="">Admin</a>
-        <ul>
-          <li><a routerLink="/register" routerLinkActive="active">registrieren</a></li>
-          <li><a routerLink="/project" routerLinkActive="active">Projekt</a></li>
-        </ul>
-      </li>
-      <li><a routerLink="/project" routerLinkActive="active">Projekt</a></li>
-
+      <li><a routerLink="/profil" routerLinkActive="active">Profil</a></li>
+      <li><a routerLink="newproject" routerLinkActive="active">Neues Projekt</a></li> 
+      <li *ngIf="isAdmin"><a routerLink="/list" routerLinkActive="active">Projekte</a></li> 
+      <li *ngIf="isAdmin"><a routerLink="/nutzer" routerLinkActive="active">Nutzer</a></li> 
+    <ul>
+  
+      </ul>
     </ul>
   </nav>
 
@@ -33,7 +28,6 @@
       <li><a routerLink="/home" routerLinkActive="active">home</a></li>
       <li><a routerLink="/list" routerLinkActive="active">Liste</a></li>
       <li>
-        <a href="">Admin</a>
         <ul>
           <li><a routerLink="/project" routerLinkActive="active">Projekt</a></li>
         </ul>
@@ -43,8 +37,7 @@
   </nav>
 
 </header>
-<div class="content" role="main">
-</div>
 
+  
 <router-outlet></router-outlet>
 

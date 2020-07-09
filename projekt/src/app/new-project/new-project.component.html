@@ -1,9 +1,44 @@
 
-<h2>Neues Projekt erstellen</h2>
+<div class="container">
+    <h2>Neues Projekt erstellen</h2>
 
-<form #projectForm="ngForm" (ngSubmit)="submitForm()">
-    <label>Projekttitel</label>
-    <input name="name" [(ngModel)]="project.name" required>
+    <form #projektForm="ngForm" (ngSubmit)="submitForm()">
 
-    <button type="submit" [disabled]="projectForm.invalid">Speichern</button>
-</form>
+        <div class="form-group">
+            <label for="name">Projektname</label>
+            <input type="text" class="form-control" id="name" required [(ngModel)]="projekt.name" name="name"
+            #name="ngModel">
+        </div>
+
+        <div class="form-group">
+            <label for="bezeichnung">Beschreibung</label>
+            <textarea type="text" class="form-control" id="bezeichnung" required [(ngModel)]="projekt.bezeichnung" name="bezeichnung"
+            #bezeichnung="ngModel" rows="5"></textarea>
+        </div>
+
+
+
+<!--------------------------------------------------------------------------------------------------------------->
+
+<!------------------------------------------Aufgabe-------------------------------------------------------------->
+
+<!--------------------------------------------------------------------------------------------------------------->
+ 
+<!-- 
+        <div *ngFor="let aufgabe of aufgaben; let i = index" class="tag-controls aufgabe">
+           <input type="number" class="form-control" name="aufgabenId {{i}}" [(ngModel)]="aufgabe.aufgabenId">
+           <input type="text" class="form-control" name="titel{{i}}"  [(ngModel)]="aufgabe.titel">
+           <input type="text" class="form-control" name="bez{{i}}" [(ngModel)]="aufgabe.bezeichnung">         
+        </div>
+        
+        <button class="btn btn-success" (click)="addTag()"> Aufgabe hinzufügen</button> -->
+
+
+      <!--   <div>
+            <input type="number" name="test" [(ngModel)]="toAdd.aufgabenId">
+        </div> -->
+
+        <button type="submit" class="btn btn-success" [disabled]="!projektForm.valid">Speichern</button>
+    </form>
+  
+</div> 

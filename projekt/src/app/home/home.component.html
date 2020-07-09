@@ -1,34 +1,70 @@
-    
-
-<input type="text" (keyup)="onKeyUp()" (input)="color=$event.target.value" [style.background-color]="color">
-
-
-<div *ngFor="let users of users" style="margin-top:10px;">
-{{users.id}} {{users.name}} {{users.vorname}} {{users.pw}} 
-</div>
-<hr>
-Meine Projekte:
-
-<div *ngFor="let project of projects" style="margin-top:10px;">
-    <div *ngIf="project; else loading">
-
-    </div>
-   {{project.name}}
-    </div>
-
-<div class="button">
-    <a routerLink="/newproject" routerLinkActive="active">neues Projekt anlegen</a>
-</div>
-
-<hr>
-
 <div class="container">
     <div class="col-md-6 col-md-offset-3 loginBox">
-        Welcome,  {{id}}
+        Willkommen,  {{id}}
         <a href="javascript:void(0);" (click)="logout()">Logout</a>
     </div>
+
+    <div class="topnav">
+        <input type="text"  (keyup)="keyUp$.next($event.target.value)" placeholder="nach Projekten suchen">
+      </div> 
+
+      <div class="results transition visible"
+      *ngIf="foundProjects.length">
+      <a class="result"
+        *ngFor="let pr of foundProjects"
+        [routerLink]="['..', 'project', pr.projektId]">
+        {{ pr.name }}
+        <p class="description">{{ pr.bezeichnung }}</p>
+      </a>
+    </div>
+
+</div>  
+<div class="row">
+  <div class="col-1"></div> <!-- Rand Links -->
+ 
+  <div class="col-4">
+    <h1>Projekte</h1>
+    <div @fadeIn class="item ca card" *ngFor="let project of projects; index as i">
+      <div *ngIf="project; else loading"></div>
+  
+      <div class="card-header" (click)="zuProjekt(project.projektId)" 
+        [class.text-success]="project.erledigt == 0"
+        [class.text-primary]="project.erledigt == 1"
+        [class.text-warning]="project.erledigt == 2"
+        [class.rot]="project.erledigt == 3"
+        [class.orange]="project.erledigt == 4">
+        <b> #{{i+1 +"  " +project.name}}</b></div> 
+      <div class="ku card-body">{{project.bezeichnung}}</div>  
+    </div>
+  </div>  
+  
+  <div class="col-4">
+    <h1>Aufgaben</h1>
+  
+    <div  @fadeIn class="item ca card" *ngFor="let a of aufgaben; index as i" style="margin-top:10px;">
+      <ng-container>
+      <div *ngIf="a; else loading"></div> 
+      <div (click)="zuAufgabe(a.aufgabenId)" *ngIf="a.erstellerId == 2">
+        <div class="card-header" ><b> #{{i+1}}   {{a.titel}}</b> </div> 
+        <div class="ku card-body"> <b>Kurzbeschreibung:</b> {{a.beschreibung}} </div>
+      </div>
+    </ng-container>        
+    </div>
+  </div>
+  <div class="col-2"> <!-- Legende -->
+    <div>
+      <h1>Legende</h1>
+      <p class="text-success">Projekt abgeschlossen</p>
+      <p class="text-primary">Projekt in Bearbeitung</p>
+      <p class="text-warning">Projekt pausiert</p>
+      <p class="rot">Fehler</p>
+      <p class="orange">Zeitüberschreitung</p>
+    </div>
+  </div>
+  <div class="col-1"></div> <!-- Rand Rechts -->
 </div>
 
+<div role="status" [hidden]="projects">Keine Projekte gefunden</div>
 <ng-template #loading>
-    <div>loading...</div>
+  <div>loading...</div>
 </ng-template>

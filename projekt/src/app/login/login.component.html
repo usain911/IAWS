@@ -1,15 +1,17 @@
-<div class="container">
+
+
+<div @fadeInAnimation class="container">
   <div class="box">
-    <div class="col-md-6 col-md-offset-3 loginBox">
+    <div class="login col-md-6 col-md-offset-3 loginBox">
         <h3>Log In</h3>
         <p *ngIf="message" class="text-center error">{{message}}</p>
       <form [formGroup]="loginForm" (ngSubmit)="login()">
           <div class="form-group clearfix" [ngClass]="{ 'has-error': f.userid.errors }"> 
-              <label for="userid" class="col-md-3 col-sm-5 col-xs-12">Userid</label>
+              <label for="userid" class="col-md-3 col-sm-5 col-xs-12">Nutzer ID</label>
               <div class="col-md-9 col-sm-7 col-xs-12">
                   <input type="text" class="form-control" formControlName="userid" />
                   <div *ngIf="f.userid.errors" class="help-block">
-                        <div *ngIf="f.userid.errors.required">Userid is required</div>
+                        <div *ngIf="f.userid.errors.required">Nutzer-ID wird benötigt</div>
                   </div>
               </div>
           </div>
@@ -18,14 +20,30 @@
             <div class="col-md-9 col-sm-7 col-xs-12">
                 <input type="password" class="form-control" formControlName="password"/>
                 <div *ngIf="f.password.errors" class="help-block">
-                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.required">Passwort wird benötigt</div>
                 </div>
             </div>
           </div>
           <div class="col-xs-12 form-group text-right">
-            <button class="btn btn-success" type="submit">Login</button>
-          </div>
-      </form>
-    </div>
+           <!--  <button class="btn btn-success" type="submit">Login</button> -->
+            <button type="submit" class="de-bu btn btn-secondary">Login</button> 
+<!--             <button type="buton" class="de-bu btn btn-secondary">Registrieren</button>  -->          
+
+  </div>        
+ 
+          
+ <div class="box loader-1"[hidden]="!laden">
+  <div class="loader">
+      <div class="loader-ball-1"></div>
+      <div class="loader-ball-2"></div>
   </div>
-</div>
+  <p>lädt</p>
+</div> 
+      </form>
+    
+     
+    </div>
+
+  </div>
+  Falls du noch kein Konto hast, kannst du  <a routerLink="/register" routerLinkActive="active" >hier</a> registrieren.
+</div> 

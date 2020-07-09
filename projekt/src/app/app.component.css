@@ -1,3 +1,6 @@
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+
 body,
 html {
   background: #1b2431;
@@ -42,6 +45,7 @@ header {
   text-align: right;
   transition: 200ms all;
   height: 7rem;
+  z-index: 5;
 }
 
   header nav#normal {
@@ -167,7 +171,7 @@ header nav#mobile ul li {
     font-size: 2rem;
     color: #fff;
     text-decoration: none;
-    background: #c8354e;
+    background:  #ff6e48;
     font-weight: 300;
     transition: all 500ms;
     font-family: "Roboto", sans-serif;
@@ -199,3 +203,33 @@ header nav#mobile ul li {
   header nav#mobile ul li:hover > ul {
     max-height: 500px;
   }
+  img {
+    width: 4rem;
+    height: 4rem;
+    position: relative;
+    margin-left: 95%;
+    margin-bottom: 1rem;
+
+}
+.ca {
+    z-index: 0;
+}
+.bu {
+    transition: 200ms;
+    background-color: #33455e;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.de-bu {
+    transition: 200ms;
+    background-color: #556770;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.bu:hover {
+    transform: scale(1.02);
+    color: white;
+}
+.ku {
+    font-weight: 500;
+}
