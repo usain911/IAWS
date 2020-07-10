@@ -61,7 +61,8 @@ namespace DataBaseAPI.Controllers
     [HttpGet("GetProjektByOwnerId/{owner}")]
         public async Task<ActionResult<IEnumerable<Projekte>>> GetProjektByOwnerId(int owner)
         {
-          return _context.Projekte.Where(ow => ow.ProjektOwnerId == owner).ToArray();
+      await _context.SaveChangesAsync();
+      return _context.Projekte.Where(ow => ow.ProjektOwnerId == owner).ToArray();
 
         }
 

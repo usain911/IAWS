@@ -45,6 +45,7 @@ namespace DataBaseAPI.Controllers
     [HttpGet("GetTeilaufgabenByAufgabenId/{AufgabenID}")]
     public async Task<ActionResult<IEnumerable<Teilaufgaben>>> GetTeilaufgabenByAufgabenId(int AufgabenID)
     {
+      await _context.SaveChangesAsync();
       return _context.Teilaufgaben.Where(k => k.ZugeordnetZuAufgabe == AufgabenID).ToArray();
     }
 

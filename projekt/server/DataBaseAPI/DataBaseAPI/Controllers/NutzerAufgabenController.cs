@@ -45,7 +45,8 @@ namespace DataBaseAPI.Controllers
         [HttpGet("GetNutzerIdByAufgabenId/{aid}")]
         public async Task<ActionResult<IEnumerable<NutzerAufgaben>>> GetNutzerIdByAufgabenId(int aid)
             {
-               return _context.NutzerAufgaben.Where(ai => ai.NutzerId == aid).ToArray();
+      await _context.SaveChangesAsync();
+      return _context.NutzerAufgaben.Where(ai => ai.NutzerId == aid).ToArray();
 
             }
 
@@ -54,7 +55,8 @@ namespace DataBaseAPI.Controllers
         [HttpGet("GetAufgabenByProjektId/{pid}")]
         public async Task<ActionResult<IEnumerable<NutzerAufgaben>>> GetAufgabenByProjektId(int pid)
         {
-          return _context.NutzerAufgaben.Where(p => p.NutzerId == pid).ToArray();
+      await _context.SaveChangesAsync();
+      return _context.NutzerAufgaben.Where(p => p.NutzerId == pid).ToArray();
 
         }
 

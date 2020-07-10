@@ -45,6 +45,8 @@ namespace DataBaseAPI.Controllers
         [HttpGet("GetNutzerByNutzername/{nname}")]
         public async Task<ActionResult<Nutzer>> GetNutzerByBenutzerName(string nname)
         {
+
+          await _context.SaveChangesAsync();
           var nutzer = _context.Nutzer.Where(bn => bn.Nutzername == nname).FirstOrDefault();
 
           if (nutzer == null)
