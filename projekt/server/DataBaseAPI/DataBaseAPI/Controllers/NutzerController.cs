@@ -41,10 +41,13 @@ namespace DataBaseAPI.Controllers
       return nutzer;
     }
 
+
     // GET: api/Nutzer/5
     [HttpGet("GetNutzerByNutzername/{nname}")]
     public async Task<ActionResult<Nutzer>> GetNutzerByBenutzerName(string nname)
     {
+
+      await _context.SaveChangesAsync();
       var nutzer = _context.Nutzer.Where(bn => bn.Nutzername == nname).FirstOrDefault();
 
       if (nutzer == null)

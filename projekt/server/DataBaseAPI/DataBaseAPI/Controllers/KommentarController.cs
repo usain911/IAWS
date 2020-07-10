@@ -31,6 +31,8 @@ namespace DataBaseAPI.Controllers
     [HttpGet("GetKommentarByAufgabenId/{AufgabenID}")]
     public async Task<ActionResult<IEnumerable<Kommentar>>> GetKommentarByAufgabenId(int AufgabenID)
     {
+
+      await _context.SaveChangesAsync();
       return _context.Kommentar.Where(k => k.AufgabenId == AufgabenID).ToArray();
 
     }
@@ -39,6 +41,7 @@ namespace DataBaseAPI.Controllers
     [HttpGet("GetKommentarByNutzerId/{NutzerID}")]
     public async Task<ActionResult<IEnumerable<Kommentar>>> GetKommentarByNutzerId(int NutzerID)
     {
+      await _context.SaveChangesAsync();
       return _context.Kommentar.Where(ow => ow.NutzerId == NutzerID).ToArray();
 
     }

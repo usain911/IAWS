@@ -9,6 +9,7 @@ export class User {
         public passwort: string,
         public isAdmin: boolean,
         public team?: string,
+        public position?,
         public mitgliedSeit?: string,
         public letzteAnmeldung?: string,
         public nutzerAufgaben?: string,

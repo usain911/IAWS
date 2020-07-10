@@ -61,10 +61,10 @@ namespace DataBaseAPI.Controllers
     [HttpGet("GetProjektByOwnerId/{owner}")]
     public async Task<ActionResult<IEnumerable<Projekte>>> GetProjektByOwnerId(int owner)
     {
+      await _context.SaveChangesAsync();
       return _context.Projekte.Where(ow => ow.ProjektOwnerId == owner).ToArray();
 
     }
-
     // PUT: api/Projekte/5
     // To protect from overposting attacks, enable the specific properties you want to bind to, for
     // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

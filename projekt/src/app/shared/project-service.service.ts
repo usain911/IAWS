@@ -137,6 +137,7 @@ export class ProjectServiceService {
   }
 
   updateAufgabe(aufgabe: Aufgaben): Observable<Aufgaben> {
+    console.log("aufgbabe: " + aufgabe)
     return this.httpClient.put<Aufgaben>(this.api, aufgabe).pipe(
       catchError(this.handleError)
     )
@@ -146,6 +147,7 @@ export class ProjectServiceService {
   //-------------------------------------------------------------------------------
   //----------------------------------Teilaufgaben---------------------------------
   //-------------------------------------------------------------------------------
+
   public getTeilAufgaben() {
     return  this.httpClient.get<TeilAufgabe[]>(`${this.api}Teilaufgaben`).pipe(retry(3), catchError(this.handleError));
   }
