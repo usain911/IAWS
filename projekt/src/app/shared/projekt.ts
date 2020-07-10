@@ -12,6 +12,7 @@ export class Projekt {
     user?: User;
     erledigt?: number;
 
+
     set setSize(val:number) {
         this.size=val;
     }

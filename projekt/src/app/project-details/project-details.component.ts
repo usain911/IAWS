@@ -74,6 +74,10 @@ export class ProjectDetailsComponent implements OnInit {
     console.log(user);
     this.neueAufgabe.erstellerId = user;
   }
+  changeState(status: number){
+    console.log(status);
+    this.projekt.erledigt = status;
+  }
 
   print(){
     console.log(this.neueAufgabe.deadline)
