@@ -22,9 +22,7 @@ namespace DataBaseAPI.Models
         public virtual DbSet<NutzerProjekte> NutzerProjekte { get; set; }
         public virtual DbSet<NutzerTeam> NutzerTeam { get; set; }
         public virtual DbSet<Projekte> Projekte { get; set; }
-        public virtual DbSet<Rechte> Rechte { get; set; }
         public virtual DbSet<Teilaufgaben> Teilaufgaben { get; set; }
-        public virtual DbSet<ZwischenRechteAp> ZwischenRechteAp { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -225,19 +223,6 @@ namespace DataBaseAPI.Models
                 entity.Property(e => e.ProjektOwnerId).HasColumnName("projekt_owner_id");
             });
 
-            modelBuilder.Entity<Rechte>(entity =>
-            {
-                entity.Property(e => e.RechteId).HasColumnName("rechte_id");
-
-                entity.Property(e => e.LeseZugriff).HasColumnName("leseZugriff");
-
-                entity.Property(e => e.Ownership).HasColumnName("ownership");
-
-                entity.Property(e => e.SchreibZugriff).HasColumnName("schreibZugriff");
-
-                entity.Property(e => e.VerwaltungsZugriff).HasColumnName("verwaltungsZugriff");
-            });
-
             modelBuilder.Entity<Teilaufgaben>(entity =>
             {
                 entity.Property(e => e.TeilaufgabenId).HasColumnName("teilaufgaben_id");
@@ -269,27 +254,6 @@ namespace DataBaseAPI.Models
                 entity.Property(e => e.ZugeordnetZuAufgabe).HasColumnName("zugeordnet_zu_aufgabe");
 
                 entity.Property(e => e.Zugewiesen).HasColumnName("zugewiesen");
-            });
-
-            modelBuilder.Entity<ZwischenRechteAp>(entity =>
-            {
-                entity.HasKey(e => e.ZwischenRechteId);
-
-                entity.ToTable("ZwischenRechteAP");
-
-                entity.Property(e => e.ZwischenRechteId).HasColumnName("zwischenRechte_id");
-
-                entity.Property(e => e.LeseZugriffAufgaben).HasColumnName("leseZugriff_aufgaben");
-
-                entity.Property(e => e.LeseZugriffProjekt).HasColumnName("leseZugriff_projekt");
-
-                entity.Property(e => e.SchreibZugriffAufgaben).HasColumnName("schreibZugriff_aufgaben");
-
-                entity.Property(e => e.SchreibZugriffProjekt).HasColumnName("schreibZugriff_projekt");
-
-                entity.Property(e => e.VerwaltungZugriffAufgaben).HasColumnName("verwaltungZugriff_aufgaben");
-
-                entity.Property(e => e.VerwaltungsZugriffProjekt).HasColumnName("verwaltungsZugriff_projekt");
             });
 
             OnModelCreatingPartial(modelBuilder);
