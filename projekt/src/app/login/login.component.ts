@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   checkData() {
     console.log("checkdata");
-    if(this.f.userid.value == this.nutzer.nutzername) {
+    if(this.f.userid.value == this.nutzer.nutzername && this.f.password.value == this.nutzer.passwort) {
       console.log(JSON.stringify("nutzer "+this.nutzer.nutzerId));
       if(this.nutzer.isAdmin == true)
         localStorage.setItem('admin', "true");
@@ -56,11 +56,8 @@ export class LoginComponent implements OnInit {
   }
   else {    
     this.authService.getUserByNutzername(this.f.userid.value).subscribe((data: User) => {
-    //  this.authService.getUserByLogin(1).subscribe((data: User) => {
       this.nutzer = data;
-      //console.log("daten= "+data);
-      //console.log(data);
-      //console.log("nID= "+ this.nutzer.nutzerId +" eingabe="+ this.f.userid.value +" " + + " ")
+
     }, error => {
       console.log("error");
     });

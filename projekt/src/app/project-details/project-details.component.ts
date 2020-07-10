@@ -6,6 +6,7 @@ import { TeilAufgabe } from '../shared/teil-aufgabe';
 import { Aufgaben } from '../shared/aufgaben';
 import { Observable } from 'rxjs';
 import { fadeIn, fadeInAnimation} from '../_animations/index'
+import {  User } from '../shared/user';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class ProjectDetailsComponent implements OnInit {
   percent: number;
   add: boolean;
   neueAufgabe = new Aufgaben();
+  user: User[];
 
   constructor(private ps: ProjectServiceService, private router: Router,  private route: ActivatedRoute) { 
     this.add=false;
@@ -29,6 +31,7 @@ export class ProjectDetailsComponent implements OnInit {
     const params = this.route.snapshot.paramMap;
     this.neueAufgabe.projektId = parseInt(params.get('id'));
     this.neueAufgabe.erledigt = false;
+    this.loadData();
   }
 
   submitForm() {
@@ -48,6 +51,9 @@ export class ProjectDetailsComponent implements OnInit {
     this.aufgaben$ = this.ps.getAufgabenByProjektId(ident);
     
   } 
+  loadData() {
+    this.ps.getUser().subscribe((data: User[]) => { this.user = data})
+  }
 
   addTime(time: string) {
     console.log(time);  
@@ -64,6 +70,13 @@ export class ProjectDetailsComponent implements OnInit {
     this.add = true
   } 
 
- 
+  changeUser(user: number){
+    console.log(user);
+    this.neueAufgabe.erstellerId = user;
+  }
+
+  print(){
+    console.log(this.neueAufgabe.deadline)
+  }
 
 }

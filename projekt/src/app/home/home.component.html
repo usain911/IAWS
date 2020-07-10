@@ -23,6 +23,10 @@
   <div class="col-1"></div> <!-- Rand Links -->
  
   <div class="col-4">
+  <!--   <label class="checkbox-inline"><input type="checkbox" value="">abgeschlossene Projekte anzeigen</label> -->
+  <!--   <label class="checkbox-inline"><input type="checkbox" value="">Option 2</label>
+    <label class="checkbox-inline"><input type="checkbox" value="">Option 3</label>  -->
+
     <h1>Projekte</h1>
     <div @fadeIn class="item ca card" *ngFor="let project of projects; index as i">
       <div *ngIf="project; else loading"></div>

@@ -60,6 +60,7 @@ export class AuthService {
     localStorage.setItem('isLoggedIn', "false");
     localStorage.removeItem('token');
     localStorage.removeItem('admin');
+    localStorage.removeItem('id');
   }
 
 

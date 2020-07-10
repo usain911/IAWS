@@ -7,9 +7,9 @@
   </div> -->
 
   <div class="container">
-  <ng-container *ngIf="aufgaben$ | async as aufgabe">
-  <app-project-details-item  @fadeInAnimation *ngFor="let a of aufgabe;"  [index]="index"  [aufgabe]="a">"> 
-  </app-project-details-item>
+    <ng-container *ngIf="aufgaben$ | async as aufgabe">
+    <app-project-details-item  @fadeInAnimation *ngFor="let a of aufgabe;"  [index]="index"  [aufgabe]="a">"> 
+    </app-project-details-item>
 </ng-container> 
 
 <button type="button" class="de-bu btn btn-secondary" >Abbrechen</button> 
@@ -23,7 +23,7 @@
 
 <div class="container">
   <div *ngIf="add">
-    <h2>Neue Aufgabe</h2>
+    <h1>Neue Aufgabe für {{projekt.name}} anlegen</h1>
     <form #projektForm="ngForm" (ngSubmit)="submitForm()">
 
       <div class="form-group">
@@ -35,12 +35,24 @@
           <textarea type="text" class="form-control" id="bezeichnung" required [(ngModel)]="neueAufgabe.beschreibung" name="beschreibung"
           #beschreibung="ngModel" rows="5"></textarea>
 
-          <label for="sollZeit"></label>
-          <input type="time" id="time" required [(ngModel)]="neueAufgabe.sollZeit" name="sollZeit"
+          <label for="sollZeit">Sollzeit</label>      <br/>
+          <input type="number" id="time" required [(ngModel)]="neueAufgabe.sollZeit" name="sollZeit"
           #sollZeit=ngModel>
+          <br/>
+          <label for="date">Deadline</label> <br/>
+<!--           <input type="date" id="date" required [(ngModel)]="neueAufgabe.deadline" name="deadline" #deadline=ngModel>
+ -->          <input type="date" id="time" required [(ngModel)]="neueAufgabe.deadline" name="deadline" #deadline=ngModel>
+          <br/>
+          <ng-container *ngIf="user">
+            <label for="userDropdown">Aufgabe zuweisen</label>
+            <select class="form-control" id="userDropdown" #userDropdown (change)="changeUser(userDropdown.value)">
+                <option *ngFor="let u of user" [value]="u.nutzerId">{{ u.nachname + ", " +u.vorname}}</option>
+            </select>
+        </ng-container>
 
       </div>
       <button type="submit" class="btn btn-success" [disabled]="!projektForm.valid">Speichern</button>
   </form>
   </div>
 </div>
+

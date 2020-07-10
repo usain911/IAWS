@@ -7,6 +7,7 @@ import { throwError, Observable } from 'rxjs';
 import { retry, catchError, tap, map } from 'rxjs/operators';
 import { Aufgaben } from './aufgaben';
 import { TeilAufgabe } from './teil-aufgabe';
+import { Kommentar } from './kommentar';
 
 
 @Injectable({
@@ -77,8 +78,8 @@ export class ProjectServiceService {
   public getProjectById(id: number): Observable<Projekt>{
     return this.httpClient.get<any>(`${this.api}projekte/${id}`).pipe(retry(3), catchError(this.handleError));
   } 
-  public getProjectsByOwner(owner: number) {
-    return this.httpClient.get<any>(`${this.api}Projekte/`);
+  public getProjectsByOwner(owner: number): Observable<Projekt[]> {
+    return this.httpClient.get<Projekt[]>(`${this.api}Projekte/GetProjektByOwnerId/${owner}`);
 
     //return this.httpClient.get<any>(`${this.api}Projekte/GetProjektByOwnerID/1`).pipe(retry(3), catchError(this.handleError));
   }
@@ -111,11 +112,11 @@ export class ProjectServiceService {
   //----------------------------------Aufgaben-------------------------------------
   //-------------------------------------------------------------------------------
 
-  public getAufgaben():Observable<any> {
+  public getAufgaben():Observable<Aufgaben[]> {
     return  this.httpClient.get<Aufgaben[]>(`${this.api}Aufgaben`).pipe(retry(5), catchError(this.handleError));
   }
-  public getNutzerAufgaben() {
-    return  this.httpClient.get<any>(`${this.api}NutzerAufgaben/GetNutzerIdByAufgabenId/1`).pipe(retry(3), catchError(this.handleError));
+  public getNutzerAufgaben(): Observable<Aufgaben[]> {
+    return  this.httpClient.get<Aufgaben[]>(`${this.api}NutzerAufgaben/GetNutzerIdByAufgabenId/1`).pipe(retry(3), catchError(this.handleError));
   }
   public getAufgabeById(id: number):Observable<Aufgaben> {
     return  this.httpClient.get<Aufgaben>(`${this.api}Aufgaben/${id}`).pipe(retry(3), catchError(this.handleError));
@@ -128,7 +129,7 @@ export class ProjectServiceService {
   }
 
   public addAufgabe(auf: Aufgaben): Observable<Aufgaben> {
-    //console.log(auf);
+    console.log(auf);
     return this.httpClient.post<Aufgaben>(`${this.api}Aufgaben`, auf)
       .pipe(
         catchError(this.handleError)
@@ -157,11 +158,18 @@ export class ProjectServiceService {
   public getKommentare() {
     return this.httpClient.get<any>(`${this.api}Kommentar`).pipe(retry(3), catchError(this.handleError));
   }
-  public getKommentarByAufgabenId(aufgabenId: number) {
-    return this.httpClient.get<any>(`${this.api}Kommentar/GetKommentarByAufgabenId/${aufgabenId}`).pipe(retry(3), catchError(this.handleError));
+  public getKommentarByAufgabenId(aufgabenId: number):Observable<Kommentar> {
+    return this.httpClient.get<Kommentar>(`${this.api}Kommentar/GetKommentarByAufgabenId/${aufgabenId}`).pipe(retry(3), catchError(this.handleError));
   }
   public getKommentareByNutzerId(nutzerId: number) {
     return this.httpClient.get<any>(`${this.api}Kommentar/GetKommentarByNutzerId/${nutzerId}`).pipe(retry(3), catchError(this.handleError));
+  }
+  public addKommentar(kom: Kommentar): Observable<Kommentar> {
+    console.log(kom);
+    return this.httpClient.post<Kommentar>(`${this.api}Kommentar`, kom)
+      .pipe(
+        catchError(this.handleError)
+      )
   }
 }
 

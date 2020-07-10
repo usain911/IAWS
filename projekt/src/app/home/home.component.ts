@@ -39,6 +39,8 @@ export class HomeComponent implements OnInit {
   nutzerAufgaben: NutzerAufgaben[];
   id: string;
   isLoggedIn: string;
+  nutzerId: number;
+  zeigeAlle: boolean;
 
   public color: string;
     onKeyUp() {
@@ -47,7 +49,7 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private ps: ProjectServiceService, private router: Router,public authService: AuthService) { 
-    
+    this.nutzerId = parseInt(localStorage.getItem('id'));
   }  
 
   user: User[];
@@ -76,7 +78,7 @@ export class HomeComponent implements OnInit {
   
     //hole projekt. in for schleife für jedes projekt die aufgaben in das projekt.aufgaben laden. 
     //
-    this.ps.getProjectsByOwner(2).subscribe((data: any[]) => {
+    this.ps.getProjectsByOwner(this.nutzerId).subscribe((data: Projekt[]) => {
       this.projects = data; 
       for(let item of this.projects) {      
         this.numbers.push(item.projektId);
@@ -85,15 +87,15 @@ export class HomeComponent implements OnInit {
     })
 
     //Aufgaben werden in das Array projekt.aufgaben kopiert
-    this.ps.getAufgabenByErstellerId(2).subscribe((data: Aufgaben[]) =>{
+    this.ps.getAufgabenByErstellerId(this.nutzerId).subscribe((data: Aufgaben[]) =>{
       this.aufgaben = data;
       console.log("Aufgaben: "+ data.length);
     })
 
-    this.ps.getNutzerAufgaben().subscribe((data: NutzerAufgaben[]) =>{
+  /*   this.ps.getNutzerAufgaben().subscribe((data: NutzerAufgaben[]) =>{
       this.nutzerAufgaben = data;
       //getNutzerid(this.nutzerAufgaben);
-    })
+    }) */
   }
 
   zuProjekt(id: number): void {
@@ -105,11 +107,6 @@ export class HomeComponent implements OnInit {
   zuAufgabe(id: number):void {
     console.log("zu Aufgabe "+ id);
     setTimeout(() => { this.router.navigate(['/aufgabe/'+id]);  }, 500);
-  }
-
-  show(id: number) {
-    console.log("project " + id  +" / " + this.numbers[id-1]);
-    this.hideTasks = !this.hideTasks;
   }
 
     logout(): void {

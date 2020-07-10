@@ -7,13 +7,16 @@ export class Aufgaben {
     beschreibung?: string;
     erstellerId?: number;
     projektId?: number;
-    sollZeit?: string;
-    istZeit?: string;
+    sollZeit?: number;
+    istZeit?: number;
     erledigt?: boolean;
     erstellDdatum?: string;
     vorgaengerId?: number;
     nachfolgerId?: number;
     hasChanged?: boolean;
     teilaufgaben?: TeilAufgabe[];
-    kommentar?: Kommentar[];
+    kommentar?: Kommentar;
+    deadline?: string;
+    //deadlineD?: Date;
+    //ueberzeit?: boolean;
 }
