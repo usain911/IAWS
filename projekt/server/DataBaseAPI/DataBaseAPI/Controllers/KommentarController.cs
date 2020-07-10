@@ -31,7 +31,7 @@ namespace DataBaseAPI.Controllers
     [HttpGet("GetKommentarByAufgabenId/{AufgabenID}")]
     public async Task<ActionResult<IEnumerable<Kommentar>>> GetKommentarByAufgabenId(int AufgabenID)
     {
-      return _context.Kommentar.Where(k => k.KommentarId == AufgabenID).ToArray();
+      return _context.Kommentar.Where(k => k.AufgabenId == AufgabenID).ToArray();
 
     }
 
