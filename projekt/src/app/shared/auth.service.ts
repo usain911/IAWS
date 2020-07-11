@@ -61,6 +61,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('admin');
     localStorage.removeItem('id');
+    sessionStorage.clear();
   }
 
 

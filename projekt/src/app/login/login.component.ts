@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
       if(this.nutzer.isAdmin == true)
         localStorage.setItem('admin', "true");
       localStorage.setItem('id', JSON.stringify(this.nutzer.nutzerId));
+      sessionStorage.setItem('gruppe', this.nutzer.team )
       this.router.navigate([this.returnUrl]);
     }
   }

@@ -10,7 +10,20 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'projekt';
-  isAdmin = localStorage.getItem('admin');
+  isAdmin: string; 
+  gruppe: string;
+  projektleiter: boolean;
+
+  constructor() {
+    this.isAdmin = localStorage.getItem('admin');
+    this.gruppe = sessionStorage.getItem('gruppe');
+    if(this.gruppe === "Nutzer") {
+      this.projektleiter = false;
+    }
+    else this.projektleiter= true;
+  }
+
+ 
   //prepareRoute(outlet: RouterOutlet) {
   //  return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   //}

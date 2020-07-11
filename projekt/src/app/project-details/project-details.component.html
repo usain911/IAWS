@@ -25,7 +25,7 @@
         <p *ngIf="projekt.erledigt == 1">Projekt in Bearbeitung</p>
         <p *ngIf="projekt.erledigt == 2">Projekt pausiert</p>
         <p *ngIf="projekt.erledigt == 3">allgemeiner Fehler</p>
-        <p *ngIf="projekt.erledigt == 4">Zeitüberschreitung</p></label>
+        <p *ngIf="projekt.erledigt == 4">Zeitüberschreitung</p></label> 
 
       <select id="inputState" class="form-control" #inputState (change)="changeState(inputState.value)">
         <option selected>Status ändern</option>

@@ -47,13 +47,8 @@
 
       <button type="submit" class="btn btn-success" 
         [disabled]="!userForm.form.valid" 
-        (click)="newUser();">Submit</button>
+        (click)="newUser();">Speichern</button>
 
       <button type="reset" class="btn btn-danger" (click)= "userForm.reset">Cancel</button>
     </form>
 </div>
-
-<div class="button">
-  <a routerLink="/newproject" routerLinkActive="active">neues Projekt anlegen</a>
-</div>
-

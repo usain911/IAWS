@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewChild, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { NgForm } from '@angular/forms';
-import { User } from '../shared/user';
 import { NewUser } from '../shared/new-user';
-import { EventEmitter } from 'events';
-import { ProjectServiceService } from '../shared/project-service.service';
-import { Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { fadeInAnimation } from '../_animations/index'
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-user',
@@ -18,13 +15,14 @@ import { fadeInAnimation } from '../_animations/index'
 export class RegisterUserComponent implements OnInit {
 
 
-  constructor(private ps: ProjectServiceService, private router: Router, private as: AuthService) { } 
+  constructor(
+    private as: AuthService,
+    private router: Router,
+    private route: ActivatedRoute) { } 
 
   teams = [];
 
-  //user = new User(null, '', '','', '','', false, '',);
-  //user = new NewUser('','','','','', 0 );
-  user = new NewUser('name','vor','na','ps','em', false );
+  user = new NewUser('anmeldename','vorname','nachname','email','', false );
   submitted = false;
 
   onSubmit() {this.submitted = true;}
@@ -32,6 +30,7 @@ export class RegisterUserComponent implements OnInit {
   newUser() {
     console.log("neuer nutzer: "+ this.user);
     this.as.addUser(this.user).subscribe(NewUser => console.log("done"))
+    this.router.navigate(['../'], { relativeTo: this.route })
   }
 
   ngOnInit(): void {
