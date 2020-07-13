@@ -102,7 +102,9 @@ namespace DataBaseAPI.Models
                     .HasColumnName("letzteAnmeldung")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.MitgliedSeit).HasColumnName("mitgliedSeit");
+                entity.Property(e => e.MitgliedSeit)
+                    .HasColumnName("mitgliedSeit")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.Nachname)
                     .HasColumnName("nachname")

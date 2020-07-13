@@ -20,7 +20,7 @@ namespace DataBaseAPI.Models
         public bool? IsAdmin { get; set; }
         public string Team { get; set; }
         public string Position { get; set; }
-        public DateTime? MitgliedSeit { get; set; }
+        public string MitgliedSeit { get; set; }
         public string LetzteAnmeldung { get; set; }
 
         public virtual ICollection<NutzerAufgaben> NutzerAufgaben { get; set; }
