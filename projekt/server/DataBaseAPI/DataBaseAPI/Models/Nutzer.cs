@@ -5,12 +5,6 @@ namespace DataBaseAPI.Models
 {
     public partial class Nutzer
     {
-        public Nutzer()
-        {
-            NutzerAufgaben = new HashSet<NutzerAufgaben>();
-            NutzerProjekte = new HashSet<NutzerProjekte>();
-        }
-
         public int NutzerId { get; set; }
         public string Nutzername { get; set; }
         public string Vorname { get; set; }
@@ -22,8 +16,5 @@ namespace DataBaseAPI.Models
         public string Position { get; set; }
         public string MitgliedSeit { get; set; }
         public string LetzteAnmeldung { get; set; }
-
-        public virtual ICollection<NutzerAufgaben> NutzerAufgaben { get; set; }
-        public virtual ICollection<NutzerProjekte> NutzerProjekte { get; set; }
     }
 }

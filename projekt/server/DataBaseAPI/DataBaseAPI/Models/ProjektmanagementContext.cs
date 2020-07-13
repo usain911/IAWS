@@ -77,8 +77,7 @@ namespace DataBaseAPI.Models
                 entity.Property(e => e.KommentarFeld)
                     .IsRequired()
                     .HasColumnName("kommentarFeld")
-                    .HasMaxLength(500)
-                    .IsFixedLength();
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.NutzerId).HasColumnName("nutzer_id");
 
@@ -150,11 +149,6 @@ namespace DataBaseAPI.Models
                     .HasForeignKey(d => d.AufgabenId)
                     .HasConstraintName("fk_NP_aufgaben");
 
-                entity.HasOne(d => d.Nutzer)
-                    .WithMany(p => p.NutzerAufgaben)
-                    .HasForeignKey(d => d.NutzerId)
-                    .HasConstraintName("fk_NP_nutzer");
-
                 entity.HasOne(d => d.Projekt)
                     .WithMany(p => p.NutzerAufgaben)
                     .HasForeignKey(d => d.ProjektId)
@@ -177,11 +171,6 @@ namespace DataBaseAPI.Models
                 entity.Property(e => e.ProjektId).HasColumnName("projekt_id");
 
                 entity.Property(e => e.ProjektOwner).HasColumnName("projekt_owner");
-
-                entity.HasOne(d => d.Nutzer)
-                    .WithMany(p => p.NutzerProjekte)
-                    .HasForeignKey(d => d.NutzerId)
-                    .HasConstraintName("fk_nutzer");
 
                 entity.HasOne(d => d.Projekt)
                     .WithMany(p => p.NutzerProjekte)
