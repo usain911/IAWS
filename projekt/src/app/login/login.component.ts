@@ -5,6 +5,7 @@ import { Login } from '../shared/login';
 import { AuthService } from '../shared/auth.service';
 import { User } from '../shared/user';
 import { fadeInAnimation } from '../_animations/index'
+import { ProjectServiceService } from '../shared/project-service.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   laden: boolean;
 
-  constructor(private formBuilder: FormBuilder,private router: Router, public authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder,private router: Router, public authService: AuthService, private ps: ProjectServiceService) { }
 
   ngOnInit(): void {
     this.laden = false;
@@ -39,26 +40,27 @@ export class LoginComponent implements OnInit {
   checkData() {
     console.log("checkdata");
     if(this.f.userid.value == this.nutzer.nutzername && this.f.password.value == this.nutzer.passwort) {
-      console.log(JSON.stringify("nutzer "+this.nutzer.nutzerId));
+      //console.log(JSON.stringify("nutzer "+this.nutzer.nutzerId));
       if(this.nutzer.isAdmin == true)
         localStorage.setItem('admin', "true");
       localStorage.setItem('id', JSON.stringify(this.nutzer.nutzerId));
       sessionStorage.setItem('gruppe', this.nutzer.team )
+      let datum = new Date();
+      this.nutzer.letzteAnmeldung = datum.toLocaleDateString();
+      this.ps.updateUser(this.nutzer).subscribe(u => this.nutzer = u);
       this.router.navigate([this.returnUrl]);
     }
   }
 
   async login() {
     this.laden = true;
-    console.log("lädt - " + this.laden);
-    // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
   }
   else {    
     this.authService.getUserByNutzername(this.f.userid.value).subscribe((data: User) => {
       this.nutzer = data;
-
+      //console.log(data);
     }, error => {
       console.log("error");
     });
@@ -72,12 +74,5 @@ export class LoginComponent implements OnInit {
       this.message = "Please check your userid and password"; 
     }
   }    
-
-  test() {
-    this.laden = true;
-    console.log("laden= " + this.laden);
-  }
-  
-  
 
 }

@@ -44,16 +44,15 @@
   
   <div class="col-4">
     <h1>Aufgaben</h1>
-  
-    <div  @fadeIn class="item ca card" *ngFor="let a of aufgaben; index as i" style="margin-top:10px;">
-      <ng-container>
-      <div *ngIf="a; else loading"></div> 
-      <div (click)="zuAufgabe(a.aufgabenId)" *ngIf="a.erstellerId == 2">
+    <ng-container *ngIf="aufgaben">
+    <div  @fadeIn class="item ca card" *ngFor="let a of aufgaben; index as i" style="margin-top:10px;"> 
+      <div (click)="zuAufgabe(a.aufgabenId)">
         <div class="card-header" ><b> #{{i+1}}   {{a.titel}}</b> </div> 
         <div class="ku card-body"> <b>Kurzbeschreibung:</b> {{a.beschreibung}} </div>
       </div>
-    </ng-container>        
+         
     </div>
+  </ng-container>  
   </div>
   <div class="col-2"> <!-- Legende -->
     <div>

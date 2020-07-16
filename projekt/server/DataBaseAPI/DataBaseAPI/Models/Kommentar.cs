@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace DataBaseAPI.Models
@@ -9,7 +9,7 @@ namespace DataBaseAPI.Models
         public int NutzerId { get; set; }
         public int AufgabenId { get; set; }
         public int? TeilaufgabenId { get; set; }
-        public DateTime? Erstelldatum { get; set; }
+        public string Erstelldatum { get; set; }
         public string KommentarFeld { get; set; }
     }
 }

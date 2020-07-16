@@ -9,10 +9,8 @@ export class User {
         public passwort: string,
         public isAdmin: boolean,
         public team?: string,
-        public position?,
+        public position?: string,
         public mitgliedSeit?: string,
         public letzteAnmeldung?: string,
-        public nutzerAufgaben?: string,
-        public nutzerProjekte?: string,
     ) {}
 }

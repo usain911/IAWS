@@ -15,7 +15,7 @@ export class Aufgaben {
     nachfolgerId?: number;
     hasChanged?: boolean;
     teilaufgaben?: TeilAufgabe[];
-    kommentar?: Kommentar;
+    kommentar?: Kommentar[];
     deadline?: string;
     //deadlineD?: Date;
     //ueberzeit?: boolean;

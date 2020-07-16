@@ -7,15 +7,19 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 })
 export class AuthGuard implements CanActivate {
 
+
   constructor(private router : Router){}
 
   canActivate(
     route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let url: string = state.url;
-    return this.verifyLogin(url);
+    return this.verifyLogin();
   }
 
-  verifyLogin(url) : boolean{
+  
+
+
+
+  verifyLogin() : boolean{
     if(!this.isLoggedIn()) {
       this.router.navigate(['./login']);
       return false;
@@ -34,6 +38,20 @@ export class AuthGuard implements CanActivate {
       status = false;
     }
     return status;
+  }
+
+  public isPl(): boolean {
+
+    return true;
+  }
+
+  public isAdmin(): boolean{
+    let status = false;
+    if(localStorage.getItem('isAdmin')) {
+      return true
+    }
+    else false
+    
   }
 
   

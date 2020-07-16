@@ -16,6 +16,12 @@
       <h1 id="name">{{projekt.name}}</h1>  
       <label for="bez">Bezeichnung:</label> 
       <h2 id="bez">{{projekt.bezeichnung}}</h2>
+      <label for="bez">Verantwortlich:</label> 
+      <h2 id="bez">{{projekt.projektOwnerId}}</h2>{{name}}
+
+      <button type="button" class="de-bu btn btn-secondary" >Abbrechen</button> 
+      <button type="button" class="bu btn btn-secondary" (click)="saveProject()">Seichern</button> 
+      <button type="button" class="bu btn btn-secondary" (click)="add=true">Aufgabe hinzufügen</button> 
     </div>
 
   
@@ -27,7 +33,7 @@
         <p *ngIf="projekt.erledigt == 3">allgemeiner Fehler</p>
         <p *ngIf="projekt.erledigt == 4">Zeitüberschreitung</p></label> 
 
-      <select id="inputState" class="form-control" #inputState (change)="changeState(inputState.value)">
+      <select id="inputState" class="form-control" #inputState (change)="changeState($event)">
         <option selected>Status ändern</option>
         <option [value]="0">Projekt Abgeschlossen</option>
         <option [value]="1">Projekt in Bearbeitung</option>
@@ -35,6 +41,15 @@
         <option [value]="3">allgemeiner Fehler</option>
         <option [value]="4">Zeitüberschreitung</option>
       </select>
+      <br/>
+
+      <ng-container *ngIf="user">
+        <label for="userSelect">Projekt zuweisen</label>
+        <select class="form-control" id="userSelect" #userSelect (change)="changeOwn($event)">
+            <option selected>Projekt neu zuweisen</option>
+            <option *ngFor="let u of user" [value]="u.nutzerId">{{u.nachname + ", " +u.vorname}}</option>
+        </select>
+    </ng-container>      
     </div>
     
 
@@ -42,14 +57,11 @@
 
 
   <div class="container" style="margin-top: 5rem;">
-    <ng-container *ngIf="aufgaben$ | async as aufgabe">
-    <app-project-details-item  @fadeInAnimation *ngFor="let a of aufgabe;"  [index]="index"  [aufgabe]="a">"> 
+    <ng-container *ngIf="tasks">
+    <app-project-details-item  @fadeInAnimation *ngFor="let a of tasks;"  [index]="index"  [aufgabe]="a">"> 
     </app-project-details-item>
 </ng-container> 
 
-<button type="button" class="de-bu btn btn-secondary" >Abbrechen</button> 
-<button type="button" class="bu btn btn-secondary">Seichern</button> 
-<button type="button" class="bu btn btn-secondary" (click)="add=true">Aufgabe hinzufügen</button> 
 
   </div>
 

@@ -2,3 +2,33 @@
     margin: 1rem;
     background-color: orchid;
 }
+.bu {
+    transition: 200ms;
+    background-color: #33455e;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.de-bu {
+    transition: 200ms;
+    background-color: #556770;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.bu:hover {
+    transition: 200ms;
+    transform: scale(1.05);
+    background-color: #ff6e48;
+    color: white;
+}
+.ku {
+    font-weight: 500;
+}
+.border {
+    border-width: 3px;
+    border-color: black;
+    border-radius: 3px;
+}
+.rechts {
+    position: relative;
+    margin-left: 30%;
+}
