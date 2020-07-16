@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       //console.log(JSON.stringify("nutzer "+this.nutzer.nutzerId));
       if(this.nutzer.isAdmin == true)
         localStorage.setItem('admin', "true");
-      localStorage.setItem('id', JSON.stringify(this.nutzer.nutzerId));
+      localStorage.setItem('id', JSON.stringify(this.nutzer.nutzerId)); 
       sessionStorage.setItem('gruppe', this.nutzer.team )
       let datum = new Date();
       this.nutzer.letzteAnmeldung = datum.toLocaleDateString();

@@ -33,33 +33,12 @@ export class NewProjectComponent implements OnInit {
   submitForm() {
     this.ps.setProjekt(this.projekt)
       .subscribe(pr => this.projekt)
-      //console.log(this.projektAdded.projektId + "angelegt");
+      console.log(this.projekt.projektId + "angelegt");
       setTimeout(() => { this.router.navigate(['home']);  }, 200);
     }      
   
 
   ngOnInit(): void { 
   }
-
-  createBook(project: Projekt) {
-    this.ps.setProjekt(project).subscribe(() => {
-      this.router.navigate(['../..', 'project'], { relativeTo: this.route });
-    });
-  }
-
-  addTag() { 
-    console.log(this.toAdd);
-    console.log('aufgaben: ' + this.aufgaben.length)
-    this.aufgaben.push(this.toAdd);
-    console.log('aufgaben: ' + this.aufgaben.length)
-
-    return false;
-  }
-
-  removeTag(i: number) {
-    this.projekt.aufgaben.splice(i,1);
-    return false;
-  }
-
 }
  
