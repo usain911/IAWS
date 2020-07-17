@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace DataBaseAPI.Models
 {
+
+  //beinhaltet alle Variablen aus der Tabelle Aufgaben (Datenbank)
     public partial class Aufgaben
     {
         public Aufgaben()

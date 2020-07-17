@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace DataBaseAPI.Models
 {
+
+  //beinhaltet alle Variablen aus der Tabelle Kommentar (Datenbank)
     public partial class Kommentar
     {
         public int KommentarId { get; set; }

@@ -1,6 +1,13 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+
+//durch die Angabe folgendes Befehlsim Paketmanager werden die Daten aus dem Datenbank in das Projekt
+//rüber kopiert
+
+//Scaffold-DbContext "Data Source=ubi19.informatik.uni-siegen.de;Initial Catalog=Projektmanagement;Persist
+//Security Info=True;User ID=gruppe03-1;Password=IVA.765$" Microsoft.EntityFrameworkCore.SqlServer -OutputDir
+//Models -force
 
 namespace DataBaseAPI.Models
 {

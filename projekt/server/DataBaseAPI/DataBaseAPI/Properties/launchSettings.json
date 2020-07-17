@@ -8,6 +8,8 @@
       "sslPort": 44372
     }
   },
+
+  //ausführen des Swaggers beim Debuggen
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
